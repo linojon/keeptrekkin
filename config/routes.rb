@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   resources :mountains
 
-  # root 'welcome#index'
+  root 'pages#home'
 
 end
