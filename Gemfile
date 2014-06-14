@@ -29,6 +29,8 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
 gem 'pundit'
 gem 'decent_exposure'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 
 group :development, :test do
   gem 'sqlite3'
