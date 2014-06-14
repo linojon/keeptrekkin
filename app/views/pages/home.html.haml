@@ -1,4 +1,29 @@
-%h1 Home
-%p Welcome to #{Rails.application.config.app_title}
-%p
-  %span.glyphicon.glyphicon-ok
+.row.centered
+  %h1 My 4000 Footers
+
+.row
+  .col-md-8.col-md-offset-2.centered  
+    %h2 Track and Share Your Epic Hikes!
+    %p Featuring all 48 New Hampshire 4000+ foot peaks
+    %br
+    %p= link_to 'Login Now via Facebook', '', class: 'btn btn-primary'
+    %br
+.row
+  .col-sm-6.col-md-4
+    .thumbnail
+      = image_tag 'jon-nikki-thumb.jpg'
+      .caption
+        %h3.centered Peak Bagging
+        %p Track the mountains you've bagged, one hike at a time.
+  .col-sm-6.col-md-4
+    .thumbnail
+      = image_tag 'map-thumb.png'
+      .caption
+        %h3.centered Mountain Info
+        %p Find details of New Hampshire's 4000-footers.
+  .col-sm-6.col-md-4
+    .thumbnail
+      = image_tag 'mt-wash-sunrise-thumb.jpg'
+      .caption
+        %h3.centered Share the Glory
+        %p Share your accomplishments, photos and stories on your favorite social networks.
