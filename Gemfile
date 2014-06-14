@@ -38,7 +38,14 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'spring-commands-rspec'
-  gem 'pry'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  
+  gem 'byebug'
+  # gem 'pry'
+  # gem 'awesome_print'
+  # gem 'annotate'
 end
 
 group :production do
