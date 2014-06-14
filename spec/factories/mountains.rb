@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :mountain do
-    name "MyString"
-    elevation 1
+    name        { "#{Faker::Name.last_name} Mountain" }
+    elevation   4000
   end
 end

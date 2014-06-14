@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :hiker do
-    name    'Joe Smith' #Faker::Name.name
+    name    { Faker::Name.name }
   end
 end
