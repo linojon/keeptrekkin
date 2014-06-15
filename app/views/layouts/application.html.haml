@@ -12,6 +12,8 @@
   %body{ id: yield(:body_id) }
     .container
       = render 'layouts/navbar'
+    #banner
+    .container
       #content
         = render 'layouts/flash'
         - if show_title?
