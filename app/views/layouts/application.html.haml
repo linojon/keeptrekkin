@@ -1,13 +1,19 @@
+-# vvvvvv parkerhill standard  vvvvvv -
+-# keep this generic, no application specific code -
 !!!
 %html
   %head
-    %title=Rails.application.config.app_title
+    %title= [Rails.application.config.app_title, yield(:title)].join(' | ')
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
+    = yield(:head)
+  %body{ id: yield(:body_id) }
     .container
       = render 'layouts/navbar'
       = render 'layouts/flash'
-      = yield
+      - if show_title?
+        %h1= yield(:title)
+      = content_for?(:content) ? yield(:content) : yield
+      = render 'layouts/footer'

@@ -28,6 +28,7 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
 gem 'pundit'
+gem 'decent_exposure'
 
 group :development, :test do
   gem 'sqlite3'

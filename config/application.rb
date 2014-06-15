@@ -28,5 +28,6 @@ module Nh4k
     # config.i18n.default_locale = :de
 
     config.app_title = 'My 4000 Footers'
+    config.copyright = 'Parkerhill Technology Group LLC'
   end
 end
