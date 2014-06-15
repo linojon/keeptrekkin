@@ -13,3 +13,26 @@ body { padding-top: 70px; }
 .small {
   font-size: x-small;
 }
+
+// layout
+.navbar-fixed-top {
+  margin-bottom: 0;
+}
+
+#banner {
+  background-color: #A9D5FA;
+  background-image: image-url("lafayette-banner-2048x85.jpg");
+  height: 85px;
+}
+
+#content {
+  margin-top: 85px; // banner height
+  min-height: 400px;
+}
+
+// #footer {
+//   color: #999;
+//   font-size: 12px;
+//   text-align: center;
+//   a { color: #999; }
+// }

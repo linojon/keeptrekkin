@@ -12,8 +12,9 @@
   %body{ id: yield(:body_id) }
     .container
       = render 'layouts/navbar'
-      = render 'layouts/flash'
-      - if show_title?
-        %h1= yield(:title)
-      = content_for?(:content) ? yield(:content) : yield
+      #content
+        = render 'layouts/flash'
+        - if show_title?
+          %h1= yield(:title)
+        = content_for?(:content) ? yield(:content) : yield
       = render 'layouts/footer'
