@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  # vvvvvv app specific vvvvvv
+
   private
   
   def current_user
@@ -16,5 +18,4 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-  # vvvvvv app specific vvvvvv
 end

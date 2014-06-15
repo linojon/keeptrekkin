@@ -6,6 +6,6 @@ FactoryGirl.define do
     uid "MyString"
     name "MyString"
     oauth_token "MyString"
-    oauth_expires_at "2014-06-13 22:24:50"
+    oauth_expires_at "2014-06-14 23:38:50"
   end
 end
