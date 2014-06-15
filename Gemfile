@@ -49,6 +49,7 @@ group :development, :test do
   # gem 'pry'
   # gem 'awesome_print'
   # gem 'annotate'
+  gem 'quiet_assets'
 end
 
 group :production do

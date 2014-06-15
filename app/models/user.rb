@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
 byebug
+logger.info auth
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
