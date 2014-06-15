@@ -69,46 +69,46 @@
 end
 
 
-# # hikers
-# [
-#   ['Jonathan', '1957-07-11'],
-#   ['Lisa', '1956-01-20'],
-#   ['Rayna', '1990-10-14'],
-#   ['Jarrett', '1992-04-18'],
-#   ['Steven', '1994-06-16'],
-#   ['Shira', '1998-12-09'],
-#   ['Nikki (dog)', '2006-01-11']
-# ].each do |name, birth|
-#   attrs = {name: name, born_on: birth}
-#   if hiker = Hiker.where(name: name).first
-#     hiker.update_attributes attrs
-#   else
-#     Hiker.create attrs
-#   end
-# end
+# hikers
+[
+  ['Jonathan', '1957-07-11'],
+  ['Lisa', '1956-01-20'],
+  ['Rayna', '1990-10-14'],
+  ['Jarrett', '1992-04-18'],
+  ['Steven', '1994-06-16'],
+  ['Shira', '1998-12-09'],
+  ['Nikki (dog)', '2006-01-11']
+].each do |name, birth|
+  attrs = {name: name}
+  if hiker = Hiker.where(name: name).first
+    hiker.update_attributes attrs
+  else
+    Hiker.create attrs
+  end
+end
 
 
-# # trips
-# [
-#   ['2014-06-08', ['East Osceola', 'Osceola'], ['Jonathan', 'Lisa', 'Shira']],
-#   ['2014-05-25', 'Waumbek', ['Jonathan', 'Lisa', 'Jarrett', 'Steven']],
-#   ['2013-06-16', 'Washington', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven', 'Shira']],
-#   ['2013-06-03', ['Eisenhower', 'Pierce'], ['Jonathan', 'Lisa', 'Rayna', 'Steven']],
-#   ['2012-07-29', 'Cannon', ['Lisa', 'Jarrett', 'Steven']],
-#   ['2012-07-15', ['Hancock', 'South Hancock'], ['Jonathan', 'Lisa', 'Jarrett', 'Shira', 'Nikki (dog)']],
-#   ['2012-05-19', 'Monroe', ['Jonathan', 'Lisa', 'Rayna', 'Nikki (dog)']],
-#   ['2012-03-12', 'Tom', ['Jonathan', 'Lisa']],
-#   ['2011-06-19', 'Moosilauke', ['Jonathan', 'Lisa']],
-#   ['2010-07-11', 'Cannon', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven', 'Shira']],
-#   ['2010-07-01', 'Moosilauke', ['Jonathan', 'Lisa']],
-#   ['2004-10-01', 'Lafayette', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven']]
-# ].each do |date, mountains, hikers|
-#   # NOTE: Not updating, only creating
-#   unless Trip.where(start_at: date).present?
-#     trip = Trip.create start_at: date.to_datetime
-#     Array(mountains).each {|mtn| trip.ascents.create( mountain: Mountain.where(name: mtn).first) }
-#     Array(hikers).each {|hiker| trip.my_hikes.create( hiker: Hiker.where(name: hiker).first) }
-#   end
-# end
+# trips
+[
+  ['2014-06-08', ['East Osceola', 'Osceola'], ['Jonathan', 'Lisa', 'Shira']],
+  ['2014-05-25', 'Waumbek', ['Jonathan', 'Lisa', 'Jarrett', 'Steven']],
+  ['2013-06-16', 'Washington', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven', 'Shira']],
+  ['2013-06-03', ['Eisenhower', 'Pierce'], ['Jonathan', 'Lisa', 'Rayna', 'Steven']],
+  ['2012-07-29', 'Cannon', ['Lisa', 'Jarrett', 'Steven']],
+  ['2012-07-15', ['Hancock', 'South Hancock'], ['Jonathan', 'Lisa', 'Jarrett', 'Shira', 'Nikki (dog)']],
+  ['2012-05-19', 'Monroe', ['Jonathan', 'Lisa', 'Rayna', 'Nikki (dog)']],
+  ['2012-03-12', 'Tom', ['Jonathan', 'Lisa']],
+  ['2011-06-19', 'Moosilauke', ['Jonathan', 'Lisa']],
+  ['2010-07-11', 'Cannon', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven', 'Shira']],
+  ['2010-07-01', 'Moosilauke', ['Jonathan', 'Lisa']],
+  ['2004-10-01', 'Lafayette', ['Jonathan', 'Lisa', 'Rayna', 'Jarrett', 'Steven']]
+].each do |date, mountains, hikers|
+  # NOTE: Not updating, only creating
+  unless Trip.where(date: date).present?
+    trip = Trip.create date: date.to_date
+    trip.mountains << Mountain.where( name: mountains )
+    trip.hikers << Hiker.where( name: hikers )
+  end
+end
 
  

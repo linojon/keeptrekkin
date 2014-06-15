@@ -1,0 +1,4 @@
+%tr
+  %td= trip.date
+  %td= trip.mountains.map(&:name).join(', ')
+  %td= trip.hikers.map(&:name).join(', ')
