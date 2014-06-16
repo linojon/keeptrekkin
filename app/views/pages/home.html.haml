@@ -6,24 +6,25 @@
     %h2 Track and Share Your Epic Hikes!
     %p Featuring all 48 New Hampshire 4000+ foot peaks
     %br
-    %p= link_to 'Login Now via Facebook', '/auth/facebook', class: 'btn btn-primary'
+    %p= link_to 'Start Now via Facebook, Free!', '/auth/facebook', class: 'btn btn-primary'
     %br
-.row
-  .col-md-4
-    .thumbnail
-      = image_tag 'jon-nikki-thumb.jpg'
-      .caption
-        %h3.centered Peak Bagging
-        %p Track the mountains you've bagged, one hike at a time.
-  .col-md-4
-    .thumbnail
-      = image_tag 'map-thumb.png'
-      .caption
-        %h3.centered Mountain Info
-        %p Find details of New Hampshire's 4000-footers.
-  .col-md-4
-    .thumbnail
-      = image_tag 'mt-wash-sunrise-thumb.jpg'
-      .caption
-        %h3.centered Share the Glory
-        %p Share your accomplishments, photos and stories on your favorite social networks.
+.container.container-xs-height
+  .row.row-xs-height
+    .col-sm-4.col-md-4.col-xs-height
+      .thumbnail
+        = image_tag 'jon-nikki-thumb.jpg'
+        .caption.centered
+          %h3 Peak Bagging
+          %p Track the mountains you've bagged, one hike at a time.
+    .col-sm-4.col-md-4.col-xs-height
+      .thumbnail
+        = image_tag 'map-thumb.png'
+        .caption.centered
+          %h3 Mountain Info
+          %p Find details of New Hampshire's 4000-footers.
+    .col-sm-4.col-md-4.col-xs-height
+      .thumbnail
+        = image_tag 'mt-wash-sunrise-thumb.jpg'
+        .caption.centered
+          %h3 Share the Glory
+          %p Share your accomplishments, photos and stories on your favorite social networks.
