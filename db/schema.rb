@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615033844) do
+ActiveRecord::Schema.define(version: 20140617063343) do
 
   create_table "hikers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "profile_image_url"
+    t.string   "profile_chip_url"
   end
+
+  add_index "hikers", ["user_id"], name: "index_hikers_on_user_id"
 
   create_table "hikers_trips", id: false, force: true do |t|
     t.integer "hiker_id", null: false

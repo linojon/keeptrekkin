@@ -2,7 +2,6 @@ require 'rails_helper'
 
 feature 'user sign in' do
   background do
-    #request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
     visit '/'
   end
 
@@ -13,9 +12,9 @@ feature 'user sign in' do
     # creates user
     # creates hiker
     # initializes user and hiker info
-    # redirects to trips
-    debugger
     expect(page).to have_content('Sign out')
+    # redirects to trips
+    expect(current_url).to include '/trips'
   end
 
   xscenario "existing user"
