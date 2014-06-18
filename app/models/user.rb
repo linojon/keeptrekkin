@@ -12,17 +12,21 @@ class User < ActiveRecord::Base
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
 
-      user.create_and_update_hiker(auth)
+      user.create_or_update_hiker( 
+        name: auth.info.name, 
+        email: auth.info.email,
+        profile_image_url: auth.info.image.gsub('square','large'), #200x200
+        profile_chip_url: auth.info.image.gsub('square', 'width=30&height=30')
+      )
     end
   end
 
-  def create_and_update_hiker(auth)
-    h = hiker || build_hiker
-    h.name  ||= auth.info.name
-    h.email ||= auth.info.email
-    h.profile_image_url ||= auth.info.image.gsub('square','large') #200x200
-    h.profile_chip_url  ||= auth.info.image.gsub('square', 'width=30&height=30')
-    h.save
+  def create_or_update_hiker(attributes)
+    if self.hiker
+      self.hiker.update_attributes_only_if_blank attributes
+    else
+      self.create_hiker attributes
+    end
   end
 
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Hiker, :type => :model do
+describe Hiker do
   it { should have_and_belong_to_many(:trips) }
   it { is_expected.to validate_presence_of :name }
 
@@ -27,5 +27,25 @@ RSpec.describe Hiker, :type => :model do
     trip2.mountains << mountain3
     expect(hiker.mountains.all).to match_array([mountain1,mountain2,mountain3])
   end
+ 
+  describe "update_attributes_only_if_blank" do
+    let(:hiker) { build :hiker }
+    let(:newattr) {{ name: 'foo bar', email: 'foo@bar.com' }}
 
+    it "doesnt update existing attributes" do
+      name = hiker.name
+      email = hiker.email
+      hiker.update_attributes_only_if_blank(newattr)
+      expect(hiker.name).to eql name
+      expect(hiker.email).to eql email
+    end
+
+    it "does update existing attributes" do
+      hiker.name = nil
+      hiker.email = ''
+      hiker.update_attributes_only_if_blank(newattr)
+      expect(hiker.name).to eql 'foo bar'
+      expect(hiker.email).to eql 'foo@bar.com'
+    end
+  end
 end

@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe User do
-  describe 'from_omniauth' do
+  
+  describe 'create .from_omniauth' do
     let(:data) { facebook_omniauth_hash }
     let(:user) { User.from_omniauth( data ) }
     let(:hiker) { user.hiker }
