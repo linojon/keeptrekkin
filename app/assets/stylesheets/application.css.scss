@@ -1,6 +1,9 @@
+$table-bg-hover: #ddd;
+
 @import "bootstrap";
 /*= depend_on "equal_heights.css.scss" */
 @import "equal_heights";
+@import "rowlink";
 
 // with .navbar-fixed-top (navbar is 50px high)
 body { padding-top: 50px; }
