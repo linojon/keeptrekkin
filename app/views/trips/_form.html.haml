@@ -1,0 +1,24 @@
+= simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
+  .col-md-4.well
+    = f.association :mountains, collection: Mountain.all, input_html: {class:'chosen-select'}
+    = f.association :hikers, collection: Hiker.all, input_html: {class:'chosen-select'}
+    = f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
+    = f.input :distance, label: 'Distance Hiked'
+  .col-md-8
+    .row
+      .col-md-offset-1.well
+        = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+
+:coffee
+  # enable chosen js
+  $('.chosen-select').chosen(
+    no_results_text: "Oops, nothing found!",
+    width: "100%"
+  )
+  
+  $('[data-behavior~=datepicker]').datepicker(
+    format: "yyyy-mm-dd", # date format must match the database date format
+    todayHighlight: true,
+    todayBtn: 'linked',
+    autoclose: true
+  )

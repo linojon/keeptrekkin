@@ -1,0 +1,26 @@
+%p
+  = link_to dashboard_path do
+    %span.glyphicon.glyphicon-chevron-left
+    Back
+
+.media
+  %a.pull-left{ href: '#' }
+    %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
+
+  .media-body
+    %h1 Trip to #{trip.mountains.map(&:name).join(', ')}
+
+    %h3=trip.date
+
+    %p
+      = trip.hikers.map(&:name).join(', ')
+
+    %p
+      = trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
+
+    - if trip.notes.present?
+      %h3 Journal
+      .journal
+        = trip.notes
+
+= link_to 'Edit', edit_trip_path(trip), class: 'btn btn-primary'

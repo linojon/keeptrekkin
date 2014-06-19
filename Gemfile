@@ -24,9 +24,12 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'haml'
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form', branch: 'master'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
+gem 'chosen-rails'
+gem 'bootstrap-datepicker-rails'
+
 gem 'pundit'
 gem 'decent_exposure'
 gem 'omniauth'

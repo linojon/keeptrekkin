@@ -6,3 +6,7 @@
 # can publish (make public)
 # can share (fb, twitter), tagged with hikers
 # any hiker can edit
+# main picture
+
+# distance
+# duration
