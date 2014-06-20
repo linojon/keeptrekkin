@@ -1,7 +1,7 @@
 = simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
   .col-md-4.well
-    = f.association :mountains, collection: Mountain.all, input_html: {class:'chosen-select'}
-    = f.association :hikers, collection: Hiker.all, input_html: {class:'chosen-select'}
+    = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {class:'chosen-select'}
+    = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {class:'chosen-select'}
     = f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
     = f.input :distance, label: 'Distance Hiked'
   .col-md-8
