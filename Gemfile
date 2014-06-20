@@ -27,7 +27,7 @@ gem 'haml'
 gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form', branch: 'master'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
-gem 'chosen-rails'
+gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 
 gem 'pundit'

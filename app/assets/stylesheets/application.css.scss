@@ -1,7 +1,8 @@
 $table-bg-hover: #ddd;
 
 @import "bootstrap";
-@import "chosen";
+@import "select2";
+@import "select2-bootstrap";
 @import "bootstrap-datepicker3";
 @import "equal_heights";
 @import "rowlink";
@@ -42,3 +43,10 @@ body { padding-top: 50px; }
 //   text-align: center;
 //   a { color: #999; }
 // }
+
+// objects
+img.chip {
+  height: 20px;
+  width: 20px;
+  padding-right: 4px;
+}

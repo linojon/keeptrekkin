@@ -1,8 +1,19 @@
 = simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
   .col-md-4.well
-    = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {class:'chosen-select'}
-    = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {class:'chosen-select'}
-    = f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
+    = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
+    %button#add_mtn.btn.add_select.btn-primary.btn-sm.btn-block Add mountain
+    = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
+    -# &nbsp; <span class="glyphicon glyphicon-search"></span>
+    %button#add_hiker.add_select.btn.btn-primary.btn-sm.btn-block Add hiker
+
+    =# f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
+    .form-group.string.optional.user_vertical_date
+      %label.string.optional.control-label{ for:"user_vertical_date" } Date
+      .input-group.date
+        %input.string.optional.form-control#user_vertical_date{ name:"user_vertical[date]", type:"text", value: trip.date.to_s, data: {behavior:"datepicker"} }
+        %span.input-group-addon
+          %i.glyphicon.glyphicon-th
+
     = f.input :distance, label: 'Distance Hiked'
   .col-md-8
     .row
@@ -10,15 +21,32 @@
         = f.input :notes, label: 'Journal', input_html: { rows: 20 }
 
 :coffee
-  # enable chosen js
-  $('.chosen-select').chosen(
-    no_results_text: "Oops, nothing found!",
-    width: "100%"
+
+  $('#add_mtn').click   -> $('#trip_mtns_select').select2('open') && false
+  $('#add_hiker').click -> $('#trip_hikers_select').select2('open') && false
+
+  format_mtn = (state) ->
+    return "<div class='selection_item'>" + state.text + "</div>";
+
+  format_hiker = (state) ->
+    return "<div class='selection_item'><img class='chip', src='/assets/jsl65.jpg'/>" + state.text + '</div>';
+
+  $('#trip_mtns_select').select2(
+    formatResult: format_mtn
+    formatSelection: format_mtn
+    escapeMarkup: (m) -> return m
+  )
+
+  $('#trip_hikers_select').select2(
+    formatResult: format_hiker
+    formatSelection: format_hiker
+    escapeMarkup: (m) -> return m
+    formatNoMatches: (term) -> "No matches found<br><a class='btn btn-primary'>Invite</a>"
   )
   
-  $('[data-behavior~=datepicker]').datepicker(
-    format: "yyyy-mm-dd", # date format must match the database date format
-    todayHighlight: true,
-    todayBtn: 'linked',
+  $('.input-group.date').datepicker(
+    format: "yyyy-mm-dd" # date format must match the database date format
+    todayHighlight: true
+    todayBtn: 'linked'
     autoclose: true
   )
