@@ -1,10 +1,10 @@
 = simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
   .col-md-4.well
     = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
-    %button#add_mtn.btn.add_select.btn-primary.btn-sm.btn-block Add mountain
+    %button#add_mtn.btn.add_select.btn-default.btn-sm.btn-block Add mountain
     = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
     -# &nbsp; <span class="glyphicon glyphicon-search"></span>
-    %button#add_hiker.add_select.btn.btn-primary.btn-sm.btn-block Add hiker
+    %button#add_hiker.add_select.btn.btn-default.btn-sm.btn-block Add hiker
 
     =# f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
     .form-group.string.optional.user_vertical_date
