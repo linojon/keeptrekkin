@@ -51,4 +51,5 @@ $ ->
   enable_multiselect('mtns', false)
   enable_multiselect('hikers', false)
 
-
+  # todo: integrate this search icon into vertical multiselect custom input
+  $(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")

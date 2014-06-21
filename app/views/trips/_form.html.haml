@@ -1,28 +1,31 @@
 = simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
-  .col-ms-4.col-sm-4.well
-    %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-    = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
-    %button#add_mtns.btn.add_select.btn-default.btn-sm.btn-block Add mountain
+  .row
+    .col-ms-4.col-sm-4.well
+      %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
+      = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
+      %button#add_mtns.btn.add_select.btn-default.btn-sm.btn-block Add mountain
 
-    %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-    = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
-    -# &nbsp; <span class="glyphicon glyphicon-search"></span>
-    %button#add_hikers.add_select.btn.btn-default.btn-sm.btn-block Add hiker
+      %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
+      = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
+      -# &nbsp; <span class="glyphicon glyphicon-search"></span>
+      %button#add_hikers.add_select.btn.btn-default.btn-sm.btn-block Add hiker
 
-    -# datepicker with icon (todo: move to custom input)
-    = f.input :date do
-      .input-group.date
-        = f.text_field :date, class: 'string optional form-control'
-        %span.input-group-addon
-          %i.glyphicon.glyphicon-th
+      = f.input :date do # datepicker with icon (todo: move to custom input)
+        .input-group.date
+          = f.text_field :date, class: 'string optional form-control'
+          %span.input-group-addon
+            %i.glyphicon.glyphicon-th
 
-    = f.input :distance, label: 'Distance Hiked'
+      = f.input :distance, label: 'Distance Hiked'
 
-  / .col-sm-8
-  /   .row
-  /     .col-md-offset-1.well
-  /       = f.input :notes, label: 'Journal', input_html: { rows: 20 }
-  .col-ms-8.col-sm-8.well
-    = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+    / .col-sm-8
+    /   .row
+    /     .col-md-offset-1.well
+    /       = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+    .col-ms-8.col-sm-8.well
+      = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+  .row
+    .col-sm-12
+      = f.button :submit, class: 'btn btn-primary'
 
   

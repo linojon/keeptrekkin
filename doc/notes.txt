@@ -14,6 +14,7 @@ New user - sign up via facebook
   create user
   lookup hiker by email , save
   [else lookup hiker by name, give user list to choose which hiker he is]
+  Is this you?
   else create new hiker too
 
 Existing user - sign in via facebook
@@ -129,6 +130,16 @@ add concept of friends for mountains list and picking hikers
     todayBtn: 'linked',
     autoclose: true
   )
+
+
+=============
+2.1.1 :026 >   puts jsl.to_json
+
+[{"id":1,"name":"Jonathan Linowes","created_at":"2014-06-15T02:12:23.901Z","updated_at":"2014-06-21T04:05:28.723Z","user_id":null,"email":"jonathan@linwoes.com","profile_image_url":null,"profile_chip_url":null},
+
+{"id":8,"name":"Jonathan Linowes","created_at":"2014-06-19T00:57:41.977Z","updated_at":"2014-06-19T00:57:41.977Z","user_id":1,"email":"jonathan@linowes.com","profile_image_url":"http://graph.facebook.com/10203290081348033/picture?type=large","profile_chip_url":"http://graph.facebook.com/10203290081348033/picture?type=width=30\u0026height=30"}]
+
+
 
 
 

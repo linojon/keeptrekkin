@@ -71,21 +71,23 @@ end
 
 # hikers
 [
-  ['Jonathan', '1957-07-11'],
-  ['Lisa', '1956-01-20'],
-  ['Rayna', '1990-10-14'],
-  ['Jarrett', '1992-04-18'],
-  ['Steven', '1994-06-16'],
-  ['Shira', '1998-12-09'],
-  ['Nikki (dog)', '2006-01-11']
-].each do |name, birth|
-  attrs = {name: name}
-  if hiker = Hiker.where(name: name).first
+  ['Jonathan Linowes', 'jonathan@linwoes.com', '1957-07-11'],
+  ['Lisa Linowes', 'lisa@linowes.com', '1956-01-20'],
+  ['Rayna Linowes', 'rayna@linowes.com', '1990-10-14'],
+  ['Jarrett Linowes', 'jaf268@wildcats.unh.edu', '1992-04-18'],
+  ['Steven Linowes', 'sjlinowe@syr.edu', '1994-06-16'],
+  ['Shira Linowes', 'shira@linowes.com', '1998-12-09'],
+  ['Nikki (dog)', '', '2006-01-11']
+].each do |name, email, birth|
+  attrs = {name: name, email: email}
+  if hiker = Hiker.where(name: name.split(' ').first).first
     hiker.update_attributes attrs
   else
     Hiker.create attrs
   end
 end
+
+
 
 
 # trips
@@ -111,4 +113,9 @@ end
   end
 end
 
+if Rails.env.development?
+  20.times do
+    hiker = FactoryGirl.create :hiker
+  end
+end
  
