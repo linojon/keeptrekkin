@@ -7,10 +7,16 @@
 }
 
 
-.selection_item {
-  width: 235px;
-  display: inline-block;
+// .selection_item {
+//   width: 235px;
+//   display: inline-block;
+// }
+
+li.select2-search-choice {
+  width: 95%;
 }
+
+
 // close button on right
 .select2-container-multi {
   .select2-search-choice-close {
@@ -21,7 +27,16 @@
   }
 }
 
+
 button.add_select {
   margin-top: -15px;
   margin-bottom: 15px;
+}
+
+.clickable_icon {
+  cursor: pointer;
+  padding: 4px;
+  &:hover {
+    background-color: #fff;
+  }
 }

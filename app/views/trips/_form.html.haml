@@ -1,52 +1,28 @@
 = simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
-  .col-md-4.well
+  .col-ms-4.col-sm-4.well
+    %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
     = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
-    %button#add_mtn.btn.add_select.btn-default.btn-sm.btn-block Add mountain
+    %button#add_mtns.btn.add_select.btn-default.btn-sm.btn-block Add mountain
+
+    %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
     = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
     -# &nbsp; <span class="glyphicon glyphicon-search"></span>
-    %button#add_hiker.add_select.btn.btn-default.btn-sm.btn-block Add hiker
+    %button#add_hikers.add_select.btn.btn-default.btn-sm.btn-block Add hiker
 
-    =# f.input :date, as: :string, input_html: {data:{behavior:'datepicker'}}
-    .form-group.string.optional.user_vertical_date
-      %label.string.optional.control-label{ for:"user_vertical_date" } Date
+    -# datepicker with icon (todo: move to custom input)
+    = f.input :date do
       .input-group.date
-        %input.string.optional.form-control#user_vertical_date{ name:"user_vertical[date]", type:"text", value: trip.date.to_s, data: {behavior:"datepicker"} }
+        = f.text_field :date, class: 'string optional form-control'
         %span.input-group-addon
           %i.glyphicon.glyphicon-th
 
     = f.input :distance, label: 'Distance Hiked'
-  .col-md-8
-    .row
-      .col-md-offset-1.well
-        = f.input :notes, label: 'Journal', input_html: { rows: 20 }
 
-:coffee
+  / .col-sm-8
+  /   .row
+  /     .col-md-offset-1.well
+  /       = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+  .col-ms-8.col-sm-8.well
+    = f.input :notes, label: 'Journal', input_html: { rows: 20 }
 
-  $('#add_mtn').click   -> $('#trip_mtns_select').select2('open') && false
-  $('#add_hiker').click -> $('#trip_hikers_select').select2('open') && false
-
-  format_mtn = (state) ->
-    return "<div class='selection_item'>" + state.text + "</div>";
-
-  format_hiker = (state) ->
-    return "<div class='selection_item'><img class='chip', src='/assets/jsl65.jpg'/>" + state.text + '</div>';
-
-  $('#trip_mtns_select').select2(
-    formatResult: format_mtn
-    formatSelection: format_mtn
-    escapeMarkup: (m) -> return m
-  )
-
-  $('#trip_hikers_select').select2(
-    formatResult: format_hiker
-    formatSelection: format_hiker
-    escapeMarkup: (m) -> return m
-    formatNoMatches: (term) -> "No matches found<br><a class='btn btn-primary'>Invite</a>"
-  )
   
-  $('.input-group.date').datepicker(
-    format: "yyyy-mm-dd" # date format must match the database date format
-    todayHighlight: true
-    todayBtn: 'linked'
-    autoclose: true
-  )
