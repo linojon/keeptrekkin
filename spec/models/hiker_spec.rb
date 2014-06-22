@@ -27,6 +27,49 @@ describe Hiker do
     trip2.mountains << mountain3
     expect(hiker.mountains.all).to match_array([mountain1,mountain2,mountain3])
   end
+
+  it "has many friends as hikers through trips" do
+    trip = create :trip
+    me = create :hiker
+    hiker1 = create :hiker
+    hiker2 = create :hiker
+    trip.hikers << [me, hiker1, hiker2]
+    expect(me.friends).to match_array [me, hiker1, hiker2]
+    expect(me.just_friends).to match_array [hiker1, hiker2]
+  end
+
+  it "scope not_authenticated" do
+    hiker1 = create :hiker
+    hiker2 = create :hiker, user_id: 99
+    expect(Hiker.not_authenticated.to_a).to eql [hiker1]
+  end
+
+  describe "fuzzy" do
+    let!(:named)   { create :hiker, name: 'Jonathan' }
+    let!(:emailed) { create :hiker, email: 'linojon@gmail.com' }
+    let!(:other)   { create :hiker }
+
+    it "finds matches for name" do
+      expect(Hiker.fuzzy(name:'jonathan')).to eql [named]
+    end
+
+    it "finds matches for email" do
+      expect(Hiker.fuzzy(email:'iinojon@gmail.com')).to eql [emailed]
+    end
+
+    it "finds fuzzy matches" do
+      expect(Hiker.fuzzy(name:'jon')).to eql [named]
+      expect(Hiker.fuzzy(email:'linojon')).to eql [emailed]
+    end
+
+    it "can be chained to scopes" do
+      # setup
+      named2 = create( :hiker, name: 'Jonathan', user_id: 99)
+      expect(Hiker.fuzzy(name:'Jonathan')).to eql [named,named2]
+      # scoped
+      expect(Hiker.where(user_id: nil).fuzzy(name:'Jonathan')).to eql [named]
+    end
+  end
  
   describe "update_attributes_only_if_blank" do
     let(:hiker) { build :hiker }

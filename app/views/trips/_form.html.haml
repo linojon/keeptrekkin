@@ -6,7 +6,9 @@
       %button#add_mtns.btn.add_select.btn-default.btn-sm.btn-block Add mountain
 
       %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-      = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
+      - grouped_hikers = [['My Hikers', current_hiker.friends], ['Site wide', Hiker.all-current_hiker.friends]]
+      = f.input :hikers, as: :grouped_select, collection: grouped_hikers, group_method: :last, label_method: :name, value_method: :id, input_html: {id: 'trip_hikers_select', multiple: true}, placeholder: 'Select one or more hikers'
+      / = f.association :hikers, label: 'Hiker(s)', collection: Hiker.all, input_html: {id: 'trip_hikers_select'}, placeholder: 'Select one or more hikers'
       -# &nbsp; <span class="glyphicon glyphicon-search"></span>
       %button#add_hikers.add_select.btn.btn-default.btn-sm.btn-block Add hiker
 
