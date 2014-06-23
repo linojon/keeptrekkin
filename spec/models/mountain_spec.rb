@@ -5,6 +5,8 @@ RSpec.describe Mountain, :type => :model do
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of :name }
 
+  xit "unique index generates exception on duplicate trip"
+
   it "has many hikers through trips" do
     trip = create :trip
     mountain = create :mountain

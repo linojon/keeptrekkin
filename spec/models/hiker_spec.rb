@@ -3,6 +3,9 @@ require 'rails_helper'
 describe Hiker do
   it { should have_and_belong_to_many(:trips) }
   it { is_expected.to validate_presence_of :name }
+  xit { is_expected.to validate_presence_of :email }
+
+  xit "unique index generates exception on duplicate trip"
 
   it "validations" do
     hiker = Hiker.new

@@ -1,4 +1,63 @@
 
+Sign in via facebook /auth/facebook
+=> /auth/facebook/callback => SessionsController#create
+
+user = User.from_omniauth(auth) where auth contains provider:'facebook', uid:<facebook id> ...
+
+  auth = uid, name, email, imageurl etc
+
+---- instead
+
+current_user = User.where uid: auth.uid
+if !current_user
+  matches = Hiker.has_no_authentications.similar_to(name, email)
+  Pop up dialog asking if you are one of the matches
+    each match posts to /users/create/ uid, hiker_id
+      which creates a user and assoicates with hiker
+      then redirects to /auth/facebook (again)
+    or 
+    or cancel
+
+
+================
+
+on Trip form, Adding Hiker
+
+Initial select list is current_user.friends
+
+Search refreshed from ajax of all hikers (2 sec delay)
+"Search for a person in Trello by name or email address, or enter an email address to invite someone new."
+
+Not found offers Invite button
+
+-> Invite
+pops up 
+  email
+  name
+  validate email format
+  autofill name based on email
+  Send invite button 
+  server validation unique email
+  adds hiker instance and to trip.hikers
+  adds hiker to dropdown and selected
+
+-> Email
+  on trip save [or if ajax Done, on hikers save]
+  any new hikers get sent an email [or FB notice] with link
+  email is to /trips/NN page
+  the requires_authentication filter remembers current url in session
+    session[:return_to] = request.url
+  then redirects to /auth/facebook
+
+
+
+
+
+      
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 User
   provider
   fb uid
