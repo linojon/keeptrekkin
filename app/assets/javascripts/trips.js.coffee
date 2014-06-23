@@ -17,6 +17,28 @@ format_mtn = (state) ->
 format_hiker = (state) ->
   return "<div class='selection_item'><img class='chip', src='/assets/jsl65.jpg'/>" + state.text + '</div>';
 
+capitalize = (string) ->
+  string.charAt(0).toUpperCase() + string.slice(1)
+
+# ref http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+validate_email = (email) -> 
+  re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  re.test(email)
+
+prefill_name_from_email = ->
+  if $('#hiker_name').val() == ''
+    name = $('#hiker_email').val()
+    name = name.split(/[\s\.@_]+/)[0] 
+    $('#hiker_name').val( capitalize(name) )
+
+enable_hiker_name_input = (enable) ->
+  if enable
+    $('#invite_hiker_name_input').show()
+    $('#invite_hiker_submit').attr('disabled', false)
+  else
+    $('#invite_hiker_name_input').hide()
+    $('#invite_hiker_submit').attr('disabled', true)
+  #end
 
 $ ->
 
@@ -37,7 +59,9 @@ $ ->
     formatResult: format_hiker
     formatSelection: format_hiker
     escapeMarkup: (m) -> return m
-    formatNoMatches: (term) -> "No matches found<br><a class='btn btn-primary'>Invite</a>"
+    formatNoMatches: (term) -> 
+      "Would you like to add a hiker who's not on this site yet?" +
+      "<br><a class='btn btn-primary' href='#' onclick='return trip_invite_hiker();'>Invite</a>"
   )
   
   $('.input-group.date').datepicker(
@@ -53,3 +77,24 @@ $ ->
 
   # todo: integrate this search icon into vertical multiselect custom input
   $(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
+
+  # $(document).on 'click', '#trip_invite_btn', ->
+  #   alert 'Invite pressed'
+  window.trip_invite_hiker = ->
+    $('#trip_hikers_select').select2('close')
+    $('#invite_hiker_dialog').modal('show')
+    # alert 'Invite pressed'
+
+  # invite hiker dialog
+  $('#invite_hiker_dialog').on 'shown.bs.modal', ->
+    enable_hiker_name_input(false)
+
+  $('#hiker_email').change ->
+    email = $('#hiker_email').val()
+    if validate_email(email)
+      enable_hiker_name_input(true)
+      prefill_name_from_email()
+    else
+      enable_hiker_name_input(false)
+    #end
+

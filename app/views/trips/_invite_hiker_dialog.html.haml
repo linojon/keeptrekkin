@@ -1,0 +1,16 @@
+#invite_hiker_dialog.modal.fade
+  .modal-dialog
+    .modal-content
+      = minimal_form_for :hiker do |f|
+        .modal-header
+          %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+          %h4.modal-title Invite Hiker
+        .modal-body
+          %p Enter an email address to invite someone new.
+          = f.input :email, placeholder: 'Email address'
+          #invite_hiker_name_input
+            %p Add a name and click “Invite” and we’ll add a virtual member and send them an invite email. They'll automatically receive access to this trip report once they sign in.
+            = f.input :name, placeholder: 'Full name'
+        .modal-footer
+          %button.btn.btn-default{ type: :button, 'data-dismiss' => :modal } Cancel
+          = f.submit 'Invite', class: 'btn btn-primary', id: 'invite_hiker_submit'

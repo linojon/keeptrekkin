@@ -23,7 +23,7 @@ class Hiker < ActiveRecord::Base
       hiker.fuzzy_score = score 
       matches << hiker if score > threshold
     end
-    matches
+    matches.sort! {|a,b| b.fuzzy_score <=> a.fuzzy_score } # sort by score highest first
   end
 
   # make this a "concerns" ?

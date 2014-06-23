@@ -40,6 +40,10 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
+  
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'faker'
