@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature 'user sign in' do
+feature 'user sign in', js: true do
   # Given:
   background do
     visit '/'
   end
 
-  scenario "first time sign up" do
+  xscenario "first time sign up" do
     # When:
     within 'nav' do 
       click_on 'Sign in via Facebook'

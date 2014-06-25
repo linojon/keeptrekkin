@@ -4,7 +4,7 @@ feature 'invite hiker dialog', js: true do
 
   # Given I am signed in and editing a trip
   # And I opened the invite hiker dialog
-  let(:trip) { create :trip_with_hiker }
+  let(:trip) { create :trip, :with_hiker }
 
   def fill_in_email_with(email)
     fill_in 'hiker_email', with: email

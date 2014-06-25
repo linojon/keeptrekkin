@@ -7,13 +7,15 @@ FactoryGirl.define do
     duration 1
     notes ""
 
-    after(:create) do |trip, evaluator|
-      trip.mountains << create(:mountain)
+    trait :with_mountain do
+      after(:create) do |trip, evaluator|
+        trip.mountains << create(:mountain)
+      end
     end
 
-    factory :trip_with_hiker do
+    trait :with_hiker do
       after(:create) do |trip, evaluator|
-        trip.hikers << create( :hiker_with_user )
+        trip.hikers << create( :hiker, :with_user )
       end
     end
 

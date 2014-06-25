@@ -1,6 +1,6 @@
 # https://github.com/intridea/omniauth/wiki/Integration-Testing
 
-def facebook_omniauth_hash( name, email )
+def facebook_omniauth_hash( name='Joe Example', email='joe@example.com' )
   OmniAuth::AuthHash.new({
     provider: 'Facebook',
     uid: '123545',
