@@ -1,6 +1,6 @@
 # https://github.com/intridea/omniauth/wiki/Integration-Testing
 
-def facebook_omniauth_hash( name='Joe Example', email='joe@example.com' )
+def facebook_omniauth_hash( name:'Joe Example', email:'joe@example.com' )
   OmniAuth::AuthHash.new({
     provider: 'Facebook',
     uid: '123545',
@@ -19,6 +19,6 @@ end
 OmniAuth.config.test_mode = true
 
 def mock_facebook_omniauth( name: 'Joe Example', email: 'joe@example.com')
-  OmniAuth.config.mock_auth[:facebook] = facebook_omniauth_hash( name, email)
+  OmniAuth.config.mock_auth[:facebook] = facebook_omniauth_hash( name:name, email:email)
 end
 

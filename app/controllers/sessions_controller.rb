@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
 
+  def create
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to dashboard_url
+  end
+
   # def create
   #   auth = env["omniauth.auth"]
   #   # already registered
@@ -28,12 +34,6 @@ class SessionsController < ApplicationController
   #     create hiker
   #     redirect_to dashboard_path
   #   end
-
-  def create
-    user = User.from_omniauth(env["omniauth.auth"])
-    session[:user_id] = user.id
-    redirect_to dashboard_url
-  end
 
   def destroy
     session[:user_id] = nil

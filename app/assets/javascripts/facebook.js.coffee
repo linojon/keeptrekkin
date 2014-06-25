@@ -8,7 +8,7 @@ jQuery ->
 
 
 window.fbAsyncInit = ->
-  FB.init(appId: '1489744201259276', cookie: true)
+  FB.init(appId: "#{Rails.application.secrets.facebook_app_id}", cookie: true)
 
   $('#sign_in').click (e) ->
     e.preventDefault()
