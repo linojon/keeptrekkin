@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User creates new trip' do
+feature 'User creates new trip', js: true do
   let(:hiker) { create :hiker, :with_user }
 
   background do
@@ -8,15 +8,25 @@ feature 'User creates new trip' do
     click_on 'Add a Trip'
   end
 
-  scenario "default values" do
-    it 'me as hiker'
-    it 'todays date'
+  context 'saves' do
+    context 'default values when nothing entered' do
+      background do
+byebug
+        click_on 'Save', match: :first
+      end
+      let(:trip) { Trip.last }
+
+      it 'adds me as hiker' do
+byebug
+        expect(trip.hikers).to match_array [hiker]
+      end
+      it 'sets todays date' do
+        expect(trip.date).to eql Date.today
+      end
+    end
+    scenario 'filled out form'
   end
 
-  it 'saves'
   it 'cancels'
 
 end
-
-
-

@@ -1,22 +1,24 @@
 %p
   = link_to dashboard_path do
     %span.glyphicon.glyphicon-chevron-left
-    Back
+    Dashboard
 
 .media
   %a.pull-left{ href: '#' }
     %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
 
   .media-body
-    %h1 Trip to #{trip.mountains.map(&:name).join(', ')}
+    - if trip.title.present?
+      %h1= trip.title
 
     %h3=trip.date
 
-    %p
-      = trip.hikers.map(&:name).join(', ')
+    - if trip.mountains.present?
+      %p= trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
+
+    %p= trip.hikers.map(&:name).join(', ')
 
     %p
-      = trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
 
     - if trip.journal.present?
       %h3 Journal

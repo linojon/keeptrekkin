@@ -6,6 +6,9 @@ class Hiker < ActiveRecord::Base
   def just_friends
     friends - [self]
   end
+  def friends_and_self
+    ([self] + friends).uniq
+  end
 
   validates :name, presence: true
 
