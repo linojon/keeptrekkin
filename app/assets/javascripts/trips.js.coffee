@@ -71,12 +71,14 @@ $ ->
     autoclose: true
   )
 
-  # todo: only if editing
-  enable_multiselect('mtns', false)
-  enable_multiselect('hikers', false)
+  # disable multiselects if editing
+  if $('form#new_trip').length == 0
+    enable_multiselect('mtns', false)
+    enable_multiselect('hikers', false)
 
   # todo: integrate this search icon into vertical multiselect custom input
-  $(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
+  $('#s2id_trip_hikers_select') # only for hikers select
+    .find(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
 
   # $(document).on 'click', '#trip_invite_btn', ->
   #   alert 'Invite pressed'
