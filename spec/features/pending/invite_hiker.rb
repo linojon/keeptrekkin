@@ -13,7 +13,7 @@ feature 'invite hiker dialog', js: true do
 
   background do
     # byebug
-    sign_in hiker: trip.hikers.first
+    sign_in trip.hikers.first
     visit "/trips/#{trip.id}/edit"
     find('#enable_edit_hikers').click
     click_on 'Add hiker'

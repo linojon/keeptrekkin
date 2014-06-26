@@ -42,13 +42,6 @@ enable_hiker_name_input = (enable) ->
 
 $ ->
 
-  $('#enable_edit_mtns').click -> enable_multiselect('mtns', true) && false
-  $('#enable_edit_hikers').click -> enable_multiselect('hikers', true) && false
-
-
-  $('#add_mtns').click   -> $('#trip_mtns_select').select2('open') && false
-  $('#add_hikers').click -> $('#trip_hikers_select').select2('open') && false
-
   $('#trip_mtns_select').select2(
     formatResult: format_mtn
     formatSelection: format_mtn
@@ -64,17 +57,12 @@ $ ->
       "<br><a class='btn btn-primary' href='#' onclick='return trip_invite_hiker();'>Invite</a>"
   )
   
-  $('.input-group.date').datepicker(
-    format: "yyyy-mm-dd" # date format must match the database date format
-    todayHighlight: true
-    todayBtn: 'linked'
-    autoclose: true
-  )
+  $('#enable_edit_mtns').click -> enable_multiselect('mtns', true) && false
+  $('#enable_edit_hikers').click -> enable_multiselect('hikers', true) && false
 
-  # disable multiselects if editing
-  if $('form#new_trip').length == 0
-    enable_multiselect('mtns', false)
-    enable_multiselect('hikers', false)
+
+  $('#add_mtns').click   -> $('#trip_mtns_select').select2('open') && false
+  $('#add_hikers').click -> $('#trip_hikers_select').select2('open') && false
 
   # todo: integrate this search icon into vertical multiselect custom input
   $('#s2id_trip_hikers_select') # only for hikers select
@@ -99,4 +87,19 @@ $ ->
     else
       enable_hiker_name_input(false)
     #end
+
+  $('.input-group.date').datepicker(
+    format: "yyyy-mm-dd" # date format must match the database date format
+    todayHighlight: true
+    todayBtn: 'linked'
+    autoclose: true
+  )
+
+  # Initial state
+  # disable multiselects if editing
+  editing = ($('form#new_trip').length == 0)
+  enable_multiselect('mtns', !editing)
+  enable_multiselect('hikers', !editing)
+
+
 

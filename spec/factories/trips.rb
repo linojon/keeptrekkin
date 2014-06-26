@@ -5,7 +5,7 @@ FactoryGirl.define do
     date "2014-06-14"
     distance 1.5
     duration 1
-    notes ""
+    journal ""
 
     trait :with_mountain do
       after(:create) do |trip, evaluator|

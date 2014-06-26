@@ -18,7 +18,7 @@
     %p
       = trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
 
-    - if trip.notes.present?
+    - if trip.journal.present?
       %h3 Journal
       .journal
         = trip.notes

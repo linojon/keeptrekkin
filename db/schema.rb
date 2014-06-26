@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617063343) do
+ActiveRecord::Schema.define(version: 20140626032807) do
 
   create_table "hikers", force: true do |t|
     t.string   "name"
@@ -48,11 +48,12 @@ ActiveRecord::Schema.define(version: 20140617063343) do
 
   create_table "trips", force: true do |t|
     t.date     "date"
-    t.float    "distance"
-    t.integer  "duration"
-    t.text     "notes"
+    t.string   "distance"
+    t.string   "duration"
+    t.text     "journal"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "users", force: true do |t|

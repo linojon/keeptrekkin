@@ -1,35 +1,47 @@
-= simple_form_for trip,  as: 'user_vertical', html: { class: 'form-vertical' } do |f|
+= simple_form_for trip, html: { class: 'form-vertical' } do |f|
+  .row
+    .col-sm-12
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
+      %a.btn.pull-right{ href:'#'} Cancel
+      %br
+      %br
   .row
     .col-ms-4.col-sm-4.well
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-      = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'}, placeholder: 'Select one or more mountains'
-      %button#add_mtns.btn.add_select.btn-default.btn-sm.btn-block Add mountain
+      = f.association :mountains, label: 'Mountain(s)', collection: Mountain.all, input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
+      %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Add mountain
 
       %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       / https://coderwall.com/p/kxwncg - Grouped multiselect with simple_form and nested_set
       / - grouped_hikers = [['My Hikers', current_hiker.friends], ['Site wide', Hiker.all-current_hiker.friends]]
       / = f.input :hikers, as: :grouped_select, collection: grouped_hikers, group_method: :last, label_method: :name, value_method: :id, input_html: {id: 'trip_hikers_select', multiple: true}, placeholder: 'Select one or more hikers'
-      = f.association :hikers, label: 'Hiker(s)', collection: current_hiker.friends, input_html: {id: 'trip_hikers_select'}, placeholder: 'Find a hiker...'
+      = f.association :hikers, label: 'Hiker(s)', collection: current_hiker.friends, input_html: {id: 'trip_hikers_select'}
       -# todo: put placehoder in search box even when selections not empty
       -# &nbsp; <span class="glyphicon glyphicon-search"></span>
-      %button#add_hikers.add_select.btn.btn-default.btn-sm.btn-block Add hiker
+      %button#add_hikers.add_select.btn.btn-info.btn-xs.btn-block Add hiker
+      /%small search by name or email
 
       = f.input :date do # datepicker with icon (todo: move to custom input)
         .input-group.date
-          = f.text_field :date, class: 'string optional form-control'
+          = f.text_field :date, class: 'string optional form-control', placeholder: "#{Date.today}" 
           %span.input-group-addon
             %i.glyphicon.glyphicon-th
 
-      = f.input :distance, label: 'Distance Hiked'
+      = f.input :distance, label: 'Distance Hiked', placeholder: '(e.g. 6.8 miles)'
+      = f.input :duration, placeholder: '(e.g. 4 hours)'
 
     / .col-sm-8
     /   .row
     /     .col-md-offset-1.well
     /       = f.input :notes, label: 'Journal', input_html: { rows: 20 }
     .col-ms-8.col-sm-8.well
-      = f.input :notes, label: 'Journal', input_html: { rows: 20 }
+      = f.input :title, placeholder: 'My awesome hike'
+      = f.input :journal, input_html: { rows: 20 }, placeholder: '(Share your experience, describe trail conditions, post pictures. All hikers can edit this area.)'
   .row
     .col-sm-12
-      = f.button :submit, class: 'btn btn-primary'
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
+      %a.btn.pull-right{ href:'#'} Cancel
+      %br
+      %br
 
 = render 'invite_hiker_dialog' 

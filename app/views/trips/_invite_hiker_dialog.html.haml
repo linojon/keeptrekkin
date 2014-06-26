@@ -1,7 +1,8 @@
 #invite_hiker_dialog.modal.fade
   .modal-dialog
     .modal-content
-      = minimal_form_for :hiker, url: trip_hikers_path(trip) do |f|
+      /= minimal_form_for :hiker, url: trip_hikers_path(trip) do |f|
+      = minimal_form_for :hiker do |f|
         .modal-header
           %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
           %h4.modal-title Invite Hiker
