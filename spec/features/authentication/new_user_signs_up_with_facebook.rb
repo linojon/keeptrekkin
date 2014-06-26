@@ -31,6 +31,7 @@ feature 'New user signs up via Facebook' do
       expect(hiker.user).to_not be_nil
       expect(hiker.user.uid).to eql omniauth.uid
     end
+    it "sets user avatar"
   end
 end
     
