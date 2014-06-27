@@ -1,6 +1,7 @@
 class Hiker < ActiveRecord::Base
-  belongs_to :user
-  has_and_belongs_to_many :trips
+  has_one :user
+  has_many :hiker_trips
+  has_many :trips, through: :hiker_trips
   has_many :mountains, through: :trips
   has_many :friends, -> { distinct }, through: :trips, source: :hikers
   def just_friends
@@ -12,7 +13,7 @@ class Hiker < ActiveRecord::Base
 
   validates :name, presence: true
 
-  scope :not_authenticated, -> { where user_id: nil }
+  # scope :not_authenticated, -> { includes(:users).where("users.hiker_id IS NULL") }
 
   # fuzzy search (like where) but returns collection
   attr_accessor :fuzzy_score

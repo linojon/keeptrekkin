@@ -1,6 +1,9 @@
 class Trip < ActiveRecord::Base
-  has_and_belongs_to_many :hikers
-  has_and_belongs_to_many :mountains
+  has_many :hiker_trips
+  has_many :mountain_trips
+  
+  has_many :hikers, through: :hiker_trips
+  has_many :mountains, through: :mountain_trips
 
   before_validation :set_defaults
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Hiker do
-  it { should have_and_belong_to_many(:trips) }
+  it { should have_many(:trips).through(:hiker_trips) }
   it { is_expected.to validate_presence_of :name }
   xit { is_expected.to validate_presence_of :email }
 
@@ -41,11 +41,12 @@ describe Hiker do
     expect(me.just_friends).to match_array [hiker1, hiker2]
   end
 
-  it "scope not_authenticated" do
-    hiker1 = create :hiker
-    hiker2 = create :hiker, user_id: 99
-    expect(Hiker.not_authenticated.to_a).to eql [hiker1]
-  end
+  # it "scope not_authenticated" do
+  #   hiker1 = create :hiker
+  #   hiker2 = create :hiker
+  #   create :user, hiker: hiker2
+  #   expect(Hiker.not_authenticated.to_a).to eql [hiker1]
+  # end
 
   describe "fuzzy" do
     let!(:named)   { create :hiker, name: 'Jonathan' }
@@ -67,10 +68,17 @@ describe Hiker do
 
     it "can be chained to scopes" do
       # setup
-      named2 = create( :hiker, name: 'Jonathan', user_id: 99)
-      expect(Hiker.fuzzy(name:'Jonathan')).to eql [named,named2]
+      named2 = create( :hiker, name: 'Jonathan')
+      named3 = create( :hiker, name: 'Jonathan')
+      named4 = create( :hiker, name: 'Abcdefg')
+      expect(Hiker.fuzzy(name:'Jonathan')).to eql [named,named2,named3]
+      
       # scoped
-      expect(Hiker.where(user_id: nil).fuzzy(name:'Jonathan')).to eql [named]
+      date = named.updated_at
+      named3.update_attribute :updated_at, date
+      named4.update_attribute :updated_at, date
+
+      expect(Hiker.where(updated_at: date).fuzzy(name:'Jonathan')).to eql [named, named3]
     end
   end
  

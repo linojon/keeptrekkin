@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_one :hiker
+  belongs_to :hiker
 
   def self.from_omniauth(auth)
     #logger.info auth
