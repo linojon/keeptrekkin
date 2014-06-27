@@ -44,7 +44,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'launchy'
