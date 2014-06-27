@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :user do
-    provider "MyString"
-    uid "MyString"
-    name "MyString"
-    oauth_token "MyString"
-    oauth_expires_at "2014-06-14 23:38:50"
+    provider "Facebook"
+    uid "12345"
+    name "Joe Example"
+    oauth_token "secrettoken"
+    oauth_expires_at "2024-06-14 23:38:50"
   end
 end

@@ -3,7 +3,7 @@
 def facebook_omniauth_hash( name:'Joe Example', email:'joe@example.com' )
   OmniAuth::AuthHash.new({
     provider: 'Facebook',
-    uid: '123545',
+    uid: '12345',
     info: {
       name: name,
       email: email,

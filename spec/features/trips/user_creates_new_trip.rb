@@ -11,13 +11,11 @@ feature 'User creates new trip', js: true do
   context 'saves' do
     context 'default values when nothing entered' do
       background do
-byebug
         click_on 'Save', match: :first
       end
       let(:trip) { Trip.last }
 
       it 'adds me as hiker' do
-byebug
         expect(trip.hikers).to match_array [hiker]
       end
       it 'sets todays date' do

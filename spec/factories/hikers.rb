@@ -8,6 +8,7 @@ FactoryGirl.define do
     trait :with_user do
       after(:create) do |hiker, evaluator|
         hiker.user = create(:user)
+        hiker.save
       end
     end
   end

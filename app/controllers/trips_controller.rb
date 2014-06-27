@@ -4,7 +4,6 @@ class TripsController < ApplicationController
   expose(:trip, attributes: :trip_params)
 
   def new
-    byebug
     trip.hikers << current_hiker
   end
 
