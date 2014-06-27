@@ -3,6 +3,11 @@ class TripsController < ApplicationController
   expose(:trips)
   expose(:trip, attributes: :trip_params)
 
+  expose(:mountains) { Mountain.all }
+  expose(:friends) { Hiker.all } #{ current_hiker.friends_and_self }
+
+  before_action :save_back, only: [:new, :edit]
+
   def new
     trip.hikers << current_hiker
   end

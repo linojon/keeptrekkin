@@ -54,7 +54,9 @@ group :development, :test do
   gem 'binding_of_caller'
   
   gem 'byebug'
-  # gem 'pry'
+  gem 'pry'
+  gem 'pry-rails'
+  #gem 'pry-byebug'
   # gem 'awesome_print'
   # gem 'annotate'
   gem 'quiet_assets'
