@@ -12,8 +12,8 @@ feature 'User adds hiker from friends list', js: true do
     click_on 'Add a Trip'
   end
 
-  scenario 'using Add Hiker button' do
-    click_on 'Add hiker'
+  scenario 'using Select Hikers button' do
+    click_on 'Select Hikers'
     ele = page.find('.selection_item', text: friend1.name)
     ele.click
     click_on 'Save', match: :first

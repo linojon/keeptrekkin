@@ -1,15 +1,15 @@
-= simple_form_for trip, html: { class: 'form-vertical' } do |f|
+= simple_form_for trip, html: { id: 'edit_trip_form', class: 'form-vertical' + (trip.new_record? ? ' new_record' : '' ) } do |f|
   .row
     .col-sm-12
       = f.submit 'Save', class: 'btn btn-primary pull-right'
-      %a.btn.pull-right{ href: saved_back_path } Cancel
+      = link_to 'Cancel', saved_back_path, class: 'btn pull-right'
       %br
       %br
   .row
     .col-ms-4.col-sm-4.well
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-      = f.association :mountains, label: 'Mountain(s)', collection: mountains, input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
-      %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Add mountain
+      = f.association :mountains, label: 'Mountains', collection: mountains, input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
+      %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Select mountains
 
       %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       /= f.association :hikers, label: 'Hiker(s)', collection: friends, input_html: {id: 'trip_hikers_select'}
@@ -20,7 +20,7 @@
 
       -# todo: put placehoder in search box even when selections not empty
       -# &nbsp; <span class="glyphicon glyphicon-search"></span>
-      %button#add_hikers.add_select.btn.btn-info.btn-xs.btn-block Add hiker
+      %button#add_hikers.add_select.btn.btn-info.btn-xs.btn-block Select Hikers
       /%small search by name or email
 
       = f.input :date do # datepicker with icon (todo: move to custom input)
@@ -42,7 +42,7 @@
   .row
     .col-sm-12
       = f.submit 'Save', class: 'btn btn-primary pull-right'
-      %a.btn.pull-right{ href: saved_back_path } Cancel
+      = link_to 'Cancel', saved_back_path, class: 'btn pull-right'
       %br
       %br
 

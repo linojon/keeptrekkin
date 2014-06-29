@@ -17,6 +17,9 @@ format_mtn = (state) ->
 format_hiker = (state) ->
   return "<div class='selection_item'><img class='chip', src='/assets/jsl65.jpg'/>" + state.text + '</div>';
 
+# -------------------
+# ADD HIKER DIALOG
+
 capitalize = (string) ->
   string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -40,6 +43,35 @@ enable_hiker_name_input = (enable) ->
     $('#invite_hiker_submit').attr('disabled', true)
   #end
 
+email_input = ->
+  email = $('#hiker_email').val()
+  if validate_email(email)
+    enable_hiker_name_input(true)
+    prefill_name_from_email()
+  else
+    enable_hiker_name_input(false)
+  #end
+
+invite_hiker_dialog_submit_callbacks = ->
+  $('#invite_hiker_form').on('ajax:success', (e, hiker, status, xhr) ->
+      $('#invite_hiker_dialog').modal('hide')
+      $('#trip_hikers_select optgroup[label="My Hikers"]').append('<option selected="selected" value="' + hiker.id + '">' + hiker.name + '</option>')
+      vals = $('#trip_hikers_select').select2('val')
+      vals[vals.length] = hiker.id
+      $('#trip_hikers_select').select2('val', vals)
+    ).on "ajax:error", (e, xhr, status, error) ->
+      $('#invite_hiker_dialog').modal('hide')
+      alert 'ERROR'
+
+# $(document).on 'click', '#trip_invite_btn', ->
+window.trip_invite_hiker = ->
+  $('#trip_hikers_select').select2('close')
+  $('#invite_hiker_dialog').modal('show')
+  # alert 'Invite pressed'
+
+
+# -------------------
+
 $ ->
 
   $('#trip_mtns_select').select2(
@@ -53,8 +85,8 @@ $ ->
     formatSelection: format_hiker
     escapeMarkup: (m) -> return m
     formatNoMatches: (term) -> 
-      "Would you like to add a hiker who's not on this site yet?" +
-      "<br><a class='btn btn-primary' href='#' onclick='return trip_invite_hiker();'>Invite</a>"
+      "<p class='padded'> Would you like to add a hiker who's not on this site yet?" +
+      "<br><a class='btn btn-primary btn-xs pull-right' href='#' onclick='return window.trip_invite_hiker();'>Add Hiker</a></p>"
   )
   
   $('#enable_edit_mtns').click -> enable_multiselect('mtns', true) && false
@@ -68,30 +100,6 @@ $ ->
   $('#s2id_trip_hikers_select') # only for hikers select
     .find(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
 
-  # $(document).on 'click', '#trip_invite_btn', ->
-  #   alert 'Invite pressed'
-  window.trip_invite_hiker = ->
-    $('#trip_hikers_select').select2('close')
-    $('#invite_hiker_dialog').modal('show')
-    # alert 'Invite pressed'
-
-  # invite hiker dialog
-  $('#invite_hiker_dialog').on 'shown.bs.modal', ->
-    enable_hiker_name_input(false)
-
-  email_change = ->
-    email = $('#hiker_email').val()
-    if validate_email(email)
-      enable_hiker_name_input(true)
-      prefill_name_from_email()
-    else
-      enable_hiker_name_input(false)
-    #end
-
-  $('#hiker_email').change -> email_change()
-  $('#hiker_email').keyup -> email_change()
-  $('#hiker_email').mouseout -> email_change()
-
   $('.input-group.date').datepicker(
     format: "yyyy-mm-dd" # date format must match the database date format
     todayHighlight: true
@@ -101,11 +109,22 @@ $ ->
 
   # Initial state
   # disable mountains if not empty
-  empty = ($('#trip_mtns_select').val().length == 0)
-  enable_multiselect('mtns', empty)
+  is_empty = ($('#trip_mtns_select').val() == null || $('#trip_mtns_select').val().length == 0)
+  enable_multiselect('mtns', is_empty)
   # disable hikers if not new
-  editing = ($('form#new_trip').length == 0)
-  enable_multiselect('hikers', !editing)
+  is_new_record = $('form#edit_trip_form').hasClass('new_record')
+  enable_multiselect('hikers', is_new_record)
 
+  # $('#edit_trip_form').areYouSure()
 
+  # -------------------
+  # ADD HIKER DIALOG
+
+  $('#invite_hiker_dialog').on 'shown.bs.modal', ->
+    enable_hiker_name_input(false)
+    $('#hiker_email').on 'change', -> email_input()
+    $('#hiker_email').on 'keyup', -> email_input()
+    $('#hiker_email').on 'mouseout', -> email_input()
+
+  invite_hiker_dialog_submit_callbacks()
 

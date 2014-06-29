@@ -13,7 +13,7 @@ feature 'User adds hiker from other users (static)', js: true do
   end
 
   scenario "search with name" do
-    click_on 'Add hiker'
+    click_on 'Select Hikers'
    ele = page.find('.selection_item', text: other1.name)
     ele.click
     click_on 'Save', match: :first

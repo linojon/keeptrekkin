@@ -41,6 +41,22 @@ button.add_select {
   }
 }
 
+#s2id_trip_mtns_select .select2-search-choice
+{
+  // .alert-success
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+#s2id_trip_hikers_select .select2-search-choice
+{
+  // .alert-warning
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+//background-image: linear-gradient(to top, #f4f4f4 20%, #dff0d8 50%, #e8e8e8 52%, #eeeeee 100%);
+
 // invite dialog
 #invite_hiker_name_input {
   display: none;

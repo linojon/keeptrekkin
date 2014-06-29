@@ -27,7 +27,7 @@ feature 'User creates new trip', js: true do
     click_on 'Add a Trip'
 
     fill_in 'Title', with: 'This is my trip'
-    select mountain.name, from: 'Mountain(s)'
+    select mountain.name, from: 'Mountains'
     select hiker2.name, from: 'Hikers'
     fill_in 'Date', with: '2014-6-1'
     fill_in 'Distance Hiked', with: '7.7 miles'

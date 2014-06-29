@@ -2,16 +2,15 @@
   .modal-dialog
     .modal-content
       /= minimal_form_for :hiker, url: trip_hikers_path(trip) do |f|
-      = minimal_form_for :hiker do |f|
+      = simple_form_for :hiker, url: hikers_path, remote: true, html: {id: 'invite_hiker_form'} do |f|
         .modal-header
           %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
-          %h4.modal-title Invite Hiker
+          %h4.modal-title Add Hiker
         .modal-body
-          %p Enter an email address to invite someone new.
-          = f.input :email, placeholder: 'Email address'
+          %p Add a hiker to the trip. We'll send them a notification email, and they'll automatically receive access to this trip report once they sign in.
+          = f.input :email, placeholder: 'Email address', placeholder: 'Email address of hiker to add to the trip'
           #invite_hiker_name_input
-            %p Add a name and click “Invite” and we’ll add a virtual member and send them an invite email. They'll automatically receive access to this trip report once they sign in.
-            = f.input :name, placeholder: 'Full name'
+            = f.input :name, label: 'Name'
         .modal-footer
           %button.btn.btn-default{ type: :button, 'data-dismiss' => :modal } Cancel
-          = f.submit 'Invite', class: 'btn btn-primary', id: 'invite_hiker_submit'
+          = f.submit 'Send', class: 'btn btn-primary', id: 'invite_hiker_submit'
