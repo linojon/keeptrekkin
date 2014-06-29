@@ -96,9 +96,11 @@ $ ->
   )
 
   # Initial state
-  # disable multiselects if editing
+  # disable mountains if not empty
+  empty = ($('#trip_mtns_select').val().length == 0)
+  enable_multiselect('mtns', empty)
+  # disable hikers if not new
   editing = ($('form#new_trip').length == 0)
-  enable_multiselect('mtns', !editing)
   enable_multiselect('hikers', !editing)
 
 

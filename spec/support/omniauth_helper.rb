@@ -7,7 +7,7 @@ def facebook_omniauth_hash( name:'Joe Example', email:'joe@example.com' )
     info: {
       name: name,
       email: email,
-      image: 'http://graph.facebook.com/10203290081348033/picture?type=square'
+      image: '/assets/profile-small.jpg' #'http://graph.facebook.com/10203290081348033/picture?type=square'
     },
     credentials: {
       token: 'ABCtokenXYZ',

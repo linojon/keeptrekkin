@@ -7,28 +7,25 @@ feature 'User creates new trip', js: true do
     sign_in hiker
   end
 
-  describe 'default values when nothing entered' do
-    background do
-     click_on 'Add a Trip'
-     click_on 'Save', match: :first
-    end
-    let(:trip) { Trip.last }
+  scenario 'default values when nothing entered' do
+    # create an 'empty' trip
+    click_on 'Add a Trip' 
+    click_on 'Save', match: :first
+    trip = Trip.last
 
-    it 'adds me as hiker' do
-      expect(trip.hikers).to match_array [hiker]
-    end
-    it 'sets todays date' do
-      expect(trip.date).to eql Date.today
-    end
-    it 'redirect to show view' do
-      expect(current_url).to include "/trips/#{trip.to_param}"
-    end
+    # adds me as hiker
+    expect(trip.hikers).to match_array [hiker]
+    # sets todays date
+    expect(trip.date).to eql Date.today
+    # redirect to show view
+    expect(current_url).to include "/trips/#{trip.to_param}"
   end
 
-  scenario 'filled out form' do
+  scenario 'filled out form', focus: true do
     mountain = create :mountain
     hiker2 = create :hiker
     click_on 'Add a Trip'
+   
     fill_in 'Title', with: 'This is my trip'
     select mountain.name, from: 'Mountain(s)'
     select hiker2.name, from: 'Hiker(s)'

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
     #logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      # TODO: decide what/if attributes updated from provider or left if user exists
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name

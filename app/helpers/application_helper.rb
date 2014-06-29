@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def flash_class_for(level)
-    'alert alert-dismissable' +
+    'alert alert-dismissable ' +
       case level
       when 'success' then 'alert-success' # green
       when 'notice'  then 'alert-info'    # blue

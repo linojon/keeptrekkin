@@ -71,7 +71,7 @@ end
 
 # hikers
 [
-  ['Jonathan Linowes', 'jonathan@linwoes.com', '1957-07-11'],
+  ['Jonathan Linowes', 'jonathan@linowes.com', '1957-07-11'],
   ['Lisa Linowes', 'lisa@linowes.com', '1956-01-20'],
   ['Rayna Linowes', 'rayna@linowes.com', '1990-10-14'],
   ['Jarrett Linowes', 'jaf268@wildcats.unh.edu', '1992-04-18'],
@@ -80,13 +80,16 @@ end
   ['Nikki (dog)', '', '2006-01-11']
 ].each do |name, email, birth|
   attrs = {name: name, email: email}
-  if hiker = Hiker.where(name: name.split(' ').first).first
+  if hiker = Hiker.where(name: name).first
     hiker.update_attributes attrs
   else
     Hiker.create attrs
   end
 end
 
+# user
+jon = Hiker.where( name: 'Jonathan Linowes').first
+User.create provider: 'facebook', uid: "10203290081348033", hiker: jon
 
 
 
@@ -107,9 +110,10 @@ end
 ].each do |date, mountains, hikers|
   # NOTE: Not updating, only creating
   unless Trip.where(date: date).present?
+    fullnames = hikers.map {|first| "#{first} Linowes"}
     trip = Trip.create date: date.to_date
     trip.mountains << Mountain.where( name: mountains )
-    trip.hikers << Hiker.where( name: hikers )
+    trip.hikers << Hiker.where( name: fullnames )
   end
 end
 

@@ -15,7 +15,12 @@
       / https://coderwall.com/p/kxwncg - Grouped multiselect with simple_form and nested_set
       / - grouped_hikers = [['My Hikers', current_hiker.friends], ['Site wide', Hiker.all-current_hiker.friends]]
       / = f.input :hikers, as: :grouped_select, collection: grouped_hikers, group_method: :last, label_method: :name, value_method: :id, input_html: {id: 'trip_hikers_select', multiple: true}, placeholder: 'Select one or more hikers'
-      = f.association :hikers, label: 'Hiker(s)', collection: friends, input_html: {id: 'trip_hikers_select'}
+
+      /= f.association :hikers, label: 'Hiker(s)', collection: friends, input_html: {id: 'trip_hikers_select'}
+
+      - grouped_hikers = [['My Hikers', friends],['Other Known Hikers', site_hikers]]
+      = f.input :hikers, as: :grouped_select, collection: grouped_hikers, group_method: :last, label_method: :name, value_method: :id, input_html: {id: 'trip_hikers_select', multiple: true}
+
       -# todo: put placehoder in search box even when selections not empty
       -# &nbsp; <span class="glyphicon glyphicon-search"></span>
       %button#add_hikers.add_select.btn.btn-info.btn-xs.btn-block Add hiker

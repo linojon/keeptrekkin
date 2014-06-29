@@ -42,6 +42,7 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
+  gem 'persistent_selenium'
   gem 'database_cleaner'
   
   gem 'shoulda-matchers', require: false
@@ -49,6 +50,8 @@ group :development, :test do
   gem 'faker'
   gem 'launchy'
   gem 'spring-commands-rspec'
+  gem 'guard-rspec'
+  gem 'rb-fsevent' if `uname` =~ /Darwin/ # osx file event api
 
   gem 'better_errors'
   gem 'binding_of_caller'
