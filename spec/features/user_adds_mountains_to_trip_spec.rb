@@ -47,7 +47,7 @@ feature 'User adds mountains to trip', js: true do
       visit "/trips/#{trip.to_param}/edit"
       expect(page).to have_selector('#s2id_trip_mtns_select.select2-container-disabled')
       # enable by clicking pencil icon and add another
-      page.find('#enable_edit_mtns').click
+      find('#enable_edit_mtns').click
       expect(page).to have_no_selector('#s2id_trip_mtns_select.select2-container-disabled')
       select mountain2.name, from: 'Mountain(s)'
       click_on 'Save', match: :first
@@ -59,8 +59,8 @@ feature 'User adds mountains to trip', js: true do
       click_on 'Save', match: :first
       # delete selected mountain
       visit "/trips/#{trip.to_param}/edit"
-      page.find('#enable_edit_mtns').click
-      page.find('a.select2-search-choice-close').click
+      find('#enable_edit_mtns').click
+      find('a.select2-search-choice-close').click
       click_on 'Save', match: :first
       expect(page).to have_content "You've saved a trip with no mountains selected"
     end

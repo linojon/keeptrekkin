@@ -14,7 +14,6 @@ class TripsController < ApplicationController
   end
 
   def create
-# byebug
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -24,7 +23,6 @@ class TripsController < ApplicationController
   end
 
   def update
-# byebug
     if trip.save
       flash_no_mountains
       redirect_to(trip)

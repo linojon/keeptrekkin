@@ -21,14 +21,14 @@ feature 'User creates new trip', js: true do
     expect(current_url).to include "/trips/#{trip.to_param}"
   end
 
-  scenario 'filled out form', focus: true do
+  scenario 'filled out form' do
     mountain = create :mountain
     hiker2 = create :hiker
     click_on 'Add a Trip'
-   
+
     fill_in 'Title', with: 'This is my trip'
     select mountain.name, from: 'Mountain(s)'
-    select hiker2.name, from: 'Hiker(s)'
+    select hiker2.name, from: 'Hikers'
     fill_in 'Date', with: '2014-6-1'
     fill_in 'Distance Hiked', with: '7.7 miles'
     fill_in 'Duration', with: '4 hours'

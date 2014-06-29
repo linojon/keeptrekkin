@@ -79,7 +79,7 @@ $ ->
   $('#invite_hiker_dialog').on 'shown.bs.modal', ->
     enable_hiker_name_input(false)
 
-  $('#hiker_email').change ->
+  email_change = ->
     email = $('#hiker_email').val()
     if validate_email(email)
       enable_hiker_name_input(true)
@@ -87,6 +87,10 @@ $ ->
     else
       enable_hiker_name_input(false)
     #end
+
+  $('#hiker_email').change -> email_change()
+  $('#hiker_email').keyup -> email_change()
+  $('#hiker_email').mouseout -> email_change()
 
   $('.input-group.date').datepicker(
     format: "yyyy-mm-dd" # date format must match the database date format
