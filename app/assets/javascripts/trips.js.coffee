@@ -74,57 +74,59 @@ window.trip_invite_hiker = ->
 
 $ ->
 
-  $('#trip_mtns_select').select2(
-    formatResult: format_mtn
-    formatSelection: format_mtn
-    escapeMarkup: (m) -> return m
-  )
+  # (only on edit trip page)
+  if $('#trip_mtns_select').length != 0
+    $('#trip_mtns_select').select2(
+      formatResult: format_mtn
+      formatSelection: format_mtn
+      escapeMarkup: (m) -> return m
+    )
 
-  $('#trip_hikers_select').select2(
-    formatResult: format_hiker
-    formatSelection: format_hiker
-    escapeMarkup: (m) -> return m
-    formatNoMatches: (term) -> 
-      "<p class='padded'> Would you like to add a hiker who's not on this site yet?" +
-      "<br><a class='btn btn-primary btn-xs pull-right' href='#' onclick='return window.trip_invite_hiker();'>Add Hiker</a></p>"
-  )
-  
-  $('#enable_edit_mtns').click -> enable_multiselect('mtns', true) && false
-  $('#enable_edit_hikers').click -> enable_multiselect('hikers', true) && false
+    $('#trip_hikers_select').select2(
+      formatResult: format_hiker
+      formatSelection: format_hiker
+      escapeMarkup: (m) -> return m
+      formatNoMatches: (term) -> 
+        "<p class='padded'> Would you like to add a hiker who's not on this site yet?" +
+        "<br><a class='btn btn-primary btn-xs pull-right' href='#' onclick='return window.trip_invite_hiker();'>Add Hiker</a></p>"
+    )
+    
+    $('#enable_edit_mtns').click -> enable_multiselect('mtns', true) && false
+    $('#enable_edit_hikers').click -> enable_multiselect('hikers', true) && false
 
 
-  $('#add_mtns').click   -> $('#trip_mtns_select').select2('open') && false
-  $('#add_hikers').click -> $('#trip_hikers_select').select2('open') && false
+    $('#add_mtns').click   -> $('#trip_mtns_select').select2('open') && false
+    $('#add_hikers').click -> $('#trip_hikers_select').select2('open') && false
 
-  # todo: integrate this search icon into vertical multiselect custom input
-  $('#s2id_trip_hikers_select') # only for hikers select
-    .find(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
+    # todo: integrate this search icon into vertical multiselect custom input
+    $('#s2id_trip_hikers_select') # only for hikers select
+      .find(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
 
-  $('.input-group.date').datepicker(
-    format: "yyyy-mm-dd" # date format must match the database date format
-    todayHighlight: true
-    todayBtn: 'linked'
-    autoclose: true
-  )
+    $('.input-group.date').datepicker(
+      format: "yyyy-mm-dd" # date format must match the database date format
+      todayHighlight: true
+      todayBtn: 'linked'
+      autoclose: true
+    )
 
-  # Initial state
-  # disable mountains if not empty
-  is_empty = ($('#trip_mtns_select').val() == null || $('#trip_mtns_select').val().length == 0)
-  enable_multiselect('mtns', is_empty)
-  # disable hikers if not new
-  is_new_record = $('form#edit_trip_form').hasClass('new_record')
-  enable_multiselect('hikers', is_new_record)
+    # Initial state 
+    # disable mountains if not empty
+    is_empty =  ($('#trip_mtns_select').val() == null || $('#trip_mtns_select').val().length == 0)
+    enable_multiselect('mtns', is_empty)
+    # disable hikers if not new
+    is_new_record = $('form#edit_trip_form').hasClass('new_record')
+    enable_multiselect('hikers', is_new_record)
 
-  # $('#edit_trip_form').areYouSure()
+    # $('#edit_trip_form').areYouSure()
 
-  # -------------------
-  # ADD HIKER DIALOG
+    # -------------------
+    # ADD HIKER DIALOG
 
-  $('#invite_hiker_dialog').on 'shown.bs.modal', ->
-    enable_hiker_name_input(false)
-    $('#hiker_email').on 'change', -> email_input()
-    $('#hiker_email').on 'keyup', -> email_input()
-    $('#hiker_email').on 'mouseout', -> email_input()
+    $('#invite_hiker_dialog').on 'shown.bs.modal', ->
+      enable_hiker_name_input(false)
+      $('#hiker_email').on 'change', -> email_input()
+      $('#hiker_email').on 'keyup', -> email_input()
+      $('#hiker_email').on 'mouseout', -> email_input()
 
-  invite_hiker_dialog_submit_callbacks()
-
+    invite_hiker_dialog_submit_callbacks()
+  #end

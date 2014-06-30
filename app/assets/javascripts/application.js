@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require select2
 //= require bootstrap-datepicker
+//= require jquery.easy-pie-chart
 //= require_tree .

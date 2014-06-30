@@ -2,5 +2,17 @@
 .row
   .col-md-2
     = link_to 'Add a Trip', new_trip_path, class: 'btn btn-primary'
+    %br
+    %br
+    %br
+    %br
+    %p.centered
+      = "#{current_hiker.mountains.count} out of #{Mountain.count} New Hampshire 4000-footers bagged!"
+      - percent = (current_hiker.mountains.count * 100 / Mountain.count) 
+      .chart{ data: { percent: percent }}= "#{percent}%"
   .col-md-8
     = render my_trips
+
+:coffeescript
+  $ ->
+    $('.chart').easyPieChart()

@@ -29,6 +29,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'redcarpet'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'easy_as_pie'
 
 gem 'pundit'
 gem 'decent_exposure'
