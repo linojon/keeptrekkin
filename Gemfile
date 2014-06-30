@@ -65,7 +65,7 @@ group :development, :test do
 end
 
 group :development, :test, :darwin do # and run heroku config:add BUNDLE_WITHOUT="development test darwin"
-  gem 'rb-fsevent' if `uname` =~ /Darwin/ # osx file event api
+  gem 'rb-fsevent' # osx file event api
 end
 
 group :production do
