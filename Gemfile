@@ -36,6 +36,7 @@ gem 'decent_exposure'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'amatch'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3'
