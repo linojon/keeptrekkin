@@ -51,7 +51,6 @@ group :development, :test do
   gem 'launchy'
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
-  gem 'rb-fsevent' if `uname` =~ /Darwin/ # osx file event api
 
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -63,6 +62,10 @@ group :development, :test do
   # gem 'awesome_print'
   # gem 'annotate'
   gem 'quiet_assets'
+end
+
+group :development, :test, :darwin do # and run heroku config:add BUNDLE_WITHOUT="development test darwin"
+  gem 'rb-fsevent' if `uname` =~ /Darwin/ # osx file event api
 end
 
 group :production do
