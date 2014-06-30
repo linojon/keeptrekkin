@@ -29,6 +29,9 @@ module Nh4k
 
     # config.autoload_paths += %W(#{config.root}/lib)
 
+    # http://aokolish.me/blog/2011/12/24/at-font-face-with-the-asset-pipeline/
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
     # e.g. Rails.application.config.app_title
     config.app_title = 'WebeTrekkin'
     config.copyright = 'Parkerhill Technology Group LLC'

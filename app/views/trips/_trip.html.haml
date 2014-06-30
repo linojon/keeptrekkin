@@ -1,4 +1,16 @@
-%tr{ data: { link: trip_path(trip) } }
-  %td= trip.date
-  %td= trip.mountains.map(&:name).join(', ')
-  %td= trip.hikers.map(&:name).join(', ')
+.panel.panel-default
+  .panel-body
+    .media
+      /= link_to trip, class='pull-left' do
+      /%img.media-object{ data: { src: "holder.js/64x64" }}
+      .media.glyph
+        %i.glyph-icon.flaticon-mountain13.pull-left
+        .media-body
+          %p
+            = trip.mountains.map {|mountain| link_to mountain.name, mountain }.join(', ').html_safe
+          %p
+            = trip.hikers.map {|hiker| link_to hiker.name, hiker }.join(', ').html_safe
+          %p
+            = trip.date.strftime('%A, %b %-d, %Y')
+          - if trip.title
+            %h4= trip.title

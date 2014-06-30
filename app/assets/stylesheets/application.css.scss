@@ -5,6 +5,7 @@ $table-bg-hover: #ddd;
 @import "select2";
 @import "select2-bootstrap";
 @import "bootstrap-datepicker3";
+@import "flaticon";
 @import "equal_heights";
 @import "rowlink";
 @import "trips";
@@ -58,3 +59,27 @@ img.chip {
   width: 20px;
   padding-right: 4px;
 }
+
+.glyph {
+    // display: inline-block;
+    // width: 120px;
+    // margin: 10px;
+    // text-align: center;
+    // vertical-align: top;
+    // background: #FFF;
+}
+
+.glyph .glyph-icon {
+    // padding: 10px;
+    display: block;
+    font-family:"Flaticon";
+    font-size: 64px;
+    line-height: 1;
+}
+
+.glyph .glyph-icon:before {
+    font-size: 64px;
+    color: #666;
+    margin-left: 0;
+}
+

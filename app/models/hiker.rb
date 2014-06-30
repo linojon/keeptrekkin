@@ -30,7 +30,6 @@ class Hiker < ActiveRecord::Base
     matches.sort! {|a,b| b.fuzzy_score <=> a.fuzzy_score } # sort by score highest first
   end
 
-  # make this a "concerns" ?
   def update_attributes_only_if_blank(attributes)
     attributes.each { |k,v| attributes.delete(k) unless read_attribute(k).blank? }
     update(attributes)

@@ -2,10 +2,11 @@
 
 FactoryGirl.define do
   factory :trip do
-    date "2014-06-14"
+    sequence(:title)    {|n| "Trip #{n}" }
+    sequence(:date)     {|n| "2014-06-#{n}" }
     distance 1.5
     duration 1
-    journal ""
+    journal             { Faker::Lorem.sentence }
 
     trait :with_mountain do
       after(:create) do |trip, evaluator|

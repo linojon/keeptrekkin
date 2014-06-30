@@ -3,6 +3,8 @@ class TripsController < ApplicationController
   expose(:trips)
   expose(:trip, attributes: :trip_params)
 
+  expose(:my_trips)     { current_hiker.trips }
+
   expose(:mountains)    { Mountain.all }
   expose(:friends)      { current_hiker.friends_and_self }
   expose(:site_hikers)  { Hiker.all - friends}
