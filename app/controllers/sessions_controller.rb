@@ -1,8 +1,20 @@
 class SessionsController < ApplicationController
 
+  def hack
+    redirect_to root_url unless Rails.env.development? && params[:id]
+
+    hiker = Hiker.find params[:id]
+    user = (hiker.user ||= User.create )
+    hiker.save
+    session[:user_id] = user.id
+    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_profile_path} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
+    redirect_to dashboard_url
+  end
+
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
+    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_profile_path} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
     redirect_to dashboard_url
   end
 

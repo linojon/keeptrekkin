@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    provider "Facebook"
+    provider "facebook"
     uid "12345"
     name "Joe Example"
     oauth_token "secrettoken"

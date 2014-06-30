@@ -29,7 +29,8 @@ module Nh4k
 
     # config.autoload_paths += %W(#{config.root}/lib)
 
-    config.app_title = 'My 4000 Footers'
+    # e.g. Rails.application.config.app_title
+    config.app_title = 'WebeTrekkin'
     config.copyright = 'Parkerhill Technology Group LLC'
   end
 end

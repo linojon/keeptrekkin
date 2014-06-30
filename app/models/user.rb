@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     #logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      # TODO: decide what/if attributes updated from provider or left if user exists
+      # user attribs update from provider, hiker attribs are only initialized then user edits
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   def create_or_update_hiker(attributes)
     if self.hiker
       self.hiker.update_attributes_only_if_blank attributes
+    elsif hiker = Hiker.where(email: attributes[:email]).first
+      self.hiker = hiker
+      self.save!
     else
       self.create_hiker attributes
     end

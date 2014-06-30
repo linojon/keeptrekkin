@@ -16,6 +16,15 @@ class HikersController < ApplicationController
     end
   end
 
+
+  def profile
+    redirect_to hiker_path(current_hiker)
+  end
+
+  def profile_edit
+    redirect_to edit_hiker_path(current_hiker)
+  end
+
   private
 
   def hiker_params

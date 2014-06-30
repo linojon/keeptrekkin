@@ -13,25 +13,24 @@ feature 'New user signs up via Facebook' do
 
   context 'First time sign up' do
 
-    it "has Sign out link" do 
+    scenario "has Sign out link and redirects to dashboard" do 
       expect(page).to have_content('Sign out')
-    end
-    it "redirects to dashboard" do
+      # TODO: user name and link to profile
       expect(current_url).to include '/dashboard'
     end
-    it "creates user with oauth info" do
+    scenario "creates user with oauth info" do
       user = User.last
-      expect(user.provider).to eql 'Facebook'
+      expect(user.provider).to eql 'facebook'
       expect(user.uid).to eql omniauth.uid
     end
-    it "creates hiker with name, email associated with user" do
+    scenario "creates hiker with name, email associated with user" do
       hiker = Hiker.last
       expect(hiker.name).to eql omniauth.info.name
       expect(hiker.email).to eql omniauth.info.email
       expect(hiker.user).to_not be_nil
       expect(hiker.user.uid).to eql omniauth.uid
     end
-    it "sets user avatar"
+    scenario "sets user avatar"
   end
 end
     

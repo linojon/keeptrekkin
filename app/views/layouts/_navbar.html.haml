@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{ href: '/' }= Rails.application.config.app_title
+      %a.navbar-brand{ href: '/' }= app_title
   
     #navbar-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
@@ -15,8 +15,8 @@
         %li= link_to 'Trips', trips_path
 
       %ul.nav.navbar-nav.navbar-right
-        - if current_user
-          / %li= link_to 'Profile', edit_user_registration_path
+        - if current_hiker
+          %li= link_to current_hiker.name, profile_path
           %li= link_to 'Sign out', signout_path, id: 'sign_out'
         - else
           %li= link_to 'Sign in via Facebook', '/auth/facebook', id: 'sign_in'

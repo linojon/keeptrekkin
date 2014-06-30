@@ -9,7 +9,9 @@ feature 'Existing user signs in via Facebook' do
     click_on 'Sign in via Facebook'
   end
 
-  it "redirects to dashboard" do
+  it "signed in and redirects to dashboard" do
+    expect(page).to have_content('Sign out')
+    # TODO: user name and link to profile
     expect(current_url).to include '/dashboard'
   end
 end

@@ -93,8 +93,6 @@ feature 'User adds new hiker via email', js: true do
         hiker = Hiker.where( email: 'newhiker@example.com').first
         expect(page).to have_selector("option[value='#{hiker.id}'][selected='selected']", text: 'Newhiker' )
       end
-
-      scenario 'queues email notice'
     end
 
     context "Send to existing hiker" do
@@ -111,7 +109,6 @@ feature 'User adds new hiker via email', js: true do
         expect(Hiker.where(email: 'newhiker@example.com').count).to eql 1
         expect(page).to have_selector("option[value='#{hiker.id}'][selected='selected']", text: 'Nuuu Hiker' )
       end
-
     end
 
   end

@@ -26,6 +26,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :back_path, :save_back, :saved_back_path
 
+  # config/application.rb
+  def app_title
+    Rails.application.config.app_title
+  end
+  helper_method :app_title
 
   # vvvvvv app specific vvvvvv
 
@@ -36,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_hiker
-    current_user.hiker
+    current_user && current_user.hiker
   end
 
   helper_method :current_user, :current_hiker

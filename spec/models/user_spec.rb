@@ -10,7 +10,7 @@ describe User do
     it 'captures facebook data' do
       expect(user).to be_valid
       expect(user).to be_persisted
-      expect(user.provider).to eql 'Facebook'
+      expect(user.provider).to eql 'facebook'
     end
 
     it 'creates a hiker' do
