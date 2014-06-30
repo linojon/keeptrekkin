@@ -12,13 +12,17 @@ feature 'User edits trip' do
   scenario "any hiker on trip can edit" do
     trip.hikers << other_hiker
     trip.save
-    visit "/trips/#{trip.to_param}/edit"
+    visit "/trips/#{trip.to_param}"
+    click_on "Edit"
     expect(page).to have_content "Editing Trip"
   end
 
   scenario "non hikers cannot edit" do
+    visit "/trips/#{trip.to_param}"
+    expect(page).to_not have_link "Edit"
     visit "/trips/#{trip.to_param}/edit"
     expect(page).to have_content "not allowed"
   end
+
 
 end
