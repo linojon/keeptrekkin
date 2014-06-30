@@ -30,6 +30,8 @@ gem 'redcarpet'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'easy_as_pie'
+gem 'carrierwave'
+gem 'attachinary'
 
 gem 'pundit'
 gem 'decent_exposure'
