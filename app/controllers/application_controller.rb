@@ -9,10 +9,16 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  include Pundit
+  # after_action :verify_authorized, :except => :index
+  # after_action :verify_policy_scoped, :only => :index
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to root_url, alert: exception.message
+  end
 
   # http://railscasts.com/episodes/131-going-back
   def back_path
-    request.env['HTTP_REFERER'] || root_path
+    request.referrer || root_path
   end
 
   # e.g. before_action :save_back, only: [:new, :edit]
@@ -35,6 +41,15 @@ class ApplicationController < ActionController::Base
   # vvvvvv app specific vvvvvv
 
   private
+  # vvvvvv parkerhill standard vvvvvv
+
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
+
+
+  # vvvvvv app specific vvvvvv
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -43,7 +58,6 @@ class ApplicationController < ActionController::Base
   def current_hiker
     current_user && current_user.hiker
   end
-
   helper_method :current_user, :current_hiker
 
 end

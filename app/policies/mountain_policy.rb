@@ -1,0 +1,2 @@
+class MountainPolicy < ApplicationPolicy
+end

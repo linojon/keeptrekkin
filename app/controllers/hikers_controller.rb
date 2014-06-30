@@ -1,4 +1,5 @@
 class HikersController < ApplicationController
+  after_action :verify_authorized, except: [:index, :show]
 
   # expose(:trip)
   # expose(:hikers)
@@ -6,6 +7,7 @@ class HikersController < ApplicationController
 
   def create
     # xhr request
+    authorize hiker
     if exists = Hiker.where( email: params[:hiker][:email] ).first
       # already exists with this email, just use it, ignore name
       render json: exists

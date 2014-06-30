@@ -1,7 +1,8 @@
 class TripsController < ApplicationController
+  after_action :verify_authorized, except: [:index, :show]
 
   expose(:trips)
-  expose(:trip, attributes: :trip_params)
+  expose!(:trip, attributes: :trip_params)
 
   expose(:my_trips)     { current_hiker.trips }
 
@@ -12,10 +13,16 @@ class TripsController < ApplicationController
   before_action :save_back, only: [:new, :edit]
 
   def new
+    authorize trip
     trip.hikers << current_hiker
   end
 
+  def edit
+    authorize trip
+  end
+
   def create
+    authorize trip
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -25,6 +32,7 @@ class TripsController < ApplicationController
   end
 
   def update
+    authorize trip
     if trip.save
       flash_no_mountains
       redirect_to(trip)

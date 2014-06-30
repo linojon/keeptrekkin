@@ -4,7 +4,8 @@
       /= link_to trip, class='pull-left' do
       /%img.media-object{ data: { src: "holder.js/64x64" }}
       .media.glyph
-        %i.glyph-icon.flaticon-mountain13.pull-left
+        = link_to trip, class: 'pull-left' do
+          %i.glyph-icon.flaticon-mountain13
         .media-body
           %p
             = trip.mountains.map {|mountain| link_to mountain.name, mountain }.join(', ').html_safe
@@ -13,4 +14,4 @@
           %p
             = trip.date.strftime('%A, %b %-d, %Y')
           - if trip.title
-            %h4= trip.title
+            %h4= link_to trip.title, trip

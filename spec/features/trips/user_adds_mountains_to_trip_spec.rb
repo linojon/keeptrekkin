@@ -62,7 +62,7 @@ feature 'User adds mountains to trip', js: true do
       find('#enable_edit_mtns').click
       find('a.select2-search-choice-close').click
       click_on 'Save', match: :first
-      expect(page).to have_content "You've saved a trip with no mountains selected"
+     expect(page).to have_content "You've saved a trip with no mountains selected"
     end
   end
 
