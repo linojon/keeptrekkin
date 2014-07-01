@@ -117,7 +117,7 @@ $ ->
     is_new_record = $('form#edit_trip_form').hasClass('new_record')
     enable_multiselect('hikers', is_new_record)
 
-    $('#edit_trip_form').areYouSure()
+    # $('#edit_trip_form').areYouSure()
 
     # file uploader
     $('.attachinary-input').attachinary()

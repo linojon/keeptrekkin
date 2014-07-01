@@ -23,6 +23,8 @@ class TripsController < ApplicationController
 
   def create
     authorize trip
+    trip.update_mountains params[:trip][:mountain_ids]
+    trip.update_hikers params[:trip][:hiker_ids]
     if trip.save
       flash_no_mountains
       redirect_to(trip)
