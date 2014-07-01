@@ -7,7 +7,10 @@
 
     .media
       %a.pull-left{ href: '#' }
-        %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
+        - if trip.profile_image?
+          = cl_image_tag trip.profile_image.path, size: '300x200', crop: :fit
+        - else
+          %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
 
       .media-body
         - if trip.title.present?

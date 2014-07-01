@@ -5,13 +5,16 @@
       /%img.media-object{ data: { src: "holder.js/64x64" }}
       .media.glyph
         = link_to trip, class: 'pull-left' do
-          %i.glyph-icon.flaticon-mountain13
+          - if trip.profile_image?
+            = cl_image_tag trip.profile_image.path, size: '64x64', crop: :fit
+          - else
+            %i.glyph-icon.flaticon-mountain13
         .media-body
+          - if trip.title
+            %h4= link_to trip.title, trip
           %p
             = trip.mountains.map {|mountain| link_to mountain.name, mountain }.join(', ').html_safe
           %p
             = trip.hikers.map {|hiker| link_to hiker.name, hiker }.join(', ').html_safe
           %p
             = trip.date.strftime('%A, %b %-d, %Y')
-          - if trip.title
-            %h4= link_to trip.title, trip

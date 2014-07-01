@@ -1,2 +1,5 @@
-facebook_app_id: 
-facebook_secret: 
+  facebook_app_id: 
+  facebook_secret: 
+  cloudinary_api_key:
+  cloudinary_api_secret:
+

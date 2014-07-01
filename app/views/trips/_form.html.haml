@@ -7,6 +7,8 @@
       %br
   .row
     .col-ms-4.col-sm-4.well
+      = f.input :profile_image, as: :attachinary
+
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       = f.association :mountains, label: 'Mountains', collection: mountains, input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
       %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Select mountains

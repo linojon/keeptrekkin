@@ -12,9 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//xx = require turbolinks
+//  require turbolinks
+//= require jquery.ui.widget
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require cloudinary/jquery.cloudinary
+//= require attachinary
 //= require bootstrap
 //= require select2
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require jquery.easy-pie-chart
 //= require_tree .

@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   match 'profile', to: 'hikers#profile', via: :get
   match 'profile/edit', to: 'hikers#profile_edit', as: 'edit_profile', via: :get
 
-
   resources :mountains
+
+  mount Attachinary::Engine => "/attachinary"
 
   root 'pages#home'
 

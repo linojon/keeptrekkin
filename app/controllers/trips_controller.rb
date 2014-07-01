@@ -33,6 +33,10 @@ class TripsController < ApplicationController
 
   def update
     authorize trip
+    # dont let disabled select widget wipe out these
+    trip.update_mountains params[:trip][:mountain_ids]
+    trip.update_hikers params[:trip][:hiker_ids]
+    
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -44,7 +48,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, mountain_ids:[], hiker_ids:[])  
+    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, :profile_image) #disallow mountain_ids:[], hiker_ids:[])  
   end
 
   def flash_no_mountains

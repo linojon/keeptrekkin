@@ -40,6 +40,10 @@ GEM
     amatch (0.3.0)
       tins (~> 1.0)
     arel (5.0.1.20140414130214)
+    attachinary (1.3.0)
+      cloudinary (~> 1.0.69)
+      rails (>= 3.2)
+    aws_cf_signer (0.1.3)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -66,6 +70,9 @@ GEM
       timers (~> 1.1.0)
     childprocess (0.5.3)
       ffi (~> 1.0, >= 1.0.11)
+    cloudinary (1.0.73)
+      aws_cf_signer
+      rest-client
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -198,6 +205,8 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redcarpet (3.1.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -275,6 +284,7 @@ PLATFORMS
 
 DEPENDENCIES
   amatch
+  attachinary
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
@@ -282,6 +292,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-webkit
+  cloudinary
   coffee-rails (~> 4.0.0)
   database_cleaner
   decent_exposure
