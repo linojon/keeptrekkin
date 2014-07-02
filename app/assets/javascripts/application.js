@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //  require turbolinks
-//= require jquery.ui.widget
-//= require jquery.iframe-transport
-//= require jquery.fileupload
-//= require cloudinary/jquery.cloudinary
+//  require jquery.ui.widget
+//  require jquery.iframe-transport
+//  require jquery.fileupload
+//  require cloudinary/jquery.cloudinary
 //= require bootstrap
 //= require select2
 //= require bootstrap-datepicker/core
