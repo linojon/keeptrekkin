@@ -5,8 +5,8 @@ class Trip < ActiveRecord::Base
   has_many :hikers, through: :hiker_trips
   has_many :mountains, through: :mountain_trips
 
-  has_attachment :profile_image
-  has_attachments :photos
+  # has_attachment :profile_image
+  # has_attachments :photos
 
   before_validation :set_defaults
 

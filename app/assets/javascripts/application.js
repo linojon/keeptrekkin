@@ -17,7 +17,6 @@
 //= require jquery.iframe-transport
 //= require jquery.fileupload
 //= require cloudinary/jquery.cloudinary
-//= require attachinary
 //= require bootstrap
 //= require select2
 //= require bootstrap-datepicker/core

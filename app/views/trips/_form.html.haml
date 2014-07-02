@@ -7,7 +7,7 @@
       %br
   .row
     .col-ms-4.col-sm-4.well
-      = f.input :profile_image, as: :attachinary
+      / = f.input :profile_image, as: :attachinary
 
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       = f.association :mountains, label: 'Mountains', collection: mountains, input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
@@ -41,7 +41,7 @@
     .col-ms-8.col-sm-8.well
       = f.input :title, placeholder: 'My awesome hike'
       = f.input :journal, input_html: { rows: 20 }, placeholder: '(Share your experience, describe trail conditions, post pictures. All hikers can edit this area.)'
-      = f.input :photos, as: :attachinary
+      / = f.input :photos, as: :attachinary
 
   .row
     .col-sm-12

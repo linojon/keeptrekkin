@@ -17,8 +17,6 @@ Rails.application.routes.draw do
 
   resources :mountains
 
-  mount Attachinary::Engine => "/attachinary"
-
   root 'pages#home'
 
 end

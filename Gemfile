@@ -31,7 +31,6 @@ gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'easy_as_pie'
 gem 'cloudinary'
-gem 'attachinary'
 gem 'font-awesome-rails' # for fraola
 gem 'wysiwyg-rails' # froala
 
