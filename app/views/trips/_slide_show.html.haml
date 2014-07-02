@@ -1,0 +1,37 @@
+%button.btn.btn-primary{ data: {toggle:'modal', target:'#slide_show_dialog'} }
+  View Photos
+
+#slide_show_dialog.modal.fade{ tabindex:"-1", role:"dialog", aria: {labelledby:"slide_show_label", hidden:true} }
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button{ type: :button, class:"close", data: {dismiss:"modal"} }
+          %span{ aria: {hidden:true} } &times;
+          %span.sr-only Close
+        %h4#slide_show_label.modal-title View Photos
+      .modal-body
+        
+        / indicators
+        #slide_show_carousel.carousel.slide{ data: {ride: :carousel} }
+          %ol.carousel-indicators
+            %li.active{ data: {target: '#slide_show_carousel', 'slide-to' => 0 }}
+            - 1.upto(trip.photos.count-1) do |n|
+              %li.active{ data: {target: '#slide_show_carousel', 'slide-to' => n }}
+        / wrapper for slides
+        .carousel-inner
+          .item.active
+            = cl_image_tag trip.photos.first.path, size: '900x500', crop: :fit, class: 'center-block'
+            / .carousel-caption
+          - trip.photos[1..-1].each do |photo|
+            .item.centered
+              = cl_image_tag photo.path, size: '900x500', crop: :fit, class: 'center-block'
+            / .carousel-caption
+        / controls
+        %a.left.carousel-control{ href: '#slide_show_dialog', role: :button, 'data-slide' => 'prev'}
+          %span.glyphicon.glyphicon-chevron-left
+        %a.right.carousel-control{ href: '#slide_show_dialog', role: :button, 'data-slide' => 'next'}
+          %span.glyphicon.glyphicon-chevron-right
+
+
+      .modal-footer
+        %button.btn.btn-default{ type: :button, data: {dismiss: :modal} } Close

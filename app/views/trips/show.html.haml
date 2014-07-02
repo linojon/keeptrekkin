@@ -31,9 +31,9 @@
         - if trip.photos.present?
           %hr
           - trip.photos.each do |photo|
-            = link_to '#', class: 'img-rounded' do
-              = cl_image_tag photo.path, size: '75x75', crop: :fit
-
+            = cl_image_tag photo.path, size: '75x75', crop: :fit, class: 'img-rounded'
+          %p
+          = render 'slide_show'
 
     - if policy(trip).edit?
       = link_to 'Edit', edit_trip_path(trip), class: 'btn btn-primary'

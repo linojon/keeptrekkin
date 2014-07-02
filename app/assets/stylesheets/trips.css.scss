@@ -16,6 +16,9 @@ li.select2-search-choice {
   width: 95%;
 }
 
+li.select2-no-results {
+  background-color: $state-info-bg !important;
+}
 
 // close button on right
 .select2-container-multi {
