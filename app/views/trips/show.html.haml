@@ -7,10 +7,12 @@
 
     .media
       %a.pull-left{ href: '#' }
-        / - if trip.profile_image?
-        /   = cl_image_tag trip.profile_image.path, size: '300x200', crop: :fit
-        / - else
-        %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
+        - byebug
+        - if trip.title_picture.present?
+          /= cl_image_tag trip.profile_image.path, size: '300x200', crop: :fit
+          = image_tag trip.title_picture.image_url
+        - else
+          %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
 
       .media-body
         - if trip.title.present?

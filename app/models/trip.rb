@@ -7,7 +7,12 @@ class Trip < ActiveRecord::Base
 
   # has_attachment :profile_image
   # has_attachments :photos
+  has_one :title_picture, class_name: 'Picture'
+  accepts_nested_attributes_for :title_picture
 
+  has_many :pictures
+  accepts_nested_attributes_for :pictures
+  
   before_validation :set_defaults
 
   default_scope { order('date DESC') }

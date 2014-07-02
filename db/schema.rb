@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627051549) do
+ActiveRecord::Schema.define(version: 20140702060658) do
 
   create_table "hiker_trips", id: false, force: true do |t|
     t.integer "hiker_id", null: false
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20140627051549) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.integer "trip_id"
+    t.integer "hiker_id"
+    t.string  "image"
+    t.string  "caption"
+  end
+
+  add_index "pictures", ["hiker_id"], name: "index_pictures_on_hiker_id"
+  add_index "pictures", ["trip_id"], name: "index_pictures_on_trip_id"
 
   create_table "trips", force: true do |t|
     t.date     "date"

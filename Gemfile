@@ -30,6 +30,7 @@ gem 'redcarpet'
 gem 'select2-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'easy_as_pie'
+gem 'carrierwave'
 gem 'cloudinary'
 gem 'font-awesome-rails' # for fraola
 gem 'wysiwyg-rails' # froala

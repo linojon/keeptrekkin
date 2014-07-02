@@ -15,16 +15,27 @@ class TripsController < ApplicationController
   def new
     authorize trip
     trip.hikers << current_hiker
+
+    trip.build_title_picture unless trip.title_picture
   end
 
   def edit
     authorize trip
+
+    trip.build_title_picture unless trip.title_picture
   end
 
   def create
     authorize trip
     trip.update_mountains params[:trip][:mountain_ids]
     trip.update_hikers params[:trip][:hiker_ids]
+
+    # proto carrierwave integration
+    if params[:trip][:title_picture_attributes] 
+      trip.title_picture.build params[:trip][:title_picture_attributes] 
+      trip.title_picture.hiker = current_hiker
+    end
+
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -39,7 +50,19 @@ class TripsController < ApplicationController
     # dont let disabled select widget wipe out these
     trip.update_mountains params[:trip][:mountain_ids]
     trip.update_hikers params[:trip][:hiker_ids]
-    # trip.update_attribute :photos, params[:trip][:photos]
+byebug
+    # # proto carrierwave integration
+    # if params[:trip][:title_picture_attributes] 
+    #   if trip.title_picture
+    #     trip.title_picture.update_attributes params[:trip][:title_picture_attributes] 
+    #   else
+    #     # trip.build_title_picture params[:trip][:title_picture_attributes] 
+
+    #     trip.title_picture = Picture.new params[:trip][:title_picture_attributes] 
+    #   end
+    #   trip.title_picture.hiker = current_hiker
+    # end
+
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -56,7 +79,8 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:title, :journal, :date, :distance, :duration) #, :profile_image) #, :photos) #disallow mountain_ids:[], hiker_ids:[])  
+    params.require(:trip).permit :title, :journal, :date, :distance, :duration, title_picture_attributes: [ :image_cache, :image ]
+    #, :profile_image) #, :photos) #disallow mountain_ids:[], hiker_ids:[])  
   end
 
   def flash_no_mountains
