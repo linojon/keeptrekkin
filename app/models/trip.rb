@@ -6,8 +6,11 @@ class Trip < ActiveRecord::Base
   has_many :mountains, through: :mountain_trips
 
   has_attachment :profile_image
+  has_attachments :photos
 
   before_validation :set_defaults
+
+  default_scope { order('date DESC') }
 
   def set_defaults
     self.date ||= Date.today

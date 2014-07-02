@@ -17,20 +17,23 @@
           %h1= trip.title
 
         %h3=trip.date
-        %p
-          = [trip.distance, trip.duration].join(', ')
+        - if trip.distance.present? || trip.duration.present?
+          %p= [trip.distance, trip.duration].join(', ')
 
         - if trip.mountains.present?
           %p= trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
 
         %p= trip.hikers.map(&:name).join(', ')
 
-        %p
-
         - if trip.journal.present?
-          %h3 Journal
-          .journal
-            = trip.journal
+          %hr
+          .journal= raw trip.journal
+        - if trip.photos.present?
+          %hr
+          - trip.photos.each do |photo|
+            = link_to '#', class: 'img-rounded' do
+              = cl_image_tag photo.path, size: '75x75', crop: :fit
+
 
     - if policy(trip).edit?
       = link_to 'Edit', edit_trip_path(trip), class: 'btn btn-primary'

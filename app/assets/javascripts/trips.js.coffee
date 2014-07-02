@@ -122,6 +122,13 @@ $ ->
     # file uploader
     $('.attachinary-input').attachinary()
 
+    # wysiwyg
+    $('#trip_journal').editable
+      inlineMode: false
+      # imageUploadUrl: $('#invite_hiker_form').attr('action') + '/image' # maybe must save to enable the journal
+      # #imageUploadParams:
+      # # one idea is to have the callback add the image to a hidden field (images[]) 
+      # # if we work with/like attachinary, when wysiwyg inserts image, the file gets uploaded to cloudinart
 
     # -------------------
     # ADD HIKER DIALOG

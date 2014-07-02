@@ -34,11 +34,12 @@ class TripsController < ApplicationController
   end
 
   def update
+# byebug
     authorize trip
     # dont let disabled select widget wipe out these
     trip.update_mountains params[:trip][:mountain_ids]
     trip.update_hikers params[:trip][:hiker_ids]
-    
+    trip.update_attribute :photos, params[:trip][:photos]
     if trip.save
       flash_no_mountains
       redirect_to(trip)
@@ -47,10 +48,15 @@ class TripsController < ApplicationController
     end
   end
 
+#   def image # post /trips/:id/image
+# byebug
+#     # send file to cloudinary
+#   end
+
   private
 
   def trip_params
-    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, :profile_image) #disallow mountain_ids:[], hiker_ids:[])  
+    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, :profile_image) #, :photos) #disallow mountain_ids:[], hiker_ids:[])  
   end
 
   def flash_no_mountains
