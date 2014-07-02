@@ -29,7 +29,7 @@ class TripsController < ApplicationController
     authorize trip
     trip.update_mountains params[:trip][:mountain_ids]
     trip.update_hikers params[:trip][:hiker_ids]
-
+byebug
     # proto carrierwave integration
     if params[:trip][:title_picture_attributes] 
       trip.title_picture.build params[:trip][:title_picture_attributes] 
@@ -51,6 +51,9 @@ class TripsController < ApplicationController
     trip.update_mountains params[:trip][:mountain_ids]
     trip.update_hikers params[:trip][:hiker_ids]
 byebug
+# using cl_image_upload_tag
+trip.build_title_picture image: params[:image]
+
     # # proto carrierwave integration
     # if params[:trip][:title_picture_attributes] 
     #   if trip.title_picture
