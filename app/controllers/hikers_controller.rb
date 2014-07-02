@@ -7,6 +7,7 @@ class HikersController < ApplicationController
 
   def create
     # xhr request
+# byebug
     authorize hiker
     if exists = Hiker.where( email: params[:hiker][:email] ).first
       # already exists with this email, just use it, ignore name

@@ -84,6 +84,8 @@ feature 'User adds new hiker via email', js: true do
       end
 
       scenario 'creates hiker' do
+# byebug
+sleep 0.5
         hiker = Hiker.last
         expect(hiker.email).to eql 'newhiker@example.com'
         expect(hiker.name).to eql 'Newhiker'

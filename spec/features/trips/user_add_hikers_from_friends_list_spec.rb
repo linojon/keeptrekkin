@@ -17,7 +17,7 @@ feature 'User adds hiker from friends list', js: true do
     ele = page.find('.selection_item', text: friend1.name)
     ele.click
     click_on 'Save', match: :first
-    trip = Trip.last
+    trip = Trip.unscoped.order(:created_at).last
     expect(trip.hikers).to match_array [hiker, friend1] 
   end
 
@@ -30,7 +30,7 @@ feature 'User adds hiker from friends list', js: true do
     ele = page.find('.selection_item', text: friend1.name)
     ele.click
     click_on 'Save', match: :first
-    trip = Trip.last
+    trip = Trip.unscoped.order(:created_at).last
     expect(trip.hikers).to match_array [hiker, friend1] 
   end
 
