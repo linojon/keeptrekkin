@@ -74,6 +74,8 @@ $ ->
     # wysiwyg
     $('#trip_journal').editable
       inlineMode: false
+      # The available buttons are: "bold", "italic", "underline", "strikeThrough", "fontSize", "color", 'blockStyle' "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "undo", "redo", "html", "save". 'insertHorizontalRule'
+      buttons: ['bold', 'italic', 'underline', 'fontSize', 'color', 'sep', 'blockStyle', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'sep', 'createLink', 'insertHorizontalRule', 'html', 'sep', 'undo', 'redo']
       # imageUploadUrl: $('#invite_hiker_form').attr('action') + '/image' # maybe must save to enable the journal
       # #imageUploadParams:
       # # one idea is to have the callback add the image to a hidden field (images[]) 
