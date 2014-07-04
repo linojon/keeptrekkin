@@ -40,7 +40,9 @@
     /       = f.input :notes, label: 'Journal', input_html: { rows: 20 }
     .col-ms-8.col-sm-8.well
       = f.input :title, placeholder: 'My awesome hike'
+      
       = f.input :journal, input_html: { rows: 20 }, placeholder: '(Share your experience, describe trail conditions, post pictures. All hikers can edit this area.)'
+
       = f.input :photos, as: :attachinary
 
   .row

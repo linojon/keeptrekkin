@@ -8,7 +8,7 @@
     .media
       %a.pull-left{ href: '#' }
         - if trip.title_image?
-          = cl_image_tag trip.title_image.path, size: '300x200', crop: :fit
+          = cl_image_tag trip.title_image.path, size: '300x200', crop: :fill, class: 'img-rounded'
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
 
@@ -31,7 +31,7 @@
         - if trip.photos.present?
           %hr
           - trip.photos.each do |photo|
-            = cl_image_tag photo.path, size: '75x75', crop: :fit, class: 'img-rounded'
+            = cl_image_tag photo.path, size: '75x75', crop: :fill, class: 'img-rounded'
           %p
           = render 'slide_show'
 

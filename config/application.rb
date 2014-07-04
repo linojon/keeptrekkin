@@ -34,7 +34,7 @@ module Nh4k
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
     # e.g. Rails.application.config.app_title
-    config.app_title = 'WebeTrekkin'
+    config.app_title = 'KeepTrekkin'
     config.copyright = 'Parkerhill Technology Group LLC'
   end
 end

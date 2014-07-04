@@ -10,7 +10,7 @@
     = cloudinary_js_config
     = csrf_meta_tags
     = yield(:head)
-  %body{ id: yield(:body_id) }
+  %body{ data: { controller: "#{controller_name}", action: "#{action_name}" }}
     .container
       = render 'layouts/navbar'
     #banner
