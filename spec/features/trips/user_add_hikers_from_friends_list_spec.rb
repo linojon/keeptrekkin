@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User adds hiker from friends list', js: true do
+feature 'User adds hiker from friends list', js: true, areyousure: true do
   let(:hiker)    { create :hiker, :with_user }
   let(:friend1) { create :hiker, :with_user }
   let(:friend2) { create :hiker, :with_user }

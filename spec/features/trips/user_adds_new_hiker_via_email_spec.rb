@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User adds new hiker via email', js: true do
+feature 'User adds new hiker via email', js: true, areyousure: true do
   def fill_in_email_with(email)
     fill_in 'hiker_email', with: email
     sleep 1

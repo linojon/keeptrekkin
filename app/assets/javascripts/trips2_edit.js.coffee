@@ -66,7 +66,7 @@ $ ->
     is_new_record = $('form#edit_trip_form').hasClass('new_record')
     enable_multiselect('hikers', is_new_record)
 
-    # $('#edit_trip_form').areYouSure()
+    $('#edit_trip_form').areYouSure()
 
     # file uploader
     $('#trip_title_image.attachinary-input').attachinary
@@ -76,6 +76,7 @@ $ ->
                   alt="" width="200" height="133", class="img-rounded" />
         <a href="#" data-remove="<%= files[0].public_id %>">Remove</a>
       """
+      btnText: 'Upload Title Photo'
 
     $('#trip_title_image').bind 'redraw', -> $('#trip_title_image').hide()
 

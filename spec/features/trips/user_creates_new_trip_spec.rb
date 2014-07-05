@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User creates new trip', js: true do
+feature 'User creates new trip', js: true, areyousure: true do
   let(:hiker) { create :hiker, :with_user }
 
   background do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User adds hiker from other users (static)', js: true do
+feature 'User adds hiker from other users (static)', js: true, areyousure: true do
   let!(:hiker)    { create :hiker, :with_user }
   let!(:other1)   { create :hiker, :with_user }
   let!(:other2)   { create :hiker, :with_user }

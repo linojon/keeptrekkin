@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User adds mountains to trip', js: true do
+feature 'User adds mountains to trip', js: true, areyousure: true do
   let!(:mountain) { create :mountain }
   let!(:mountain2) { create :mountain }
   let(:trip) { Trip.last }

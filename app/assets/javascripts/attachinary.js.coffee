@@ -24,6 +24,7 @@
           </div>
         <% } %>
       """
+      btnText: 'Upload Photo'
       render: (files) ->
         $.attachinary.Templating.template(@template, files: files)
 
@@ -51,7 +52,7 @@
       @initFileUpload()
       @addFilesContainer()
       # jsl
-      @makeInputButton('Upload Photo')
+      @makeInputButton(@config.btnText)
       @bindEventHandlers()
       @redraw()
       @checkMaximum()
@@ -191,7 +192,7 @@
 
     # jsl
     makeInputButton: (btn_text) ->
-      @$input.wrap "<span class='btn btn-primary btn-file'>" + btn_text + "</span>"
+      @$input.wrap "<div class='btn btn-info btn-file'>" + btn_text + "</div>"
 
 
   # JavaScript templating by John Resig's

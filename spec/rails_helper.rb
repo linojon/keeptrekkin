@@ -49,7 +49,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.before(:each) do
-    set_selenium_window_size(1024, 800) if Capybara.current_driver == :selenium
+    set_selenium_window_size(1024, 600) if Capybara.current_driver == :selenium
   end
 
 end

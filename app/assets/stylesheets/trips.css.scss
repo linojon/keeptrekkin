@@ -70,6 +70,8 @@ button.add_select {
 .btn-file {
     position: relative;
     overflow: hidden;
+    //
+    display: block;
 }
 .btn-file input[type=file] {
     position: absolute;
