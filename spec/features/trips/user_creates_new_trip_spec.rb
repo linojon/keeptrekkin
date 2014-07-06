@@ -32,7 +32,12 @@ feature 'User creates new trip', js: true, areyousure: true do
     fill_in 'Date', with: '2014-6-1'
     fill_in 'Distance Hiked', with: '7.7 miles'
     fill_in 'Duration', with: '4 hours'
-    fill_in 'Journal', with: 'We had a great time.'
+    
+    # fill_in 'Journal', with: 'We had a great time.'
+    # find('textarea#trip_journal', visible: false).set 'We had a great time.'
+    # page.execute_script("document.getElementById('#trip_journal').value = 'We had a great time.'");
+    find('.froala-element').set 'We had a great time.'
+
     click_on 'Save', match: :first
 
     trip = Trip.last

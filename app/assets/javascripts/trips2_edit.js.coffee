@@ -66,8 +66,6 @@ $ ->
     is_new_record = $('form#edit_trip_form').hasClass('new_record')
     enable_multiselect('hikers', is_new_record)
 
-    $('#edit_trip_form').areYouSure()
-
     # file uploader
     $('#trip_title_image.attachinary-input').attachinary
       template: """
@@ -87,6 +85,9 @@ $ ->
       inlineMode: false
       borderColor: '#ccc'
       spellcheck: true
+      contentChangedCallback: ->
+        $('#edit_trip_form').addClass('dirty')
+
       # The available buttons are: "bold", "italic", "underline", "strikeThrough", "fontSize", "color", 'blockStyle' "formatBlock", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", "selectAll", "createLink", "insertImage", "insertVideo", "undo", "redo", "html", "save". 'insertHorizontalRule'
       # buttons: ['bold', 'italic', 'underline', 'fontSize', 'color', 'sep', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'outdent', 'indent', 'sep', 'createLink', 'insertHorizontalRule', 'html', 'sep', 'undo', 'redo']
       buttons: ['bold', 'italic', 'color', 'sep', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'sep', 'createLink', 'insertHorizontalRule', 'html', 'sep', 'undo', 'redo']
@@ -95,5 +96,7 @@ $ ->
       # #imageUploadParams:
       # # one idea is to have the callback add the image to a hidden field (images[]) 
       # # if we work with/like attachinary, when wysiwyg inserts image, the file gets uploaded to cloudinart
+
+    $('#edit_trip_form').areYouSure()
 
   #end

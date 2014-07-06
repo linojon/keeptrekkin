@@ -22,6 +22,7 @@
         'silent' : false,
         'addRemoveFieldsMarksDirty' : false,
         'fieldEvents' : 'change keyup propertychange input',
+        // 'fieldSelector': 'textarea', //":input:not(input[type=submit]):not(input[type=button])",
         'fieldSelector': ":input:not(input[type=submit]):not(input[type=button])"
       }, options);
 
