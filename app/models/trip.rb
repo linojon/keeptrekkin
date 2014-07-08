@@ -22,10 +22,14 @@ class Trip < ActiveRecord::Base
     ids -= ['']
     self.mountain_ids = ids unless ids.empty?
   end
+  
   def update_hikers( ids )
+    current_ids = self.hiker_ids.map(&:to_s)
     ids = ids.to_a
     ids -= ['']
     self.hiker_ids = ids unless ids.empty?
+    # return new ones
+    ids - current_ids 
   end 
 
 end

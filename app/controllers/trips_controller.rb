@@ -24,8 +24,9 @@ class TripsController < ApplicationController
   def create
     authorize trip
     trip.update_mountains params[:trip][:mountain_ids]
-    trip.update_hikers params[:trip][:hiker_ids]
+    hikers_ids = trip.update_hikers params[:trip][:hiker_ids]
     if trip.save
+      send_added_hiker_emails hikers_ids
       flash_no_mountains
       redirect_to(trip)
     else
@@ -38,9 +39,10 @@ class TripsController < ApplicationController
     authorize trip
     # dont let disabled select widget wipe out these
     trip.update_mountains params[:trip][:mountain_ids]
-    trip.update_hikers params[:trip][:hiker_ids]
+    hikers_ids = trip.update_hikers params[:trip][:hiker_ids]
     trip.update_attribute :photos, params[:trip][:photos]
     if trip.save
+      send_added_hiker_emails hikers_ids
       flash_no_mountains
       redirect_to(trip)
     else
@@ -62,4 +64,12 @@ class TripsController < ApplicationController
   def flash_no_mountains
     flash[:alert] = "You've saved a trip with no mountains selected" if trip.mountains.empty?
   end
+
+  def send_added_hiker_emails( ids )
+    hikers = Hiker.find ids
+    hikers.each do |hiker|
+      HikerMailer.added_email( hiker, trip).deliver
+    end
+  end
+
 end

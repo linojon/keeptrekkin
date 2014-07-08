@@ -1,0 +1,11 @@
+Hi <%= @hiker.name %>! 
+
+You've been added to a hiking trip on KeepTrekkin.com. Check out the trip report, edit the journal, and add photos. 
+
+Trip to <%= @trip.mountains.map(&:name).join(', ') %>
+
+No sign-up is needed. Just visit #{@url} and connect via your Facebook account. 
+
+(For authentication only, we will never share your info or post without your direction.)
+
+
