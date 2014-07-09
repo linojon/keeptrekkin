@@ -90,6 +90,7 @@ GEM
     easy_as_pie (0.1.2)
       rails (>= 3.0)
     erubis (2.7.0)
+    excon (0.37.0)
     execjs (2.2.1)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -119,6 +120,15 @@ GEM
     haml (4.0.5)
       tilt
     hashie (2.1.2)
+    heroku (3.8.3)
+      heroku-api (~> 0.3.17)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.3.18)
+      excon (~> 0.27)
+      multi_json (~> 1.8)
     hike (1.2.3)
     httpauth (0.2.1)
     i18n (0.6.9)
@@ -147,6 +157,7 @@ GEM
     minitest (5.3.5)
     multi_json (1.10.1)
     multipart-post (2.0.0)
+    netrc (0.7.7)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oauth2 (0.8.1)
@@ -308,6 +319,7 @@ DEPENDENCIES
   font-awesome-rails
   guard-rspec
   haml
+  heroku
   jbuilder (~> 2.0)
   jquery-rails
   launchy

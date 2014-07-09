@@ -10,7 +10,7 @@ class Trip < ActiveRecord::Base
 
   before_validation :set_defaults
 
-  default_scope { order('date DESC') }
+  #default_scope { order('date DESC') }
 
   def set_defaults
     self.date ||= Date.today
