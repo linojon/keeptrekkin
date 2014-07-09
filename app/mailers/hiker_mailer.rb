@@ -5,7 +5,8 @@ class HikerMailer < ActionMailer::Base
     @hiker = hiker
     @trip  = trip
     @url   = root_url #( only_path: false )
-    mail to: @hiker.email, subject: "Hello Hiker! You've been added to a trip"
+    to     = 'linojon@gmail.com' #@hiker.email
+    mail to: to, subject: "Hello Hiker! You've been added to a trip"
   end
 
 end
