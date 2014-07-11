@@ -23,4 +23,5 @@
 //= require bootstrap-datepicker/core
 //= require jquery.easy-pie-chart
 //= require froala_editor.min.js
+//= require assets_js
 //= require_tree .
