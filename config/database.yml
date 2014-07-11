@@ -12,6 +12,15 @@ default: &default
 development:
   <<: *default
   database: db/development.sqlite3
+  
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   host: localhost
+#   database: nh4k_development
+#   pool: 5
+#   username: jlinowes
+#   password: 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

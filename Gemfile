@@ -45,6 +45,8 @@ gem 'figaro', '~> 1.0.0.rc1'
 
 group :development, :test do
   gem 'sqlite3'
+  # gem 'pg'
+  
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
