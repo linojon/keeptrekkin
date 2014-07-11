@@ -1,6 +1,6 @@
 class Trip < ActiveRecord::Base
-  has_many :hiker_trips
-  has_many :mountain_trips
+  has_many :hiker_trips, dependent: :destroy
+  has_many :mountain_trips, dependent: :destroy
   
   has_many :hikers, through: :hiker_trips
   has_many :mountains, through: :mountain_trips

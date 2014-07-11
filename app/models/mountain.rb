@@ -1,5 +1,5 @@
 class Mountain < ActiveRecord::Base
-  has_many :mountain_trips
+  has_many :mountain_trips, dependent: :destroy
   has_many :trips, through: :mountain_trips
   has_many :hikers, through: :trips
   

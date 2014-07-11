@@ -1,6 +1,6 @@
 class Hiker < ActiveRecord::Base
-  has_one :user
-  has_many :hiker_trips
+  has_one :user, dependent: :destroy
+  has_many :hiker_trips, dependent: :destroy
   has_many :trips, through: :hiker_trips
   has_many :mountains, through: :trips
   has_many :friends, -> { distinct }, through: :trips, source: :hikers
