@@ -34,6 +34,7 @@ gem 'cloudinary'
 gem 'attachinary'
 gem 'font-awesome-rails' # for fraola
 gem 'wysiwyg-rails' # froala
+gem 'assets_js' # assets helpers
 
 gem 'pundit'
 gem 'decent_exposure'

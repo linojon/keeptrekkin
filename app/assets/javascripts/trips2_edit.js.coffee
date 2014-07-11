@@ -15,7 +15,7 @@ format_mtn = (state) ->
   return "<div class='selection_item'>" + state.text + "</div>";
 
 format_hiker = (state) ->
-  return "<div class='selection_item'><img class='chip', src='/assets/jsl65.jpg'/>" + state.text + '</div>';
+  return "<div class='selection_item'><img class='chip', src='" + asset_path('jsl65.jpg') + "'/>" + state.text + '</div>';
 
 
 
