@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701005917) do
+ActiveRecord::Schema.define(version: 20140712135806) do
 
   create_table "attachinary_files", force: true do |t|
     t.integer  "attachinariable_id"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20140701005917) do
     t.string   "profile_chip_url"
   end
 
+  create_table "links", force: true do |t|
+    t.string   "site_name"
+    t.string   "url"
+    t.string   "rating"
+    t.integer  "mountain_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "links", ["mountain_id"], name: "index_links_on_mountain_id"
+
   create_table "mountain_trips", id: false, force: true do |t|
     t.integer "mountain_id", null: false
     t.integer "trip_id",     null: false
@@ -57,6 +68,13 @@ ActiveRecord::Schema.define(version: 20140701005917) do
     t.integer  "elevation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_name"
+    t.string   "location"
+    t.string   "state"
+    t.float    "lat"
+    t.float    "lng"
+    t.text     "description"
+    t.text     "hikes"
   end
 
   create_table "trips", force: true do |t|

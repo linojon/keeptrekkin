@@ -43,6 +43,8 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'amatch'
 gem 'figaro', '~> 1.0.0.rc1'
 
+gem 'mechanize'
+
 group :development, :test do
   gem 'sqlite3'
   # gem 'pg'

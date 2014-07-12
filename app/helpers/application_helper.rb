@@ -6,12 +6,8 @@ module ApplicationHelper
   end
 
   def title(page_title, show: true)
-    content_for(:title) { h(page_title.to_s) }
     @show_title = show
-  end
-
-  def show_title?
-    @show_title
+    content_tag :h1, page_title
   end
 
   def flash_class_for(level)

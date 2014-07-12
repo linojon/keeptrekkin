@@ -9,6 +9,10 @@
 #   end
 # end
 
+require 'scrape'
+
+amc_index = Scrape.amc_index
+
 # mountains
 [
   ['Washington', 6288],
@@ -18,53 +22,78 @@
   ['Madison', 5367],
   ['Lafayette', 5260],
   ['Lincoln', 5089],
-  ['South Twin', 4902],
-  ['Carter Dome', 4832],
+  ['South Twin', 4902, 'twinsouth'],
+  ['Carter Dome', 4832, 'carterdome'],
   ['Moosilauke', 4802],
   ['Eisenhower', 4780],
-  ['North Twin', 4761],
+  ['North Twin', 4761, 'twinnorth'],
   ['Carrigain', 4700],
   ['Bond', 4698],
-  ['Middle Carter', 4610],
-  ['West Bond', 4540],
+  ['Middle Carter', 4610, 'cartermiddle'],
+  ['West Bond', 4540, 'bondwest'],
   ['Garfield', 4500],
   ['Liberty', 4459],
-  ['South Carter', 4430],
-  ['Wildcat', 4422],
+  ['South Carter', 4430, 'cartersouth'],
+  ['Wildcat', 4422, 'wildcata'],
   ['Hancock', 4420],
-  ['South Kinsman', 4358],
+  ['South Kinsman', 4358, 'kinsmansouth'],
   ['Field', 4340],
   ['Osceola', 4340],
   ['Flume', 4328],
-  ['South Hancock', 4319],
+  ['South Hancock', 4319, 'hancocksouth'],
   ['Pierce', 4310],
-  ['North Kinsman', 4293],
+  ['North Kinsman', 4293, 'kinsmannorth'],
   ['Willey', 4285],
   ['Bondcliff', 4265],
   ['Zealand', 4260],
-  ['North Tripyramid', 4180],
+  ['North Tripyramid', 4180, 'tripyramidnorth'],
   ['Cabot', 4170],
-  ['East Osceola', 4156],
-  ['Middle Tripyramid', 4140],
+  ['East Osceola', 4156, 'osceolaeast'],
+  ['Middle Tripyramid', 4140, 'tripyramidmiddle'],
   ['Cannon', 4100],
   ['Hale', 4054],
   ['Jackson', 4052],
-  ['Tom', 4051, 'Mt. Tom'],
-  ['Wildcat, D Peak', 4050],
+  ['Tom', 4051],
+  ['Wildcat, D Peak', 4050, 'wildcatd'],
   ['Moriah', 4049],
-  ['Passaconaway', 4043],
-  ["Owl's Head", 4025],
+  ['Passaconaway', 4043, 'passaconway'],
+  ["Owl's Head", 4025, 'owlshead'],
   ['Galehead', 4024],
   ['Whiteface', 4020],
   ['Waumbek', 4006],
   ['Isolation', 4004],
   ['Tecumseh', 4003]
-].each do |name, elev, fullname|
+].each do |name, elev, fourkpage|
   attrs = {name: name, elevation: elev}
-  if mountain = Mountain.where(name: name).first
-    mountain.update_attributes attrs
-  else
-    Mountain.create attrs
+  # if mountain = Mountain.where(name: name).first
+  #   mountain.update_attributes attrs
+  # else
+  #   Mountain.create attrs
+  # end
+# byebug
+  mountain = Mountain.find_or_create_by name: name
+  fourkpage ||= name.downcase
+  url = "http://4000footers.com/#{fourkpage}.shtml"
+  pp "------------"
+  pp url
+  attrs = Scrape.fourkfooters url
+  if attrs.blank?
+    puts "ERROR SCAPING #{name}"
+    next
+  end
+  # pp name
+  # pp attrs
+  rating = attrs.delete(:rating)
+  attrs[:state] = 'NH'
+  mountain.update_attributes attrs
+  mountain.links.find_or_create_by site_name: '4000footers.com' do |link|
+    link.url = url
+    link.rating = rating
+  end
+
+  mountain.links.find_or_create_by site_name: 'Appalachian Mountain Club' do |link|
+    link.url = amc_index[name][:url]
+    link.rating = amc_index[name][:rating]
   end
 end
 
@@ -89,8 +118,9 @@ end
 
 # user
 jon = Hiker.where( name: 'Jonathan Linowes').first
-User.create provider: 'facebook', uid: "10203290081348033", hiker: jon
-
+unless jon.user
+  User.create( provider: 'facebook', uid: "10203290081348033", hiker: jon)
+end
 
 
 # trips
@@ -117,7 +147,7 @@ User.create provider: 'facebook', uid: "10203290081348033", hiker: jon
   end
 end
 
-if Rails.env.development?
+if Rails.env.development? && Hiker.count < 10
   20.times do
     hiker = FactoryGirl.create :hiker
   end
