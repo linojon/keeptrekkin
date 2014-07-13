@@ -6,10 +6,11 @@
     %br
     %br
     %br
-    %p.centered
-      = "#{current_hiker.mountains.count} out of #{Mountain.count} New Hampshire 4000-footers bagged!"
-      - percent = (current_hiker.mountains.count * 100 / Mountain.count) if Mountain.count > 0
-      .chart{ data: { percent: percent }}= "#{percent}%"
+    - if current_hiker
+      %p.centered
+        = "#{current_hiker.mountains.count} out of #{Mountain.count} New Hampshire 4000-footers bagged!"
+        - percent = (current_hiker.mountains.count * 100 / Mountain.count) if Mountain.count > 0
+        .chart{ data: { percent: percent }}= "#{percent}%"
   .col-sm-8
     = render my_trips
 

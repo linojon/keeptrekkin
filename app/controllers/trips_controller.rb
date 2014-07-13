@@ -4,10 +4,10 @@ class TripsController < ApplicationController
   expose(:trips)
   expose!(:trip, attributes: :trip_params)
 
-  expose(:my_trips)     { current_hiker.trips.order('date DESC') }
+  expose(:my_trips)     { current_hiker ? current_hiker.trips.order('date DESC') : [] }
 
   expose(:mountains)    { Mountain.all }
-  expose(:friends)      { current_hiker.friends_and_self }
+  expose(:friends)      { current_hiker ? current_hiker.friends_and_self : [] }
   expose(:site_hikers)  { Hiker.all - friends}
 
   before_action :save_back, only: [:new, :edit]
