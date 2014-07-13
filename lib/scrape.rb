@@ -49,18 +49,32 @@ class Scrape
         end
       end
 
-      td = page.at("td[width='381'] strong:contains('Elevation')").parent
-      tr = td.parent
-      table = tr.parent
-      # up to 3 paragraphs
-      ele = table
-      content = 1.upto(3).map do
-        ele = ele.next_element
-        ele.to_s if ele && ele.name == 'p'
-      end.join('')
-      content = ActionController::Base.helpers.strip_links content
-      content += "<p class='small align_right'>- description courtesy of <a href='#{url}'>4000footers.com</a></p>"
-      info[:description] = content
+      #                                                td     tr     table
+      ele = page.at("td strong:contains('Elevation')").parent.parent.parent
+      # content = 1.upto(3).map do
+      #   ele = ele.next
+      #   ele.to_s if ele && ele.name == 'p'
+      # end.join('')
+      # content = ActionController::Base.helpers.strip_links content
+      nodes = []
+      while ele = ele.next do 
+        if ele[:name] == 'table'
+          nodes += ele.children
+        else
+          nodes << ele
+        end
+      end
+
+      content = nodes.map do |ele| 
+        text = ele.text
+        text = ActionController::Base.helpers.strip_tags( text ).strip
+        unless text.blank? || text.match(/^(Lists |For peak-baggers)/)
+          "<p>#{text}</p>" 
+        end
+      end.compact
+
+      content << "<p class='small align_right'>- description courtesy of <a href='#{url}'>4000footers.com</a></p>"
+      info[:description] = content.join
       info
     end
 
