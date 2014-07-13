@@ -11,7 +11,8 @@ class Scrape
       # scraping: 
       agent = Mechanize.new
       page = agent.get url
-      nodes = page.at("td[width='381'] strong:contains('Elevation')").parent.children
+      #                                                  td     tr     td's                 
+      nodes = page.at("td strong:contains('Elevation')").parent.parent.children.children # go from header to content
       info = {}
       nodes.each_with_index do |node, i| 
         case node.text.strip.split(' ').first
@@ -66,16 +67,17 @@ class Scrape
     def amc_index
       agent = Mechanize.new
       page  = agent.get "http://www.outdoors.org/recreation/tripplanner/plan/4kfooter-guide.cfm"
+      i = Rails.env.production? ? 0 : 1 # dont know hy localhost offset is 1, heroku 0
       rows  = page.search("#standardTable tr")
       mountains = rows.inject({}) do |h, row|
         if row[:id] =~ /rowColor/
           cells       = row.children
-          mountain    = cells[1].text.split('.')[1].strip # "1. Washington\n"
+          mountain    = cells[i].text.split('.')[i].strip # "1. Washington\n"
           mountain = 'Wildcat, D Peak' if mountain == 'Wildcat D'
           mountain = "Owl's Head" if mountain == "Owl’s Head" # different apostrophe
-          path        = cells[1].at('a')[:href]
-          elevation   = cells[3].text
-          rating      = cells[5].text.strip
+          path        = cells[i].at('a')[:href]
+          elevation   = cells[i+2].text
+          rating      = cells[i+4].text.strip
           h[mountain] = {url: 'http://www.outdoors.org'+path, rating: rating}
         end
         h
