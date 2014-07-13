@@ -1,25 +1,29 @@
-%p.padded
-  = link_to mountains_path do
-    %span.glyphicon.glyphicon-chevron-left
-    New Hampshire 4000 Footers
+.row
+  .md-col-12
+    %p.padded
+    = link_to mountains_path do
+      %span.glyphicon.glyphicon-chevron-left
+      New Hampshire 4000 Footers
 
-= title mountain.full_name
-%p
-  %strong Elevation: 
-  #{mountain.elevation} feet (#{mountain.elevation_meters} meters)
-%p
-  %strong Location:
-  = mountain.location
-%p
-  %strong State:
-  = mountain.state
-%div
-  %i.fa.fa-quote-left.pull-left{ style: 'font-size: 24px'}
-  %div{ style: 'margin-left: 30px'}
-    = raw mountain.description
-%h3 More Info
-- mountain.links.each do |link|
+  = title mountain.full_name
+  %p
+    %strong Elevation: 
+    #{mountain.elevation} feet (#{mountain.elevation_meters} meters)
+  %p
+    %strong Location:
+    = mountain.location
+  %p
+    %strong State:
+    = mountain.state
   %div
-    = link_to "#{link.site_name}: #{mountain.full_name}", link.url
-    - if link.rating
-      (rating: #{link.rating})
+    %i.fa.fa-quote-left.pull-left{ style: 'font-size: 24px'}
+    %div{ style: 'margin-left: 30px'}
+      = raw mountain.description
+  %h3 More Info
+  - mountain.links.each do |link|
+    %p
+      %span.glyphicon.glyphicon-link
+      = link_to "#{link.site_name}: #{mountain.full_name}", link.url
+      - if link.rating
+        (rating: #{link.rating})
+
