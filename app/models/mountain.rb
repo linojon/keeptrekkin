@@ -1,4 +1,6 @@
 class Mountain < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper # number_with_delimiter
+
   has_many :mountain_trips, dependent: :destroy
   has_many :trips, through: :mountain_trips
   has_many :hikers, through: :trips
@@ -10,5 +12,9 @@ class Mountain < ActiveRecord::Base
 
   def elevation_meters
     (elevation * 0.3048 + 0.5).to_i
+  end
+
+  def name_elev
+    "#{name} (#{number_with_delimiter elevation}')"
   end
 end

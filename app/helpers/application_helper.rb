@@ -23,4 +23,8 @@ module ApplicationHelper
 
   # vvvvvv app specific vvvvvv
 
+  def mountain_ribbon(mtn)
+    "#{mtn.name} (#{number_with_delimiter mtn.elevation}')"
+  end
+
 end
