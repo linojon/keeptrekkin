@@ -72,7 +72,7 @@ class Scrape
       mountains = rows.inject({}) do |h, row|
         if row[:id] =~ /rowColor/
           cells       = row.children
-          mountain    = cells[i].text.split('.')[i].strip # "1. Washington\n"
+          mountain    = cells[i].text.split('.')[1].strip # "1. Washington\n"
           mountain = 'Wildcat, D Peak' if mountain == 'Wildcat D'
           mountain = "Owl's Head" if mountain == "Owl’s Head" # different apostrophe
           path        = cells[i].at('a')[:href]
