@@ -6,6 +6,8 @@ class Mountain < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
 
+  default_scope { order('elevation DESC') }
+
   def elevation_meters
     (elevation * 0.3048 + 0.5).to_i
   end
