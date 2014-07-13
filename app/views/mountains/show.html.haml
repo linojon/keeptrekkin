@@ -3,7 +3,7 @@
     %span.glyphicon.glyphicon-chevron-left
     New Hampshire 4000 Footers
 
-= title mountain.name
+= title mountain.full_name
 %p
   %strong Elevation: 
   #{mountain.elevation} feet (#{mountain.elevation_meters} meters)
@@ -20,5 +20,6 @@
 %h3 More Info
 - mountain.links.each do |link|
   %div
-    = link_to link.site_name, link.url
-    (rating: #{link.rating})
+    = link_to "#{link.site_name}: #{mountain.full_name}", link.url
+    - if link.rating
+      (rating: #{link.rating})

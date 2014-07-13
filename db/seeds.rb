@@ -11,80 +11,95 @@
 
 require 'scrape'
 
-amc_index = Scrape.amc_index
+amc_index        = Scrape.amc_index
+trailsnh_index   = Scrape.trailsnh_index
+summitpost_index = Scrape.summitpost_index
+wikipedia_index  = Scrape.wikipedia_index
 
 # mountains
 [
-  ['Washington', 6288],
-  ['Adams', 5774],
-  ['Jefferson', 5712],
-  ['Monroe', 5384],
-  ['Madison', 5367],
-  ['Lafayette', 5260],
-  ['Lincoln', 5089],
-  ['South Twin', 4902, 'twinsouth'],
-  ['Carter Dome', 4832, 'carterdome'],
-  ['Moosilauke', 4802],
-  ['Eisenhower', 4780],
-  ['North Twin', 4761, 'twinnorth'],
-  ['Carrigain', 4700],
-  ['Bond', 4698],
-  ['Middle Carter', 4610, 'cartermiddle'],
-  ['West Bond', 4540, 'bondwest'],
-  ['Garfield', 4500],
-  ['Liberty', 4459],
-  ['South Carter', 4430, 'cartersouth'],
-  ['Wildcat', 4422, 'wildcata'],
-  ['Hancock', 4420],
-  ['South Kinsman', 4358, 'kinsmansouth'],
-  ['Field', 4340],
-  ['Osceola', 4340],
-  ['Flume', 4328],
-  ['South Hancock', 4319, 'hancocksouth'],
-  ['Pierce', 4310],
-  ['North Kinsman', 4293, 'kinsmannorth'],
-  ['Willey', 4285],
-  ['Bondcliff', 4265],
-  ['Zealand', 4260],
-  ['North Tripyramid', 4180, 'tripyramidnorth'],
-  ['Cabot', 4170],
-  ['East Osceola', 4156, 'osceolaeast'],
-  ['Middle Tripyramid', 4140, 'tripyramidmiddle'],
-  ['Cannon', 4100],
-  ['Hale', 4054],
-  ['Jackson', 4052],
-  ['Tom', 4051],
-  ['Wildcat, D Peak', 4050, 'wildcatd'],
-  ['Moriah', 4049],
-  ['Passaconaway', 4043, 'passaconway'],
-  ["Owl's Head", 4025, 'owlshead'],
-  ['Galehead', 4024],
-  ['Whiteface', 4020],
-  ['Waumbek', 4006],
-  ['Isolation', 4004],
-  ['Tecumseh', 4003]
-].each do |name, elev, fourkpage|
-  attrs = {name: name, elevation: elev}
-  # if mountain = Mountain.where(name: name).first
-  #   mountain.update_attributes attrs
-  # else
-  #   Mountain.create attrs
-  # end
-# byebug
-  mountain = Mountain.find_or_create_by name: name
+  ['Mt','Washington', 6288],
+  ['Mt','Adams', 5774],
+  ['Mt','Jefferson', 5712],
+  ['Mt','Monroe', 5384],
+  ['Mt','Madison', 5367],
+  ['Mt','Lafayette', 5260],
+  ['Mt','Lincoln', 5089],
+  ['Mtn','South Twin', 4902, 'twinsouth'],
+  ['','Carter Dome', 4832, 'carterdome'],
+  ['Mt','Moosilauke', 4802],
+  ['Mt','Eisenhower', 4780],
+  ['Mtn','North Twin', 4761, 'twinnorth'],
+  ['Mt','Carrigain', 4700],
+  ['Mt','Bond', 4698],
+  ['Mtn','Middle Carter', 4610, 'cartermiddle'],
+  ['Mtn','West Bond', 4540, 'bondwest'],
+  ['Mt','Garfield', 4500],
+  ['Mt','Liberty', 4459],
+  ['Mtn','South Carter', 4430, 'cartersouth'],
+  ['Mtn','Wildcat', 4422, 'wildcata'],
+  ['Mt','Hancock', 4420],
+  ['South Peak Kinsman Mountain','South Kinsman', 4358, 'kinsmansouth'],
+  ['Mt','Field', 4340],
+  ['Mt','Osceola', 4340],
+  ['Mt','Flume', 4328],
+  ['Mtn','South Hancock', 4319, 'hancocksouth'],
+  ['Mt','Pierce', 4310],
+  ['North Peak Kinsman Mountain','North Kinsman', 4293, 'kinsmannorth'],
+  ['Mt','Willey', 4285],
+  ['','Bondcliff', 4265],
+  ['Mtn','Zealand', 4260],
+  ['North Peak Tripyramid Mountain','North Tripyramid', 4180, 'tripyramidnorth'],
+  ['Mt','Cabot', 4170],
+  ['East Peak Mount Osceola','East Osceola', 4156, 'osceolaeast'],
+  ['Middle Peak Mount Tripyramid','Middle Tripyramid', 4140, 'tripyramidmiddle'],
+  ['Mt','Cannon', 4100],
+  ['Mt','Hale', 4054],
+  ['Mt','Jackson', 4052],
+  ['Mt','Tom', 4051],
+  ['Wildcat Mountain, D Peak','Wildcat, D Peak', 4050, 'wildcatd'],
+  ['Mt','Moriah', 4049],
+  ['Mt','Passaconaway', 4043, 'passaconway'],
+  ["Owl's Head (Franconia)","Owl's Head", 4025, 'owlshead'],
+  ['','Galehead', 4024],
+  ['Mt','Whiteface', 4020],
+  ['Mt','Waumbek', 4006],
+  ['Mt','Isolation', 4004],
+  ['Mt','Tecumseh', 4003]
+].each do |full_clue, name, elev, fourkpage|
+  pp "------------"
+
+  mountain = Mountain.find_or_create_by( name: name) 
+
   fourkpage ||= name.downcase
   url = "http://4000footers.com/#{fourkpage}.shtml"
-  pp "------------"
   pp url
   attrs = Scrape.fourkfooters url
   if attrs.blank?
     puts "ERROR SCAPING #{name}"
     next
   end
+
+  full_name = case full_clue
+  when 'Mt'
+    "Mount #{name}"
+  when 'Mtn'
+    "#{name} Mountain"
+  when ''
+    name
+  else
+    full_clue
+  end
+
+  attrs.merge!(
+    # name: name,
+    full_name: full_name,
+    state: 'NH',
+    elevation: elev
+  )
   # pp name
   # pp attrs
   rating = attrs.delete(:rating)
-  attrs[:state] = 'NH'
   mountain.update_attributes attrs
   mountain.links.find_or_create_by site_name: '4000footers.com' do |link|
     link.url = url
@@ -94,6 +109,15 @@ amc_index = Scrape.amc_index
   mountain.links.find_or_create_by site_name: 'Appalachian Mountain Club' do |link|
     link.url = amc_index[name][:url]
     link.rating = amc_index[name][:rating]
+  end
+  mountain.links.find_or_create_by site_name: 'Trails NH (hiking conditions)' do |link|
+    link.url = trailsnh_index[name][:url]
+  end
+  mountain.links.find_or_create_by site_name: 'SummitPost.org' do |link|
+    link.url = summitpost_index[name][:url] if summitpost_index[name]
+  end
+  mountain.links.find_or_create_by site_name: 'Wikipedia' do |link|
+    link.url = wikipedia_index[name][:url]
   end
 end
 
