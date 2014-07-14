@@ -5,7 +5,11 @@ class HikerMailer < ActionMailer::Base
     @hiker = hiker
     @trip  = trip
     @url   = root_url #( only_path: false )
-    to_email  = 'linojon@gmail.com' #@hiker.email
+    if Rails.env.test?
+      to_email  = @hiker.email
+    else
+      to_email  = 'linojon@gmail.com' #@hiker.email
+    end
     to        = "#{hiker.name} <#{to_email}>"
     mail to: to, subject: "Hello Hiker! You've been added to a trip"
   end

@@ -37,7 +37,6 @@ gem 'wysiwyg-rails' # froala
 gem 'assets_js' # assets helpers
 
 gem 'pundit'
-gem 'decent_exposure'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'amatch'

@@ -14,4 +14,8 @@ class TripPolicy < ApplicationPolicy
     user && (record.hikers.empty? || record.hikers.include?(user)) # BUT hikers shouldnt be empty
   end
 
+  def scope
+    user && user.trips
+  end
+
 end

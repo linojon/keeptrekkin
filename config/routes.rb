@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   match 'dashboard', to: 'trips#index', as: :dashboard, via: :get
 
   resources :hikers
-  match 'profile', to: 'hikers#profile', via: :get
-  match 'profile/edit', to: 'hikers#profile_edit', as: 'edit_profile', via: :get
 
   resources :mountains
 

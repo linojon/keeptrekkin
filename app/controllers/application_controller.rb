@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :error
 
-  decent_configuration do
-    strategy DecentExposure::StrongParametersStrategy
-  end
+  # decent_configuration do
+  #   strategy DecentExposure::StrongParametersStrategy
+  # end
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def record_not_found(exception)
-    byebug
     redirect_to request.referrer||root_url, error: "Page not found"
   end
 

@@ -1,11 +1,12 @@
 class MountainsController < ApplicationController
-  after_action :verify_authorized, except: [:index, :show]
 
-  expose(:mountains) { policy_scope(Mountain) }
-  expose(:mountain)  
+  def index
+    @mountains = policy_scope(Mountain)
+  end
 
   def show
-    authorize mountain
+    @mountain = Mountain.find params[:id]
+    authorize @mountain
   end
 
 end

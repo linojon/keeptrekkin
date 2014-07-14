@@ -5,14 +5,7 @@ class HikerPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && (record.users.include? user)
-  end
-
-  def profile
-    true
-  end
-  def profile_edit
-    true
+    record == user
   end
 
 end

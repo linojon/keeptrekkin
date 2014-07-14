@@ -1,7 +1,11 @@
 .row
-  = title 'My Trips'
+  - if current_hiker
+    = title 'My Trips'
+  - else
+    = title 'Public Trips'
   .col-sm-2
-    = link_to 'Add a Trip', new_trip_path, class: 'btn btn-primary'
+    - if policy(Trip.new).new?
+      = link_to 'Add a Trip', new_trip_path, class: 'btn btn-primary'
     %br
     %br
     %br
@@ -12,7 +16,7 @@
         - percent = (current_hiker.mountains.count * 100 / Mountain.count) if Mountain.count > 0
         .chart{ data: { percent: percent }}= "#{percent}%"
   .col-sm-8
-    = render trips
+    = render @trips
 
 :coffeescript
   $ ->

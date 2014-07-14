@@ -8,14 +8,14 @@ class SessionsController < ApplicationController
     user = (hiker.user ||= User.create )
     hiker.save
     session[:user_id] = user.id
-    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_profile_path} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
+    flash_edit_profile user
     redirect_to dashboard_url
   end
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_profile_path} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
+    flash_edit_profile user
     redirect_to dashboard_url
   end
 
@@ -51,6 +51,12 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_url
+  end
+
+  private
+
+  def flash_edit_profile(user)
+    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_hiker_path(current_hiker)} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
   end
   
 end

@@ -1,4 +1,4 @@
-= simple_form_for trip, html: { id: 'edit_trip_form', class: 'form-vertical' + (trip.new_record? ? ' new_record' : '' ) } do |f|
+= simple_form_for @trip, html: { id: 'edit_trip_form', class: 'form-vertical' + (@trip.new_record? ? ' new_record' : '' ) } do |f|
   .row
     .col-sm-12
       = f.submit 'Save', class: 'btn btn-primary pull-right'
@@ -10,14 +10,14 @@
       = f.input :title_image, as: :attachinary
 
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
-      = f.association :mountains, label: 'Mountains', collection: mountains, label_method: -> (mtn) { mountain_ribbon(mtn) } , input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
+      = f.association :mountains, label: 'Mountains', collection: @mountains, label_method: -> (mtn) { mountain_ribbon(mtn) } , input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
       %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Select mountains
 
       %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       /= f.association :hikers, label: 'Hiker(s)', collection: friends, input_html: {id: 'trip_hikers_select'}
 
       / http://stackoverflow.com/questions/4037537/simple-form-how-to-create-a-grouped-select-box
-      - grouped_hikers = [['My Hikers', friends],['Other Known Hikers', site_hikers]]
+      - grouped_hikers = [['My Hikers', @friends],['Other Known Hikers', @site_hikers]]
       = f.association :hikers, as: :grouped_select, collection: grouped_hikers, group_method: :last, label_method: :name, value_method: :id, input_html: {id: 'trip_hikers_select', multiple: true}
 
       -# todo: put placehoder in search box even when selections not empty

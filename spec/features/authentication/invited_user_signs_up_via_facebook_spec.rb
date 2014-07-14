@@ -22,7 +22,7 @@ feature 'Invited user signs up via Facebook' do
     scenario "flash prompt to edit profile" do
       within ".alert" do
         expect(page).to have_content "Welcome #{hiker.name}! You can edit your profile now"
-        expect(page).to have_link 'edit your profile', href: '/profile/edit'
+        expect(page).to have_link 'edit your profile', href: "/hikers/#{hiker.id}/edit"
       end
     end
   end

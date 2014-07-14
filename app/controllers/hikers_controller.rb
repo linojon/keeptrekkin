@@ -1,37 +1,50 @@
 class HikersController < ApplicationController
-  after_action :verify_authorized, except: [:index, :show]
 
-  # expose(:trip)
-  # expose(:hikers)
-  expose(:hiker, attributes: :hiker_params)
+  def show
+    find_and_authorize_hiker
+  end
+
+  def edit
+    find_and_authorize_hiker
+  end
+
+  def update
+    find_and_authorize_hiker
+    if @hiker.update_attributes(hiker_params)
+      redirect_to @hiker, notice: 'Hiker profile updated'
+    else
+      flash.now[:error] = 'There was a problem saving the profile. Please try again.'
+      render :new
+    end
+  end
 
   def create
     # xhr request
 # byebug
-    authorize hiker
-    if exists = Hiker.where( email: params[:hiker][:email] ).first
+    if @hiker = Hiker.where( email: params[:hiker][:email] ).first
       # already exists with this email, just use it, ignore name
-      render json: exists
-    elsif hiker.save
-      render json: hiker
+      authorize @hiker
+      render json: @hiker
     else
-      render json: hiker, status: :unprocessable_entity
+      @hiker = Hiker.new hiker_params
+      authorize @hiker
+      if @hiker.save
+        render json: @hiker
+      else
+        render json: @hiker, status: :unprocessable_entity
+      end
     end
-  end
-
-
-  def profile
-    redirect_to hiker_path(current_hiker)
-  end
-
-  def profile_edit
-    redirect_to edit_hiker_path(current_hiker)
   end
 
   private
 
   def hiker_params
     params.require(:hiker).permit(:email, :name)
+  end
+
+  def find_and_authorize_hiker
+    @hiker = Hiker.find params[:id]
+    authorize @hiker
   end
 
 end

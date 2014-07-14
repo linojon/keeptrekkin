@@ -15,14 +15,14 @@
         #slide_show_carousel.carousel.slide{ data: {ride: :carousel} }
           %ol.carousel-indicators
             %li.active{ data: {target: '#slide_show_carousel', 'slide-to' => 0 }}
-            - 1.upto(trip.photos.count-1) do |n|
+            - 1.upto(@trip.photos.count-1) do |n|
               %li.active{ data: {target: '#slide_show_carousel', 'slide-to' => n }}
         / wrapper for slides
         .carousel-inner
           .item.active
-            = cl_image_tag trip.photos.first.path, size: '900x500', crop: :fit, class: 'center-block'
+            = cl_image_tag @trip.photos.first.path, size: '900x500', crop: :fit, class: 'center-block'
             / .carousel-caption
-          - trip.photos[1..-1].each do |photo|
+          - @trip.photos[1..-1].each do |photo|
             .item.centered
               = cl_image_tag photo.path, size: '900x500', crop: :fit, class: 'center-block'
             / .carousel-caption

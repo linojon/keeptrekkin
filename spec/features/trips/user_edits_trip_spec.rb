@@ -17,7 +17,7 @@ feature 'User edits trip' do
     expect(page).to have_content "Editing Trip"
   end
 
-  scenario "non hikers cannot edit" do
+  scenario "non hikers cannot edit", js: true do
     visit "/trips/#{trip.to_param}"
     expect(page).to_not have_link "Edit"
     visit "/trips/#{trip.to_param}/edit"

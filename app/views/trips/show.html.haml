@@ -7,34 +7,34 @@
 
     .media
       %a.pull-left{ href: '#' }
-        - if trip.title_image?
-          = cl_image_tag trip.title_image.path, size: '300x200', crop: :fill, class: 'img-rounded'
+        - if @trip.title_image?
+          = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill, class: 'img-rounded'
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200" }}
 
       .media-body
-        - if trip.title.present?
-          %h1= trip.title
+        - if @trip.title.present?
+          %h1= @trip.title
 
-        %h3=trip.date
-        - if trip.distance.present? || trip.duration.present?
-          %p= [trip.distance, trip.duration].join(', ')
+        %h3=@trip.date
+        - if @trip.distance.present? || @trip.duration.present?
+          %p= [@trip.distance, @trip.duration].join(', ')
 
-        - if trip.mountains.present?
-          %p= trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
+        - if @trip.mountains.present?
+          %p= @trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
 
-        %p= trip.hikers.map(&:name).join(', ')
+        %p= @trip.hikers.map(&:name).join(', ')
 
-        - if trip.journal.present?
+        - if @trip.journal.present?
           %hr
-          .journal= raw trip.journal
-        - if trip.photos.present?
+          .journal= raw @trip.journal
+        - if @trip.photos.present?
           %hr
-          - trip.photos.each do |photo|
+          - @trip.photos.each do |photo|
             = cl_image_tag photo.path, size: '75x75', crop: :fill, class: 'img-rounded'
           %p
           = render 'slide_show'
 
-    - if policy(trip).edit?
+    - if policy(@trip).edit?
       %p.padded
-        = link_to 'Edit', edit_trip_path(trip), class: 'btn btn-primary'
+        = link_to 'Edit Trip Report', edit_trip_path(@trip), class: 'btn btn-primary'
