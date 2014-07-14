@@ -124,15 +124,16 @@ end
 
 # hikers
 [
-  ['Jonathan Linowes', 'jonathan@linowes.com', '1957-07-11'],
-  ['Lisa Linowes', 'lisa@linowes.com', '1956-01-20'],
-  ['Rayna Linowes', 'rayna@linowes.com', '1990-10-14'],
-  ['Jarrett Linowes', 'jaf268@wildcats.unh.edu', '1992-04-18'],
-  ['Steven Linowes', 'sjlinowe@syr.edu', '1994-06-16'],
-  ['Shira Linowes', 'shira@linowes.com', '1998-12-09'],
+  ['Jonathan Linowes', 'jonathan@linowes.com', '1957-07-11', 'jsl65.jpg'],
+  ['Lisa Linowes', 'lisa@linowes.com', '1956-01-20', 'lisa.jpg'],
+  ['Rayna Linowes', 'rayna@linowes.com', '1990-10-14', 'rayna.jpg'],
+  ['Jarrett Linowes', 'jaf268@wildcats.unh.edu', '1992-04-18', 'jarrett.jpg'],
+  ['Steven Linowes', 'sjlinowe@syr.edu', '1994-06-16', 'steven.jpg'],
+  ['Shira Linowes', 'shira@linowes.com', '1998-12-09', 'shira.jpg'],
   ['Nikki (dog)', '', '2006-01-11']
-].each do |name, email, birth|
-  attrs = {name: name, email: email}
+].each do |name, email, birth, image|
+  url = "/assets/#{image}"
+  attrs = {name: name, email: email, profile_image_url: url, profile_chip_url: url}
   if hiker = Hiker.where(name: name).first
     hiker.update_attributes attrs
   else

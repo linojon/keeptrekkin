@@ -58,11 +58,13 @@ body { padding-top: 50px; }
 // }
 
 // objects
-img.chip {
-  height: 20px;
-  width: 20px;
+.chip {
+  height: 28px;
+  width: 28px;
+  font-size: 18px;
   padding-right: 4px;
 }
+
 
 .glyph {
     // display: inline-block;

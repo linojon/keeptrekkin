@@ -1,5 +1,5 @@
-.panel.panel-default
-  .panel-body
+.panel.panel-default[trip]
+  .panel-body{ class: "#{trip.hikers.include?(current_hiker) && 'bg-success'}"}
     .media
       /= link_to trip, class='pull-left' do
       /%img.media-object{ data: { src: "holder.js/64x64" }}

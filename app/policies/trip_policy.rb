@@ -1,7 +1,12 @@
 class TripPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      user ? user.trips.order('date DESC') : []
+      if user
+        # todo: definately can be optimized!
+        user.friends.map {|hiker| hiker.trips }.flatten.uniq
+      else
+        []
+      end
     end
   end
 

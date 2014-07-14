@@ -32,8 +32,8 @@ $ ->
     )
 
     $('#trip_hikers_select').select2(
-      formatResult: format_hiker
-      formatSelection: format_hiker
+      # formatResult: format_hiker
+      # formatSelection: format_hiker
       escapeMarkup: (m) -> return m
       formatNoMatches: (term) -> 
         "<p class='padded'>Name not found. Would you like to add a hiker who's not on this site yet?" +
