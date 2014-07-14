@@ -28,15 +28,20 @@ module ApplicationHelper
   end
 
   def hiker_chip(hiker)
-    if hiker.profile_chip_url
+    html = if hiker.profile_chip_url
       "<img class='chip' src='#{hiker.profile_chip_url}' title='#{hiker.name}'/>"
     else
       "<span class='chip glyphicon glyphicon-user' title='#{hiker.name}'></span>"
     end.html_safe
+    link_to html, hiker
   end
 
   def hiker_ribbon(hiker)
-    "<div class='selection_item'>#{hiker_chip hiker}#{hiker.name}</div>".html_safe
+    if hiker.profile_chip_url
+       "<div class='selection_item'><img class='chip', src='#{hiker.profile_chip_url}'/>#{hiker.name}</div>"
+     else
+       "<div class='selection_item'><span class='chip glyphicon glyphicon-user'></span>#{hiker.name}</div>"
+     end
    end
 
 end
