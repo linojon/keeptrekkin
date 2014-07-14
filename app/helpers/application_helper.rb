@@ -27,12 +27,16 @@ module ApplicationHelper
     "#{mtn.name} (#{number_with_delimiter mtn.elevation}')"
   end
 
-  def hiker_ribbon(hiker)
+  def hiker_chip(hiker)
     if hiker.profile_chip_url
-       "<div class='selection_item'><img class='chip', src='#{hiker.profile_chip_url}'/>#{hiker.name}</div>"
-     else
-       "<div class='selection_item'><span class='chip glyphicon glyphicon-user'></span>#{hiker.name}</div>"
-     end
+      "<img class='chip' src='#{hiker.profile_chip_url}' title='#{hiker.name}'/>"
+    else
+      "<span class='chip glyphicon glyphicon-user' title='#{hiker.name}'></span>"
+    end.html_safe
+  end
+
+  def hiker_ribbon(hiker)
+    "<div class='selection_item'>#{hiker_chip hiker}#{hiker.name}</div>".html_safe
    end
 
 end
