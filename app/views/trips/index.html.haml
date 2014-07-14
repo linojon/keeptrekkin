@@ -12,7 +12,7 @@
         - percent = (current_hiker.mountains.count * 100 / Mountain.count) if Mountain.count > 0
         .chart{ data: { percent: percent }}= "#{percent}%"
   .col-sm-8
-    = render my_trips
+    = render trips
 
 :coffeescript
   $ ->

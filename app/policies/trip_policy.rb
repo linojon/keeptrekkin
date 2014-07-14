@@ -1,4 +1,9 @@
 class TripPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      user ? user.trips.order('date DESC') : []
+    end
+  end
 
   def create?
     user.present?
@@ -6,7 +11,7 @@ class TripPolicy < ApplicationPolicy
 
   def update?
     # user.present? && record.hikers.include?( user.hiker)
-    user.present? && (record.hikers.empty? || record.hikers.include?( user.hiker)) # BUT hikers shouldnt be empty
+    user && (record.hikers.empty? || record.hikers.include?(user)) # BUT hikers shouldnt be empty
   end
 
 end

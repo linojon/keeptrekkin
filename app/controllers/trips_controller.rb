@@ -1,12 +1,11 @@
 class TripsController < ApplicationController
   after_action :verify_authorized, except: [:index, :show]
 
-  expose(:trips)
+  expose(:trips) { policy_scope(Trip) }
   expose!(:trip, attributes: :trip_params)
 
-  expose(:my_trips)     { current_hiker ? current_hiker.trips.order('date DESC') : [] }
 
-  expose(:mountains)    { Mountain.all }
+  expose(:mountains)    { policy_scope(Mountain) }
   expose(:friends)      { current_hiker ? current_hiker.friends_and_self : [] }
   expose(:site_hikers)  { Hiker.all - friends}
 

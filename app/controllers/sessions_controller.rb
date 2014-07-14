@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-
+  skip_after_action :verify_authorized
+  
   def hack
     redirect_to root_url unless Rails.env.development? && params[:id]
 
