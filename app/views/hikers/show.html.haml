@@ -1,0 +1,22 @@
+.row
+  .md-col-12
+    = title 'User Profile'
+
+    .media
+      .pull-left
+        - if @hiker.profile_image_url?
+          = cl_image_tag @hiker.profile_image_url, size: '300x200', crop: :fill, class: 'img-rounded'
+        - else
+          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
+
+      .media-body
+        %h3= @hiker.name
+        %p= @hiker.email
+
+    - if policy(@hiker).edit?
+      %p.padded
+        = link_to 'Edit Profile', edit_hiker_path(@hiker), class: 'btn btn-primary'
+
+/ .row
+/   .md-col-12
+/     %h3 Photos

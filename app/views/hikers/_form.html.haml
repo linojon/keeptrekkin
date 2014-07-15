@@ -1,0 +1,12 @@
+= simple_form_for @hiker, html: { class: 'form-vertical' } do |f|
+  .row
+    .col-ms-4.col-sm-4.well
+      / = f.input :profile_image, as: :attachinary
+
+    .col-ms-8.col-sm-8.well
+      = f.input :name
+      = f.input :email
+  .row
+    .col-sm-12
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
+      = link_to 'Cancel', saved_back_path, class: 'btn pull-right'

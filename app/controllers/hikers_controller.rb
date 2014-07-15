@@ -14,7 +14,7 @@ class HikersController < ApplicationController
       redirect_to @hiker, notice: 'Hiker profile updated'
     else
       flash.now[:error] = 'There was a problem saving the profile. Please try again.'
-      render :new
+      render :edit
     end
   end
 
