@@ -34,4 +34,13 @@ class Hiker < ActiveRecord::Base
     attributes.each { |k,v| attributes.delete(k) unless read_attribute(k).blank? }
     update(attributes)
   end
+
+  def profile_image_url
+    user.image_url if user
+  end
+
+  def profile_chip_url
+    user.image_url if user
+  end
+
 end

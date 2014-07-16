@@ -1,11 +1,22 @@
 = simple_form_for @hiker, html: { class: 'form-vertical' } do |f|
   .row
-    .col-ms-4.col-sm-4.well
+    .col-sm-4.well
       / = f.input :profile_image, as: :attachinary
 
-    .col-ms-8.col-sm-8.well
+    .col-sm-8.well
       = f.input :name
+      = f.input :location
+
+  .row
+    .col-sm-8.col-sm-offset-4.well
+      %h3 Private
       = f.input :email
+      = f.input :disable_notifications
+      %hr
+      %h4 Social Connections
+      = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
+
+
   .row
     .col-sm-12
       = f.submit 'Save', class: 'btn btn-primary pull-right'

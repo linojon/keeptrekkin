@@ -8,17 +8,20 @@ class User < ActiveRecord::Base
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       # user attribs update from provider, hiker attribs are only initialized then user edits
       user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.oauth_token = auth.credentials.token
+      user.uid              = auth.uid
+      user.name             = auth.info.name
+      user.oauth_token      = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.profile_url      = auth.info.link
+      user.image_url        = auth.info.image.gsub('square','large'), #200x200
+      # profile_chip_url: auth.info.image.gsub('square', 'width=30&height=30')
       user.save!
 
+      # can we pull location from facebook?
+
       user.create_or_update_hiker( 
-        name: auth.info.name, 
-        email: auth.info.email,
-        profile_image_url: auth.info.image.gsub('square','large'), #200x200
-        profile_chip_url: auth.info.image.gsub('square', 'width=30&height=30')
+        name:  auth.info.name, 
+        email: auth.info.email
       )
     end
   end

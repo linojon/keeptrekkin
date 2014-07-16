@@ -1,21 +1,34 @@
 .row
   .md-col-12
     = title 'User Profile'
-
-    .media
-      .pull-left
-        - if @hiker.profile_image_url?
-          = cl_image_tag @hiker.profile_image_url, size: '300x200', crop: :fill, class: 'img-rounded'
-        - else
-          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
-
-      .media-body
-        %h3= @hiker.name
-        %p= @hiker.email
+.row
+  .col-sm-4
+    - if @hiker.profile_image_url?
+      = cl_image_tag @hiker.profile_image_url, size: '200x200', crop: :fill, class: 'img-rounded'
+    - else
+      %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
 
     - if policy(@hiker).edit?
       %p.padded
         = link_to 'Edit Profile', edit_hiker_path(@hiker), class: 'btn btn-primary'
+
+  .col-sm-8
+    %h3= @hiker.name
+    %p= @hiker.location
+
+
+    - if @hiker == current_hiker
+      %hr
+      %h4 Private Info
+      %p= @hiker.email
+      %p
+        %strong Email Notifications:
+        = current_hiker.disable_notifications? ? 'Disabled' : 'Enabled'
+      %hr
+      %h4 Social Connections
+      = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
+
+
 
 / .row
 /   .md-col-12
