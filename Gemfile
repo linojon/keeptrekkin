@@ -72,7 +72,6 @@ group :development, :test do
   # gem 'awesome_print'
   # gem 'annotate'
   gem 'quiet_assets'
-  gem 'heroku'
 end
 
 group :development, :test, :darwin do # and run heroku config:add BUNDLE_WITHOUT="development test darwin"
