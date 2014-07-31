@@ -43,7 +43,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, :title_image, :photos) #disallow mountain_ids:[], hiker_ids:[])  
+    params.require(:trip).permit(:title, :journal, :date, :distance, :duration, :title_image, photos: []) #disallow mountain_ids:[], hiker_ids:[])  
   end
 
   def find_and_authorize_trip
