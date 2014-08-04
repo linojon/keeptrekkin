@@ -11,13 +11,7 @@
 
 require 'scrape'
 
-amc_index        = Scrape.amc_index
-trailsnh_index   = Scrape.trailsnh_index
-summitpost_index = Scrape.summitpost_index
-wikipedia_index  = Scrape.wikipedia_index
-
-# mountains
-[
+mountains = [
   ['Mt','Washington', 6288],
   ['Mt','Adams', 5774],
   ['Mt','Jefferson', 5712],
@@ -66,7 +60,9 @@ wikipedia_index  = Scrape.wikipedia_index
   ['Mt','Waumbek', 4006],
   ['Mt','Isolation', 4004],
   ['Mt','Tecumseh', 4003]
-].each do |full_clue, name, elev, fourkpage|
+]
+
+mountains.each do |full_clue, name, elev, fourkpage|
   pp "------------"
 
   mountain = Mountain.find_or_create_by( name: name) 
@@ -105,6 +101,16 @@ wikipedia_index  = Scrape.wikipedia_index
     link.url = url
     link.rating = rating
   end
+end
+
+
+amc_index        = Scrape.amc_index
+trailsnh_index   = Scrape.trailsnh_index
+summitpost_index = Scrape.summitpost_index
+wikipedia_index  = Scrape.wikipedia_index
+
+mountains.each do |full_clue, name, elev, fourkpage|
+  pp "------------"
 
   mountain.links.find_or_create_by site_name: 'Appalachian Mountain Club' do |link|
     link.url = amc_index[name][:url]
