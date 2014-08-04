@@ -5,7 +5,7 @@
       /%img.media-object{ data: { src: "holder.js/64x64" }}
       .media.glyph
         = link_to trip, class: 'pull-left' do
-          - if trip.title_image?
+          - if trip.title_image
             = cl_image_tag trip.title_image.path, size: '64x64', crop: :fit
           - else
             %i.glyph-icon.flaticon-mountain13
