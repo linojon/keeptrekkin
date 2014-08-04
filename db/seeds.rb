@@ -112,6 +112,8 @@ wikipedia_index  = Scrape.wikipedia_index
 mountains.each do |full_clue, name, elev, fourkpage|
   pp "------------"
 
+  mountain = Mountain.find_by_name name
+
   mountain.links.find_or_create_by site_name: 'Appalachian Mountain Club' do |link|
     link.url = amc_index[name][:url]
     link.rating = amc_index[name][:rating]
