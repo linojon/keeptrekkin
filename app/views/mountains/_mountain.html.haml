@@ -1,6 +1,7 @@
-%tr{ data: { link: mountain_path(mountain) } }
+-#%tr{ data: { link: mountain_path(mountain) } }
+%tr
   %td= mountain_counter+1
-  %td= mountain.name
+  %td= link_to mountain.name, mountain
   %td= number_with_delimiter(mountain.elevation) + "'"
   - if current_hiker
     %td.align_right
