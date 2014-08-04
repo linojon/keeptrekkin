@@ -16,10 +16,15 @@
             <% } else { %>
               <img
                 src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
-                alt="" width="75" height="75", class="img-rounded" />
+                alt="" width="75" height="75" class="img-rounded" />
             <% } %>
             <div>
               <a href="#" data-remove="<%= files[i].public_id %>">Remove</a>
+              <br>
+              <a href="#" 
+                data-title-image="<%= files[i].public_id %>" 
+                data-title-image-url="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 300, "height": 200 }) %>" 
+                >Title image</a>
             </div>
           </div>
         <% } %>
@@ -139,6 +144,13 @@
       @checkMaximum()
       @$input.trigger 'attachinary:fileremoved', [removedFile]
 
+
+    # JSL added
+    setTitleImage: (fileId, fileUrl) ->
+      $('input#trip_title_image').val(fileId)
+      $('#title_image').html("<img src='" + fileUrl + "' width='300' height='200' class='img-rounded' />")
+
+
     checkMaximum: ->
       if @maximumReached()
         @$wrapper.addClass 'disabled' if @$wrapper?
@@ -149,7 +161,6 @@
 
     maximumReached: ->
       @options.maximum && @files.length >= @options.maximum
-
 
 
     addFilesContainer: ->
@@ -170,6 +181,11 @@
         @$filesContainer.find('[data-remove]').on 'click', (event) =>
           event.preventDefault()
           @removeFile $(event.target).data('remove')
+
+        # jsl
+        @$filesContainer.find('[data-title-image]').on 'click', (event) =>
+          event.preventDefault()
+          @setTitleImage $(event.target).data('title-image'), $(event.target).data('title-image-url')
 
         @$filesContainer.show()
       else

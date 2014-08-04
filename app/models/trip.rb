@@ -5,8 +5,8 @@ class Trip < ActiveRecord::Base
   has_many :hikers, through: :hiker_trips
   has_many :mountains, through: :mountain_trips
 
-  has_attachment :title_image
   has_attachments :photos
+  belongs_to :title_image, class_name: 'Attachinary::File'
 
   before_validation :set_defaults
 
@@ -32,4 +32,24 @@ class Trip < ActiveRecord::Base
     ids - current_ids 
   end 
 
+  # workaround for attachinary custom hiker_id
+  def associate_photos_with( hiker )
+    photos.where(hiker_id: nil).each do |photo|
+      photo.update_attribute :hiker_id, hiker.id
+    end
+  end
+
+  # allow attachinary public_id to be input for title_image
+  def title_image=(val)
+    if val.is_a? Attachinary::File
+      self.title_image_id = val.id
+    elsif photo = photos.where(public_id: val).first
+      self.title_image_id = photo.id
+    else
+      self.title_image_id = nil
+    end
+  end
+
 end
+
+

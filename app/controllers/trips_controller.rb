@@ -58,27 +58,24 @@ class TripsController < ApplicationController
   end
 
   def create_or_update_trip
-    if params[:id]
-      find_and_authorize_trip
-    else
-      @trip = Trip.new
-      authorize @trip
-    end
+    @trip = params[:id] ? Trip.find(params[:id]) : Trip.new
+    authorize @trip
+
     # dont let disabled select widget wipe out these
     mountain_ids = params[:trip].delete(:mountain_ids)
     hiker_ids    = params[:trip].delete(:hiker_ids)
-
+    
     @trip.attributes = trip_params
 
     @trip.update_mountains mountain_ids
-    added_hikers_ids = @trip.update_hikers hiker_ids
+    added_hikers_ids =  @trip.update_hikers hiker_ids
 
-    if ok = @trip.save
-      send_added_hiker_emails added_hikers_ids
+    if @trip.save
+      @trip.associate_photos_with current_hiker
       flash_no_mountains
       redirect_to @trip, success: 'Trip saved'
+      true
     end
-    ok
   end
 
   def flash_no_mountains

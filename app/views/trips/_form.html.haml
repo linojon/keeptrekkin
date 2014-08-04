@@ -7,7 +7,12 @@
       %br
   .row
     .col-ms-4.col-sm-4.well
-      = f.input :title_image, as: :attachinary
+      #title_image
+        - if @trip.title_image
+          = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill, class: 'img-rounded'
+        - else
+          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
+      = f.hidden_field :title_image
 
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       = f.association :mountains, label: 'Mountains', collection: @mountains, label_method: -> (mtn) { mountain_ribbon(mtn) } , input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'

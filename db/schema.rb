@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716012538) do
+ActiveRecord::Schema.define(version: 20140804023214) do
 
   create_table "attachinary_files", force: true do |t|
     t.integer  "attachinariable_id"
@@ -25,9 +25,11 @@ ActiveRecord::Schema.define(version: 20140716012538) do
     t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "hiker_id"
   end
 
   add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent"
+  add_index "attachinary_files", ["hiker_id"], name: "index_attachinary_files_on_hiker_id"
 
   create_table "hiker_trips", id: false, force: true do |t|
     t.integer "hiker_id", null: false
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140716012538) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.integer  "title_image_id"
   end
 
   create_table "users", force: true do |t|
