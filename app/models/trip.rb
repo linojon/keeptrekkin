@@ -6,11 +6,15 @@ class Trip < ActiveRecord::Base
   has_many :mountains, through: :mountain_trips
 
   has_attachments :photos
+
   belongs_to :title_image, class_name: 'Attachinary::File'
 
-  before_validation :set_defaults
+  attr_accessor :title_image_input
+  after_save :set_title_image
 
   #default_scope { order('date DESC') }
+
+  before_validation :set_defaults
 
   def set_defaults
     self.date ||= Date.today
@@ -39,15 +43,24 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  # allow attachinary public_id to be input for title_image
-  def title_image=(val)
-    if val.is_a? Attachinary::File
-      self.title_image_id = val.id
-    elsif photo = photos.where(public_id: val).first
-      self.title_image_id = photo.id
+  # allow attachinary public_id to be input for title_image; stow and handle after attachinary save
+  def title_image_input
+    title_image && title_image.public_id
+  end
+
+  def title_image_input=(image)
+    @title_image_input = image
+  end
+
+  def set_title_image
+    if @title_image_input.is_a? Attachinary::File
+      image_id = val.id
+    elsif photo = photos.where(public_id: @title_image_input).first
+      image_id = photo.id
     else
-      self.title_image_id = nil
+      image_id = nil
     end
+    update_column :title_image_id, image_id
   end
 
 end
