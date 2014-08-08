@@ -1,14 +1,25 @@
 = simple_form_for @hiker, html: { class: 'form-vertical' } do |f|
   .row
+    .col-sm-12
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
+      = link_to 'Cancel', saved_back_path, class: 'btn pull-right'
+      %br
+      %br
+  .row
     .col-sm-4.well
-      / = f.input :profile_image, as: :attachinary
+      #profile_image
+        - if @hiker.profile_image
+          = cl_image_tag @hiker.profile_image.path, size: '300x200', crop: :fill
+        - elsif @hiker.profile_image_url
+          = image_tag @hiker.profile_image_url, size: '300x200', crop: :fill
+        - else
+          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
+      = f.hidden_field :profile_image_input
 
     .col-sm-8.well
       = f.input :name
       = f.input :location
 
-  .row
-    .col-sm-8.col-sm-offset-4.well
       %h3 Private
       = f.input :email
       = f.input :disable_notifications
@@ -16,6 +27,16 @@
       %h4 Social Connections
       = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
 
+      %h3 Gallery
+      - @hiker.photos.each do |photo|
+        .profile_image_thumb.pull-left.padded
+          - trip = photo.attachinariable
+          - mtns = trip.mountains.map(&:name).join(', ')
+          = cl_image_tag photo.path, size: '75x75', crop: :fill, title: mtns
+          %p
+            = link_to "#{trip.date}", trip, title: mtns
+            %br
+            = link_to 'Profile image', "#", data: { 'profile-image' => photo.public_id, 'profile-image-url' => photo.fullpath(size: '300x200', crop: :fill) }
 
   .row
     .col-sm-12

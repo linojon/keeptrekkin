@@ -11,6 +11,12 @@ class Hiker < ActiveRecord::Base
     ([self] + friends).uniq
   end
 
+  has_many :photos, class_name: 'Attachinary::File'
+
+  belongs_to :profile_image, class_name: 'Attachinary::File'
+  attr_accessor :profile_image_input
+  after_save :set_profile_image
+
   validates :name, presence: true
 
   # scope :not_authenticated, -> { includes(:users).where("users.hiker_id IS NULL") }
@@ -36,11 +42,39 @@ class Hiker < ActiveRecord::Base
   end
 
   def profile_image_url
-    user.image_url if user
+    if profile_image
+      profile_image.fullpath(size: '300x200', crop: :fill)
+    elsif user 
+      user.image_url
+    end
   end
 
   def profile_chip_url
-    user.image_url if user
+    if profile_image
+      profile_image.fullpath(size: '30x30', crop: :fill)
+    elsif user
+      user.image_url
+    end
+  end
+
+  # allow attachinary public_id to be input for title_image; stow and handle after attachinary save
+  def profile_image_input
+    profile_image && profile_image.public_id
+  end
+
+  def profile_image_input=(image)
+    @profile_image_input = image
+  end
+
+  def set_profile_image
+    if @profile_image_input.is_a? Attachinary::File
+      image_id = val.id
+    elsif photo = photos.where(public_id: @profile_image_input).first
+      image_id = photo.id
+    else
+      image_id = nil
+    end
+    update_column :profile_image_id, image_id
   end
 
 end

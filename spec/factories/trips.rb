@@ -20,5 +20,11 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_photo do
+      after(:create) do |trip, evaluator|
+        trip.photos.create( scope: 'photos', hiker_id: trip.hikers.first.id )
+      end
+    end
+
   end
 end

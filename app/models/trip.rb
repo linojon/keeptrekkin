@@ -8,7 +8,6 @@ class Trip < ActiveRecord::Base
   has_attachments :photos
 
   belongs_to :title_image, class_name: 'Attachinary::File'
-
   attr_accessor :title_image_input
   after_save :set_title_image
 

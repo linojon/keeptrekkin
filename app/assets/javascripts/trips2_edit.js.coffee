@@ -66,24 +66,6 @@ $ ->
     is_new_record = $('form#edit_trip_form').hasClass('new_record')
     enable_multiselect('hikers', is_new_record)
 
-    # file uploader
-    $('#trip_title_image.attachinary-input').attachinary
-      template: """
-        <img 
-          src="<%= $.cloudinary.url(files[0].public_id, { "version": files[0].version, "format": 'jpg', "crop": 'fill', "width": 200, "height": 133 }) %>"
-                  alt="" width="200" height="133", class="img-rounded" />
-        <a href="#" data-remove="<%= files[0].public_id %>">Remove</a>
-        <script>$('.trip_title_image .btn-file').hide();</script>
-        <script>$('.trip_title_image a').click(function(){ $('.trip_title_image .btn-file').show() })
-      """
-      btnText: 'Upload Title Photo'
-
-    $('.trip_title_image a').click -> 
-      $('.trip_title_image .btn-file').show()
-    # i dont remember what this is for
-    # $('#trip_title_image').bind 'redraw', -> $('#trip_title_image').hide()
-
-
     $('#trip_photos.attachinary-input').attachinary()
 
     # froala editor - wysiwyg

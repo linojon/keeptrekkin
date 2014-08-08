@@ -28,6 +28,7 @@ class TripsController < ApplicationController
   end
 
   def create
+  byebug
     render :new unless create_or_update_trip
   end
 

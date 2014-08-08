@@ -16,7 +16,7 @@
             <% } else { %>
               <img
                 src="<%= $.cloudinary.url(files[i].public_id, { "version": files[i].version, "format": 'jpg', "crop": 'fill', "width": 75, "height": 75 }) %>"
-                alt="" width="75" height="75" class="img-rounded" />
+                alt="" width="75" height="75" />
             <% } %>
             <div>
               <a href="#" data-remove="<%= files[i].public_id %>">Remove</a>
@@ -148,7 +148,7 @@
     # JSL added
     setTitleImage: (fileId, fileUrl) ->
       $('input#trip_title_image_input').val(fileId)
-      $('#title_image').html("<img src='" + fileUrl + "' width='300' height='200' class='img-rounded' />")
+      $('#title_image').html("<img src='" + fileUrl + "' width='300' height='200' />")
 
 
     checkMaximum: ->

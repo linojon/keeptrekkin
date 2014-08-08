@@ -20,7 +20,6 @@ class HikersController < ApplicationController
 
   def create
     # xhr request
-# byebug
     if @hiker = Hiker.where( email: params[:hiker][:email] ).first
       # already exists with this email, just use it, ignore name
       authorize @hiker
@@ -39,7 +38,7 @@ class HikersController < ApplicationController
   private
 
   def hiker_params
-    params.require(:hiker).permit(:email, :name)
+    params.require(:hiker).permit(:email, :name, :profile_image_input, :location, :disable_notifications)
   end
 
   def find_and_authorize_hiker

@@ -3,8 +3,8 @@
     = title 'User Profile'
 .row
   .col-sm-4
-    - if @hiker.profile_image_url?
-      = cl_image_tag @hiker.profile_image_url, size: '200x200', crop: :fill, class: 'img-rounded'
+    - if @hiker.profile_image_url
+      = cl_image_tag @hiker.profile_image_url, size: '300x200', crop: :fill
     - else
       %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
 
@@ -27,6 +27,17 @@
       %hr
       %h4 Social Connections
       = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
+
+    - if @hiker.photos.present?
+      %hr
+      %h3 Gallery
+      - @hiker.photos.each do |photo|
+        %div.pull-left.padded
+          - trip = photo.attachinariable
+          - mtns = trip.mountains.map(&:name).join(', ')
+          = cl_image_tag photo.path, size: '75x75', crop: :fill, title: mtns
+          %p
+            = link_to "#{trip.date}", trip, title: mtns
 
 
 

@@ -9,7 +9,7 @@
     .col-ms-4.col-sm-4.well
       #title_image
         - if @trip.title_image
-          = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill, class: 'img-rounded'
+          = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
       = f.hidden_field :title_image_input
