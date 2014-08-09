@@ -16,14 +16,14 @@
         - if @trip.title.present?
           %h1= @trip.title
 
-        %h3= l @trip.date
+        %h3= @trip.date.strftime('%A, %b %-d, %Y')
         - if @trip.distance.present? || @trip.duration.present?
           %p= [@trip.distance, @trip.duration].join(', ')
 
         - if @trip.mountains.present?
           %p= @trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
 
-        %p= raw @trip.hikers.map {|hiker| link_to( hiker_ribbon(hiker).html_safe, hiker).html_safe }.join('<br>').html_safe
+        %p= @trip.hikers.map {|hiker| link_to( hiker_ribbon(hiker), hiker) }.join('<br>').html_safe
 
         - if @trip.journal.present?
           %hr

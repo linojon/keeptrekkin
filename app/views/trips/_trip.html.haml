@@ -15,6 +15,9 @@
           %p
             = trip.mountains.map {|mountain| link_to mountain.name, mountain }.join(', ').html_safe
           %p
-            = trip.hikers.map {|hiker| link_to hiker.name, hiker }.join(', ').html_safe
+            - trip.hikers.each do |hiker|
+              %div{style: 'display:inline-block; margin: 0 1em 0.5em 0;'}
+                = link_to hiker_ribbon(hiker), hiker
+
           %p
             = trip.date.strftime('%A, %b %-d, %Y')

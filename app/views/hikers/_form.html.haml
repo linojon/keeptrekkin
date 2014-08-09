@@ -34,7 +34,7 @@
           - mtns = trip.mountains.map(&:name).join(', ')
           = cl_image_tag photo.path, size: '75x75', crop: :fill, title: mtns
           %p
-            = link_to "#{trip.date}", trip, title: mtns
+            = link_to "#{trip.date.strftime('%b %-d, %Y')}", trip, title: mtns
             %br
             = link_to 'Profile image', "#", data: { 'profile-image' => photo.public_id, 'profile-image-url' => photo.fullpath(size: '300x200', crop: :fill) }
 

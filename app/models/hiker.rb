@@ -77,4 +77,8 @@ class Hiker < ActiveRecord::Base
     update_column :profile_image_id, image_id
   end
 
+  def first_name
+    name.split(' ').first if name
+  end
+
 end

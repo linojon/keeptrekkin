@@ -19,6 +19,14 @@ class Trip < ActiveRecord::Base
     self.date ||= Date.today
   end
 
+  def title
+    @title || default_title
+  end
+
+  def default_title
+    "#{date.strftime('%A')} hike to #{mountains.map(&:name).to_sentence} with #{hikers.map(&:first_name).to_sentence}"
+  end
+
   # dont let disabled select widget wipe out these
   def update_mountains( ids )
     ids = ids.to_a

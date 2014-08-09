@@ -41,7 +41,7 @@ module ApplicationHelper
        "<div class='selection_item'><img class='chip', src='#{hiker.profile_chip_url}'/>#{hiker.name}</div>"
      else
        "<div class='selection_item'><span class='chip glyphicon glyphicon-user'></span>#{hiker.name}</div>"
-     end
+     end.html_safe
    end
 
 end
