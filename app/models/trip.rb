@@ -17,6 +17,7 @@ class Trip < ActiveRecord::Base
 
   def set_defaults
     self.date ||= Date.today
+    self.title = nil if title.strip.blank?
   end
 
   def title

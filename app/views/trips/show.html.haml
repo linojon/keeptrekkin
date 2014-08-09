@@ -5,36 +5,39 @@
         %span.glyphicon.glyphicon-chevron-left
         Dashboard
 
-    .media
-      .pull-left
-        - if @trip.title_image
-          = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill
-        - else
-          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
+    - if @trip.title.present?
+      = title @trip.title
 
-      .media-body
-        - if @trip.title.present?
-          %h1= @trip.title
+.row
+  .col-md-4
+    - if @trip.title_image
+      = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill
+    /- else
+    /  %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
 
-        %h3= @trip.date.strftime('%A, %b %-d, %Y')
-        - if @trip.distance.present? || @trip.duration.present?
-          %p= [@trip.distance, @trip.duration].join(', ')
-
-        - if @trip.mountains.present?
-          %p= @trip.mountains.map {|m| link_to m.name, m }.join(', ').html_safe
-
-        %p= @trip.hikers.map {|hiker| link_to( hiker_ribbon(hiker), hiker) }.join('<br>').html_safe
-
-        - if @trip.journal.present?
-          %hr
-          .journal= raw @trip.journal
-        - if @trip.photos.present?
-          %hr
-          - @trip.photos.each do |photo|
-            = cl_image_tag photo.path, size: '75x75', crop: :fill
-          %p
-          = render 'slide_show'
+    %p &nbsp;
+    %p= @trip.hikers.map {|hiker| link_to( hiker_ribbon(hiker), hiker) }.join('<br>').html_safe
 
     - if policy(@trip).edit?
       %p.padded
         = link_to 'Edit Trip Report', edit_trip_path(@trip), class: 'btn btn-primary'
+
+  .col-md-8
+    %h3= @trip.date.strftime('%A, %b %-d, %Y')
+    - if @trip.distance.present? || @trip.duration.present?
+      %p= [@trip.distance, @trip.duration].join(', ')
+
+    - if @trip.mountains.present?
+      %p= @trip.mountains.map {|m| link_to m.full_name, m }.join(', ').html_safe
+
+
+    - if @trip.journal.present?
+      %hr
+      .journal= raw @trip.journal
+    - if @trip.photos.present?
+      %hr
+      - @trip.photos.each do |photo|
+        = cl_image_tag photo.path, size: '75x75', crop: :fill
+      %p
+      = render 'slide_show'
+

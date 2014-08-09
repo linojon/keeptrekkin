@@ -1,32 +1,32 @@
 .row
   .md-col-12
-    = title 'User Profile'
+    = title @hiker.name
+
 .row
-  .col-sm-4
+  .col-md-4
     - if @hiker.profile_image_url
       = cl_image_tag @hiker.profile_image_url, size: '300x200', crop: :fill
     - else
       %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
 
-    - if policy(@hiker).edit?
-      %p.padded
-        = link_to 'Edit Profile', edit_hiker_path(@hiker), class: 'btn btn-primary'
+    - if @hiker == current_hiker
+      .well{ style: 'margin-top: 1em'}
+        %h4 Private Info (Only Visible To You)
+        %p= @hiker.email
+        %p
+          %strong Email Notifications:
+          = current_hiker.disable_notifications? ? 'Disabled' : 'Enabled'
+        %hr
+        %h4 Social Connections
+        = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
 
-  .col-sm-8
-    %h3= @hiker.name
+        %hr
+        %p= link_to 'Edit Profile', edit_hiker_path(@hiker), class: 'btn btn-primary'
+
+  .col-md-8
     %p= @hiker.location
 
-
-    - if @hiker == current_hiker
-      %hr
-      %h4 Private Info
-      %p= @hiker.email
-      %p
-        %strong Email Notifications:
-        = current_hiker.disable_notifications? ? 'Disabled' : 'Enabled'
-      %hr
-      %h4 Social Connections
-      = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
+    = render 'mountains'
 
     - if @hiker.photos.present?
       %hr
@@ -38,9 +38,3 @@
           = cl_image_tag photo.path, size: '75x75', crop: :fill, title: mtns
           %p
             = link_to "#{trip.date.strftime('%b %-d, %Y')}", trip, title: mtns
-
-
-
-/ .row
-/   .md-col-12
-/     %h3 Photos

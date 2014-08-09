@@ -1,0 +1,10 @@
+%table.table.table-condensed.table-striped.table-hover
+  %thead
+    %tr
+      / %th{ width: 20 } Rank
+      %th Mountain
+      %th Elevation
+      %th.align_right Trips
+      %th Hikers
+  %tbody
+    = render @hiker.mountains

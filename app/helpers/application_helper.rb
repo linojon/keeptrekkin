@@ -7,7 +7,10 @@ module ApplicationHelper
 
   def title(page_title, show: true)
     @show_title = show
-    content_tag :h1, page_title
+    content_for :title do
+      page_title
+    end
+    content_tag :h1, page_title if show
   end
 
   def flash_class_for(level)
