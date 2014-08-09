@@ -18,8 +18,8 @@ feature 'user sign in', js: true do
     # creates hiker
     # initializes user and hiker info
     expect(page).to have_content('Sign out')
-    # redirects to dashboard
-    expect(current_url).to include '/dashboard'
+    # redirects to newsfeed
+    expect(current_url).to include '/newsfeed'
   end
 
   xscenario "existing user"
@@ -27,7 +27,7 @@ feature 'user sign in', js: true do
 
     # Then:
     # finds current_user
-    # redirects to dashboard
+    # redirects to newsfeed
 
   xscenario "invited user via link"
     # When: click sign in button
@@ -43,7 +43,7 @@ feature 'user sign in', js: true do
     # Then:
     # finds user and hiker
     # initializes user and hiker info
-    # redirects to dashboard
+    # redirects to newsfeed
 
   xscenario "invited user via sign in where fb email doesnt match but name does"
     # When: click sign in button
@@ -56,7 +56,7 @@ feature 'user sign in', js: true do
   xscenario "invited via link does not work when current user"
     # Given: signed in
     # When: click sign in button
-    # Then: stay signed in, redirects to dashboard
+    # Then: stay signed in, redirects to newsfeed
 
   xscenario "failure from Facebook login"
     # When: click signin button wit FB failure

@@ -8,13 +8,13 @@
   .row
     .col-sm-4.well
       #profile_image
-        - if @hiker.profile_image
-          = cl_image_tag @hiker.profile_image.path, size: '300x200', crop: :fill
-        - elsif @hiker.profile_image_url
-          = image_tag @hiker.profile_image_url, size: '300x200', crop: :fill
+        - if @hiker.profile_image_url
+          = image_tag @hiker.profile_image_url
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
       = f.hidden_field :profile_image_input
+      %br
+      = link_to 'Use facebook image', '#', id: 'use_facebook_image'
 
     .col-sm-8.well
       = f.input :name

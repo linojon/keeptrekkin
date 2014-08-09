@@ -6,7 +6,7 @@ class PagesController < ApplicationController
       redirect_to "/session/create?hiker_id=#{params[:hiker_id]}"
     elsif current_user
       flash = flash # pay it forward
-      redirect_to dashboard_path
+      redirect_to newsfeed_path
     end
   end
   

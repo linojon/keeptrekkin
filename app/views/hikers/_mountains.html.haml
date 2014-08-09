@@ -5,6 +5,6 @@
       %th Mountain
       %th Elevation
       %th.align_right Trips
-      %th Hikers
+      %th.align_right Hikers
   %tbody
-    = render @hiker.mountains
+    = render @hiker.mountains.uniq

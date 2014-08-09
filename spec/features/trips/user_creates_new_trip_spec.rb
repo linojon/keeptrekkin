@@ -48,7 +48,7 @@ feature 'User creates new trip', js: true, areyousure: true do
   scenario 'cancels' do
     click_on 'Add a Trip'
     click_on 'Cancel', match: :first
-    expect(current_url).to include '/dashboard'
+    expect(current_url).to include '/newsfeed'
   end
 
 end

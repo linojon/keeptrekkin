@@ -13,10 +13,10 @@ feature 'New user signs up via Facebook' do
 
   context 'First time sign up' do
 
-    scenario "has Sign out link and redirects to dashboard" do 
+    scenario "has Sign out link and redirects to newsfeed" do 
       expect(page).to have_content('Sign out')
       # TODO: user name and link to profile
-      expect(current_url).to include '/dashboard'
+      expect(current_url).to include '/newsfeed'
     end
     scenario "creates user with oauth info" do
       user = User.last

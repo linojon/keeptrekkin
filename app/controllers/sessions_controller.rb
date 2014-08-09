@@ -9,14 +9,14 @@ class SessionsController < ApplicationController
     hiker.save
     session[:user_id] = user.id
     flash_edit_profile user
-    redirect_to dashboard_url
+    redirect_to newsfeed_url
   end
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     flash_edit_profile user
-    redirect_to dashboard_url
+    redirect_to newsfeed_url
   end
 
   # def create
@@ -25,13 +25,13 @@ class SessionsController < ApplicationController
   #   if user = User.where uid: auth.uid
   #     update user info
   #     session[:user_id] = user.id
-  #     redirect_to dashboard_path
+  #     redirect_to newsfeed_path
 
   #   # invited with this email
   #   elsif user = User.where(email: auth.info.email).first
   #     update user info
   #     session[:user_id] = user.id
-  #     redirect_to dashboard_path
+  #     redirect_to newsfeed_path
       
 
   #   # # maybe invited?
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
   #   else
   #     create user
   #     create hiker
-  #     redirect_to dashboard_path
+  #     redirect_to newsfeed_path
   #   end
 
   def destroy

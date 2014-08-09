@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'dashboard page' do
+describe 'newsfeed page' do
   describe 'trips timeline' do
     # my trips
     # option to include my hikers trips

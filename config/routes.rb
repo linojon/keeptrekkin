@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :hikers, only: [:create]
   end
   
-  match 'dashboard', to: 'trips#index', as: :dashboard, via: :get
+  match 'newsfeed', to: 'trips#index', as: :newsfeed, via: :get
 
   resources :hikers
 

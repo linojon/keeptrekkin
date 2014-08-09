@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User dashboard' do
+feature 'User newsfeed' do
   let!(:hiker)       { create :hiker, :with_user }
   let!(:trip1)       { create :trip, :with_mountain }
   let!(:trip2)       { create :trip, :with_mountain }
@@ -12,7 +12,7 @@ feature 'User dashboard' do
     trip2.hikers << hiker
     trip2.hikers << friend_trip.hikers.first
     sign_in hiker
-    expect(current_url).to include '/dashboard'
+    expect(current_url).to include '/newsfeed'
   end
 
   scenario 'shows own trips' do

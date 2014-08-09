@@ -8,4 +8,4 @@
 #   share button
 #   publish button?
 #   clicking image opens full size modal
-#   back to dashboard 
+#   back to newsfeed 

@@ -14,10 +14,10 @@ feature 'Invited user signs up via Facebook' do
       hiker.reload
       expect(hiker.user).to_not be_nil
     end
-    scenario 'signed in and redirects to dashboard' do
+    scenario 'signed in and redirects to newsfeed' do
       expect(page).to have_content('Sign out')
       # TODO: user name and link to profile
-      expect(current_url).to include '/dashboard'
+      expect(current_url).to include '/newsfeed'
     end
     scenario "flash prompt to edit profile" do
       within ".alert" do

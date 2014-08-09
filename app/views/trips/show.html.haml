@@ -1,17 +1,14 @@
 .row
   .md-col-12
     %p.padded
-      = link_to dashboard_path do
+      = link_to newsfeed_path do
         %span.glyphicon.glyphicon-chevron-left
-        Dashboard
-
-    - if @trip.title.present?
-      = title @trip.title
+        Newsfeed
 
 .row
   .col-md-4
     - if @trip.title_image
-      = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill
+      = image_tag @trip.title_image_url
     /- else
     /  %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
 
@@ -23,6 +20,9 @@
         = link_to 'Edit Trip Report', edit_trip_path(@trip), class: 'btn btn-primary'
 
   .col-md-8
+    - if @trip.title.present?
+      = title @trip.title
+
     %h3= @trip.date.strftime('%A, %b %-d, %Y')
     - if @trip.distance.present? || @trip.duration.present?
       %p= [@trip.distance, @trip.duration].join(', ')

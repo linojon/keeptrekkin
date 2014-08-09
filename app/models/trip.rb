@@ -25,7 +25,14 @@ class Trip < ActiveRecord::Base
   end
 
   def default_title
-    "#{date.strftime('%A')} hike to #{mountains.map(&:name).to_sentence} with #{hikers.map(&:first_name).to_sentence}"
+    title = []
+    # title << date.strftime('%A') + ' hike' if date
+    # title << 'to ' + mountains.map(&:name).to_sentence if mountains.present?
+    # title << 'with ' + hikers.map(&:first_name).to_sentence if hikers.count > 1
+    title << mountains.map(&:full_name).to_sentence if mountains.present?
+    title << 'hike'
+    title << 'with ' + hikers.map(&:first_name).to_sentence if hikers.count > 1
+    title.join(' ')
   end
 
   # dont let disabled select widget wipe out these
@@ -48,6 +55,12 @@ class Trip < ActiveRecord::Base
   def associate_photos_with( hiker )
     photos.where(hiker_id: nil).each do |photo|
       photo.update_attribute :hiker_id, hiker.id
+    end
+  end
+
+  def title_image_url
+    if title_image
+      title_image.fullpath(size: '300x200', crop: :fill)
     end
   end
 
