@@ -8,7 +8,10 @@ $ ->
 
   $('#use_facebook_image').click (event) ->
     $('input#hiker_profile_image_input').val('')
-    $('#profile_image').html("<img class='img-thumbnail' data-src='holder.js/300x200/text:Profile Image'>")
-    Holder.run({use_canvas:true})
+    url = $(event.target).data('facebook-image-url')
+    # $('#profile_image').html("<img class='img-thumbnail' data-src='holder.js/300x200/text:Profile Image'>")
+    # Holder.run({use_canvas:true})
+    $('#profile_image').html("<img src='" + url + "' width='300' height='200' />")
+    $('#use_facebook_image').hide()
 
   $('.chart').easyPieChart()

@@ -9,5 +9,8 @@ class PagesController < ApplicationController
       redirect_to newsfeed_path
     end
   end
+
+  def legalese
+  end
   
 end

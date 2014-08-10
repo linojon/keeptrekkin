@@ -13,19 +13,21 @@
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
       = f.hidden_field :profile_image_input
-      %br
-      = link_to 'Use facebook image', '#', id: 'use_facebook_image'
+      - if @hiker.profile_image
+        %br
+        = link_to 'Use facebook image', '#', id: 'use_facebook_image', 'data-facebook-image-url' => @hiker.user.profile_image_url
 
-    .col-sm-8.well
-      = f.input :name
-      = f.input :location
-
-      %h3 Private
-      = f.input :email
-      = f.input :disable_notifications
-      %hr
-      %h4 Social Connections
-      = link_to 'Facebook Profile', '#', class: 'btn btn-sm btn-info'
+    .col-sm-8
+      .well
+        = f.input :name
+        = f.input :location, placeholder: 'city, state, or wherever'
+      .well
+        %h3 Private
+        = f.input :email
+        = f.input :disable_notifications
+        %hr
+        %h4 Social Connections
+        = link_to 'Facebook Profile', @hiker.user.profile_url, class: 'btn btn-sm btn-info'
 
       %h3 Gallery
       - @hiker.photos.each do |photo|

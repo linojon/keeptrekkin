@@ -45,7 +45,7 @@ class Hiker < ActiveRecord::Base
     if profile_image
       profile_image.fullpath(size: '300x200', crop: :fill)
     elsif user 
-      user.image_url
+      user.profile_image_url
     end
   end
 
@@ -53,7 +53,7 @@ class Hiker < ActiveRecord::Base
     if profile_image
       profile_image.fullpath(size: '30x30', crop: :fill)
     elsif user
-      user.image_url
+      user.chip_image_url
     end
   end
 

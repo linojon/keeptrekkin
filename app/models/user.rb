@@ -6,14 +6,16 @@ class User < ActiveRecord::Base
     #logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      byebug
       # user attribs update from provider, hiker attribs are only initialized then user edits
       user.provider = auth.provider
       user.uid              = auth.uid
       user.name             = auth.info.name
       user.oauth_token      = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.profile_url      = auth.info.link
-      user.image_url        = auth.info.image.gsub('square','large'), #200x200
+      user.profile_url      = auth.info.urls['Facebook']
+      user.image_url        = auth.info.image.split('?').first
+      #auth.info.image.gsub('square','large'), #200x200
       # profile_chip_url: auth.info.image.gsub('square', 'width=30&height=30')
       user.save!
 
@@ -36,5 +38,14 @@ class User < ActiveRecord::Base
       self.create_hiker attributes
     end
   end
+
+  def profile_image_url
+    image_url + '?width=300&height=200'
+  end
+
+  def chip_image_url
+    image_url + '?width=30&height=30'
+  end
+
 
 end
