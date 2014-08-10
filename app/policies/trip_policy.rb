@@ -3,7 +3,7 @@ class TripPolicy < ApplicationPolicy
     def resolve
       if user
         # todo: definately can be optimized!
-        user.friends.map {|hiker| hiker.trips }.flatten.uniq
+        user.friends.map {|hiker| hiker.trips.order('date DESC') }.flatten.uniq
       else
         []
       end
@@ -19,7 +19,7 @@ class TripPolicy < ApplicationPolicy
     user && (record.hikers.empty? || record.hikers.include?(user)) # BUT hikers shouldnt be empty
   end
 
-  def scope
+  def scope # not used?
     user && user.trips.order('date DESC')
   end
 
