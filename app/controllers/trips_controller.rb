@@ -2,7 +2,12 @@ class TripsController < ApplicationController
   before_action :save_back, only: [:new, :edit]
 
   def index
-    @trips = policy_scope(Trip)
+    # @trips = policy_scope(Trip)
+    if current_user
+      user.friends.map {|hiker| hiker.trips }.flatten.uniq.sort {|a,b| b.date <=> a.date }
+    else
+      []
+    end
   end
 
   def show
