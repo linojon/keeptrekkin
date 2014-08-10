@@ -28,7 +28,7 @@
           %li= link_to current_hiker.name, edit_hiker_path(current_hiker)
           %li= link_to 'Sign out', signout_path, id: 'sign_out'
         - else
-          %li= link_to 'Sign in via Facebook', '/auth/facebook', id: 'sign_in'
+          %li= link_to 'Sign in via Facebook', '/auth/facebook' #, id: 'sign_in'
 
       / %ul.nav.navbar-nav.navbar-right
       /   - if current_user
