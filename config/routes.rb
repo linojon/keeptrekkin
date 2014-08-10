@@ -21,6 +21,6 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  match 'legalese', to: 'pages#legalese' as: :legalese, via: :get
+  match 'legalese', to: 'pages#legalese', as: :legalese, via: :get
 
 end
