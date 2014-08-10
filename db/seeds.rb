@@ -135,8 +135,8 @@ end
   ['Jonathan Linowes', 'jonathan@linowes.com', '1957-07-11', 'jsl65.jpg'],
   ['Lisa Linowes', 'lisa@linowes.com', '1956-01-20', 'lisa.jpg'],
   ['Rayna Linowes', 'rayna@linowes.com', '1990-10-14', 'rayna.jpg'],
-  ['Jarrett Linowes', 'jaf268@wildcats.unh.edu', '1992-04-18', 'jarrett.jpg'],
-  ['Steven Linowes', 'sjlinowe@syr.edu', '1994-06-16', 'steven.jpg'],
+  ['Jarrett Linowes', 'jarrett@linowes.com', '1992-04-18', 'jarrett.jpg'],
+  ['Steven Linowes', 'sjl@linowes.com', '1994-06-16', 'steven.jpg'],
   ['Shira Linowes', 'shira@linowes.com', '1998-12-09', 'shira.jpg'],
   ['Nikki (dog)', '', '2006-01-11']
 ].each do |name, email, birth, image|

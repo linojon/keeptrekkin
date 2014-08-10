@@ -20,7 +20,7 @@ class TripPolicy < ApplicationPolicy
   end
 
   def scope
-    user && user.trips
+    user && user.trips.order('date DESC')
   end
 
 end

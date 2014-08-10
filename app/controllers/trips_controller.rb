@@ -1,10 +1,4 @@
 class TripsController < ApplicationController
-  # after_action :verify_authorized, except: [:index, :show]
-
-  # expose!(:trip, attributes: :trip_params)
-
-
-
   before_action :save_back, only: [:new, :edit]
 
   def index
@@ -28,18 +22,12 @@ class TripsController < ApplicationController
   end
 
   def create
-  byebug
     render :new unless create_or_update_trip
   end
 
   def update
     render :edit unless create_or_update_trip
   end
-
-#   def image # post /trips/:id/image
-# byebug
-#     # send file to cloudinary
-#   end
 
   private
 
