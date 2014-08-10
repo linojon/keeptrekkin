@@ -13,6 +13,10 @@
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
       = f.hidden_field :title_image_input
+      - if @trip.title_image
+        = link_to 'remove title image', '#', id: 'remove_title_image'
+        %br
+      %br
 
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
       = f.association :mountains, label: 'Mountains', collection: @mountains, label_method: -> (mtn) { mountain_ribbon(mtn) } , input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'

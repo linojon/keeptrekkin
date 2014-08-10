@@ -87,4 +87,11 @@ $ ->
 
     $('#edit_trip_form').areYouSure()
 
+    $('#remove_title_image').click ->
+      $('input#trip_title_image_input').val('')
+      $('#title_image').html("<img class='img-thumbnail' data-src='holder.js/300x200/text:Title Image'>")
+      Holder.run({use_canvas:true})
+      $('#remove_title_image').hide()
+
+
   #end
