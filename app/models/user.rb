@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      byebug
+      # byebug
       # user attribs update from provider, hiker attribs are only initialized then user edits
       user.provider = auth.provider
       user.uid              = auth.uid

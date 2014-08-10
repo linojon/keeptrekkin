@@ -61,6 +61,7 @@ class TripsController < ApplicationController
 
     if @trip.save
       @trip.associate_photos_with current_hiker
+      send_added_hiker_emails added_hikers_ids
       flash_no_mountains
       redirect_to @trip, success: 'Trip saved'
       true
