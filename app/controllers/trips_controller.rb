@@ -3,11 +3,11 @@ class TripsController < ApplicationController
 
   def index
     # @trips = policy_scope(Trip)
-    if current_hiker
-      current_hiker.friends.map {|hiker| hiker.trips }.flatten.uniq.sort {|a,b| b.date <=> a.date }
-    else
-      []
-    end
+    @trip = if current_hiker
+        current_hiker.friends.map {|hiker| hiker.trips }.flatten.uniq.sort {|a,b| b.date <=> a.date }
+      else
+        []
+      end
   end
 
   def show
