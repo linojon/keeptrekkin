@@ -3,7 +3,7 @@
   %head
     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
   %body
-    %p (to email #{@hiker.email})
+    / %p (to email #{@hiker.email})
     %h1 
       Hi #{@hiker.name}! 
     %p 
@@ -22,4 +22,4 @@
         %small For authentication only, we will never share your info or post without your direction.
     -if @trip.title_image.present?
       %p.centered
-        = cl_image_tag @trip.title_image.path, size: '300x200', crop: :fill
+        = image_tag @trip.title_image_url

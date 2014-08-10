@@ -8,7 +8,7 @@ class HikerMailer < ActionMailer::Base
     if Rails.env.test?
       to_email  = @hiker.email
     else
-      to_email  = 'linojon@gmail.com' #@hiker.email
+      to_email  = @hiker.email #'linojon@gmail.com'
     end
     to        = "#{hiker.name} <#{to_email}>"
     mail to: to, subject: "Hello Hiker! You've been added to a trip"
