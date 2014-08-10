@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :hiker
 
   def self.from_omniauth(auth)
-    #logger.info auth
+    logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       byebug
@@ -40,11 +40,11 @@ class User < ActiveRecord::Base
   end
 
   def profile_image_url
-    image_url + '?width=300&height=200'
+    image_url + '?width=300&height=200' if image_url
   end
 
   def chip_image_url
-    image_url + '?width=30&height=30'
+    image_url + '?width=30&height=30' if image_url
   end
 
 
