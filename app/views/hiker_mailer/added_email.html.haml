@@ -9,12 +9,8 @@
     %p 
       You've been added to a hiking trip on KeepTrekkin.com. Check out the trip report, edit the journal, and add photos. 
     - if @trip.mountains.present?
-      %h3
-        Trip
-        - if @trip.mountains.present?
-          to #{ @trip.mountains.map(&:name).join(', ')}
-        with #{ (@trip.hikers - [@hiker]).map(&:name).join(', ') }
-
+      %h3= @trip.title
+  
     - unless @hiker.user.present?
       %p
         No sign-up is needed. Just visit #{@url} and connect via your Facebook account. 
