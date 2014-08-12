@@ -19,7 +19,7 @@
                 alt="" width="75" height="75" />
             <% } %>
             <div>
-              <a href="#" data-remove="<%= files[i].public_id %>">Remove</a>
+              <a href="#" data-remove="<%= files[i].public_id %>">Delete</a>
               <br>
               <a href="#" 
                 data-title-image="<%= files[i].public_id %>" 

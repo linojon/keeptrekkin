@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   match 'legalese', to: 'pages#legalese', as: :legalese, via: :get
+  match 'test_email', to: 'pages#test_email', as: :test_email, via: :get
 
 end

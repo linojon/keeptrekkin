@@ -57,6 +57,7 @@ class TripsController < ApplicationController
     @trip.attributes = trip_params
 
     @trip.update_mountains mountain_ids
+byebug
     added_hikers_ids =  @trip.update_hikers hiker_ids
 
     if @trip.save
@@ -73,8 +74,10 @@ class TripsController < ApplicationController
   end
 
   def send_added_hiker_emails( ids )
+  byebug
     hikers = Hiker.find ids
     hikers.each do |hiker|
+  byebug
       HikerMailer.added_email( hiker, @trip).deliver
     end
   end

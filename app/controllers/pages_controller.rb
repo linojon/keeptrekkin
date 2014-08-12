@@ -12,5 +12,10 @@ class PagesController < ApplicationController
 
   def legalese
   end
+
+  def test_email
+    HikerMailer.test_email( current_hiker ).deliver
+    redirect_to newsfeed_url, notice: 'Email sent'
+  end
   
 end
