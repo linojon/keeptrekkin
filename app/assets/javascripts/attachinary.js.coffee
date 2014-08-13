@@ -149,6 +149,8 @@
     setTitleImage: (fileId, fileUrl) ->
       $('input#trip_title_image_input').val(fileId)
       $('#title_image').html("<img src='" + fileUrl + "' width='300' height='200' />")
+      $('#remove_title_image').show()
+
 
 
     checkMaximum: ->

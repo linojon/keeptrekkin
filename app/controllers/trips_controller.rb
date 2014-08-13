@@ -14,11 +14,13 @@ class TripsController < ApplicationController
     authorize @trip
     @trip.hikers << current_hiker
     find_and_authorize_edit_vars
+    gon.current_hiker_id = current_hiker.id
   end
 
   def edit
     find_and_authorize_trip
     find_and_authorize_edit_vars
+    gon.current_hiker_id = current_hiker.id
   end
 
   def create
@@ -26,6 +28,7 @@ class TripsController < ApplicationController
   end
 
   def update
+  byebug
     render :edit unless create_or_update_trip
   end
 
@@ -57,12 +60,12 @@ class TripsController < ApplicationController
     @trip.attributes = trip_params
 
     @trip.update_mountains mountain_ids
-byebug
+
     added_hikers_ids =  @trip.update_hikers hiker_ids
 
     if @trip.save
       @trip.associate_photos_with current_hiker
-      send_added_hiker_emails added_hikers_ids
+      send_added_hiker_emails (added_hikers_ids - [current_hiker.id])
       flash_no_mountains
       redirect_to @trip, success: 'Trip saved'
       true
@@ -74,11 +77,9 @@ byebug
   end
 
   def send_added_hiker_emails( ids )
-  byebug
     hikers = Hiker.find ids
     hikers.each do |hiker|
-  byebug
-      HikerMailer.added_email( hiker, @trip).deliver
+      HikerMailer.added_email( hiker, @trip).deliver unless hiker.disabled_notifications
     end
   end
 

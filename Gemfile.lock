@@ -109,6 +109,11 @@ GEM
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    gon (5.1.2)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -223,6 +228,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redcarpet (3.1.2)
+    request_store (1.0.8)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (3.0.0)
@@ -326,6 +332,7 @@ DEPENDENCIES
   faker
   figaro (~> 1.0.0.rc1)
   font-awesome-rails
+  gon
   guard-rspec
   haml
   jbuilder (~> 2.0)

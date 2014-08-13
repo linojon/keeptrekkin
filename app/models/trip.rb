@@ -73,6 +73,7 @@ class Trip < ActiveRecord::Base
     @title_image_input = image
   end
 
+  # this also takes care of the case where photo that title_image references is deleted
   def set_title_image
     if @title_image_input.is_a? Attachinary::File
       image_id = val.id

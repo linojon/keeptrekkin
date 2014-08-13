@@ -6,6 +6,7 @@
     %title= [app_title, yield(:title)].join(' | ')
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = include_gon
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = cloudinary_js_config
     = csrf_meta_tags

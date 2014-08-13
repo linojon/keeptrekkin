@@ -1,3 +1,4 @@
+
 = simple_form_for @trip, html: { id: 'edit_trip_form', class: 'form-vertical' + (@trip.new_record? ? ' new_record' : '' ) } do |f|
   .row
     .col-sm-12
@@ -13,9 +14,8 @@
         - else
           %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Title Image" }}
       = f.hidden_field :title_image_input
-      - if @trip.title_image
-        = link_to 'remove title image', '#', id: 'remove_title_image'
-        %br
+      = link_to 'remove title image', '#', id: 'remove_title_image', style: (@trip.title_image ? '' : "dislay: none")
+      %br
       %br
 
       %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
@@ -62,3 +62,5 @@
       %br
 
 = render 'invite_hiker_dialog' 
+= render 'remove_self_dialog'
+= redner 'deleting_trip_dialog'
