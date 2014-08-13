@@ -1,12 +1,12 @@
 %table.table.table-condensed.table-striped.table-hover
   %thead
     %tr
-      %th{ width: 20 } Rank
+      / %th{ width: 20 } Rank
       %th Mountain
       %th Elevation
-      - if current_hiker
-        %th.align_right My Trips
-        %th.align_right Who I Went With
+      / - if current_hiker
+      /   %th.align_right My Trips
+      /   %th.align_right Who I Went With
   -#%tbody.rowlink
   %tbody
     = render @mountains

@@ -1,12 +1,12 @@
 -#%tr{ data: { link: mountain_path(mountain) } }
 %tr
   / %td= mountain_counter+1
-  %td= link_to mountain.name, mountain
+  %td= link_to mountain.full_name, mountain
   %td= number_with_delimiter(mountain.elevation) + "'"
-  - if current_hiker
-    %td.align_right
-      - trips = current_hiker.trips.select {|trip| trip.mountains.include? mountain }
-      = trips.map {|trip| link_to "#{trip.date.strftime('%b %-d, %Y')}", trip, class: 'btn btn-default btn-xs' }.join.html_safe
-    %td.align_right
-      = hiker_chip(current_hiker) if current_hiker.mountains.include?(mountain)
-      = (mountain.hikers & current_hiker.just_friends).map {|hiker| hiker_chip(hiker) }.join.html_safe
+  / - if current_hiker
+  /   %td.align_right
+  /     - trips = current_hiker.trips.select {|trip| trip.mountains.include? mountain }
+  /     = trips.map {|trip| link_to "#{trip.date.strftime('%b %-d, %Y')}", trip, class: 'btn btn-default btn-xs' }.join.html_safe
+  /   %td.align_right
+  /     = hiker_chip(current_hiker) if current_hiker.mountains.include?(mountain)
+  /     = (mountain.hikers & current_hiker.just_friends).map {|hiker| hiker_chip(hiker) }.join.html_safe

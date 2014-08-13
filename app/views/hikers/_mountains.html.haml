@@ -7,4 +7,4 @@
       %th.align_right Trips
       %th.align_right Hikers
   %tbody
-    = render @hiker.mountains.uniq
+    = render partial: 'mountain', collection: @hiker.mountains.uniq
