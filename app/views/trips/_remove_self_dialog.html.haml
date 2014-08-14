@@ -1,0 +1,12 @@
+#remove_self_dialog.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+        %h4.modal-title Remove Yourself?
+      .modal-body
+        %p You are removing yourself from this trip. You will not be able to edit this trip again. 
+        %p Are you sure you want to save with yourself removed?
+      .modal-footer
+        %button.btn.btn-default.cancel{ type: :button, 'data-dismiss' => :modal } No, Cancel
+        %button.btn.btn-default.confirm{ type: :button, 'data-dismiss' => :modal } Yes, Save changes

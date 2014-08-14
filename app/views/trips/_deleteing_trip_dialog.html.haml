@@ -1,0 +1,12 @@
+#deleteing_trip_dialog.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+        %h4.modal-title Deleting Trip?
+      .modal-body
+        %p All hikers have been removed from this trip. This effectively deletes the trip, no one will be able to see or edit it again. 
+        %p Are you sure you want to delete this trip?
+      .modal-footer
+        %button.btn.btn-default.cancel{ type: :button, 'data-dismiss' => :modal } No, Cancel
+        %button.btn.btn-default.confirm{ type: :button, 'data-dismiss' => :modal } Yes, Delete
