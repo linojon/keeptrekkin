@@ -1,0 +1,24 @@
+
+
+#who_dialog.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
+        %h4.modal-title Welcome
+      .modal-body
+        %p Hello
+        - if @hikers.present?
+          %p Were you invited to join KeepTrekkin? Are you one of these unregistered hikers? (CHOOSE ONE)
+          .padded
+            - @hikers.each do |hiker|
+              = link_to hiker.name, iam_sessions_path(id: hiker.id)
+              %br
+          %p Not you? What's your name?
+        - else
+          %p Welcome. What's your name?
+        %p
+          = text_field_tag :name 
+        %button.btn.btn-default.confirm{ type: :button, 'data-dismiss' => :modal } I'm new
+      .modal-footer
+        %button.btn.btn-default.cancel{ type: :button, 'data-dismiss' => :modal } Never mind

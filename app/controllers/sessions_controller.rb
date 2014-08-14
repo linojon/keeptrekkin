@@ -15,8 +15,25 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    flash_edit_profile user
-    redirect_to newsfeed_url
+    if user
+      flash_edit_profile user
+      redirect_to newsfeed_url
+    else
+      redirect_to :who
+    end
+  end
+
+  def who
+    if current_user.nil?
+      redirect_to root_url
+    else
+      @hikers = Hiker.has_no_user.fuzzy( name: current_user.name, email: current_user.email )
+    end
+  end
+
+  def iam
+    # TODO
+    byebug
   end
 
   # def create
@@ -56,7 +73,7 @@ class SessionsController < ApplicationController
   private
 
   def flash_edit_profile(user)
-    flash[:success] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_hiker_path(current_hiker)} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
+    flash[:info] = "Welcome #{current_hiker.name}! You can #{view_context.link_to 'edit your profile', edit_hiker_path(current_hiker)} now.".html_safe if (user.updated_at - user.created_at) < 0.1 # e.g new user
   end
   
 end

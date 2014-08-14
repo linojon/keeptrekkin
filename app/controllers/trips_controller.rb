@@ -65,21 +65,26 @@ class TripsController < ApplicationController
 
     if @trip.save
       @trip.associate_photos_with current_hiker
-      send_added_hiker_emails (added_hikers_ids - [current_hiker.id])
+      send_added_hiker_emails added_hikers_ids
       flash_no_mountains
-      redirect_to @trip, success: 'Trip saved'
+      if @trip.hikers.empty?
+        redirect_to newsfeed_path, notice: 'Trip removed'
+      else
+        redirect_to @trip, success: 'Trip saved'
+      end
       true
     end
   end
 
   def flash_no_mountains
-    flash[:alert] = "You've saved a trip with no mountains selected" if @trip.mountains.empty?
+    flash[:notice] = "You've saved a trip with no mountains selected" if @trip.mountains.empty?
   end
 
   def send_added_hiker_emails( ids )
+    ids -= [current_hiker.id.to_s]
     hikers = Hiker.find ids
     hikers.each do |hiker|
-      HikerMailer.added_email( hiker, @trip).deliver unless hiker.disabled_notifications
+      HikerMailer.added_email( hiker, @trip).deliver unless hiker.disable_notifications
     end
   end
 

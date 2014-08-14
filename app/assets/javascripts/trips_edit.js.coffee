@@ -91,14 +91,14 @@ $ ->
 
     $('#edit_trip_form input[type=submit]').click ->
       hiker_ids = $('#trip_hikers_select').val()
-      if hikder_ids.length == 0
+      if hiker_ids == null || hiker_ids.length == 0
         $('#deleting_trip_dialog').modal('show')
         false
       else if jQuery.inArray( gon.current_hiker_id.toString(), hiker_ids) == -1
         $('#remove_self_dialog').modal('show')
         false
     # submit it when ok
-    $('#remove_self_dialog .cancel, #deleteing_trip_dialog .cancel').click -> 
+    $('#remove_self_dialog .cancel, #deleting_trip_dialog .cancel').click -> 
       # add me back in
       hiker_ids = $('#trip_hikers_select').val()
       hiker_ids.push gon.current_hiker_id.toString()
@@ -106,7 +106,7 @@ $ ->
       $('#remove_self_dialog').modal('hide')
       false
 
-    $('#remove_self_dialog .confirm, #deleteing_trip_dialog .confirm').click -> 
+    $('#remove_self_dialog .confirm, #deleting_trip_dialog .confirm').click -> 
       $('#edit_trip_form').submit()
 
         

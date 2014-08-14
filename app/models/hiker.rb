@@ -19,6 +19,10 @@ class Hiker < ActiveRecord::Base
 
   validates :name, presence: true
 
+  scope :has_no_user, -> {
+    joins('LEFT OUTER JOIN users ON users.hiker_id = hikers.id').where('users.id IS null')
+  }
+
   # scope :not_authenticated, -> { includes(:users).where("users.hiker_id IS NULL") }
 
   # fuzzy search (like where) but returns collection

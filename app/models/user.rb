@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid              = auth.uid
       user.name             = auth.info.name
+      user.email            = auth.info.email
       user.oauth_token      = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.profile_url      = auth.info.urls['Facebook']
@@ -34,8 +35,8 @@ class User < ActiveRecord::Base
     elsif hiker = Hiker.where(email: attributes[:email]).first
       self.hiker = hiker
       self.save!
-    else
-      self.create_hiker attributes
+    # else
+    #   self.create_hiker attributes
     end
   end
 
