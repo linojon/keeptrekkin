@@ -28,7 +28,7 @@ class TripsController < ApplicationController
   end
 
   def update
-  byebug
+  # byebug
     render :edit unless create_or_update_trip
   end
 
@@ -50,6 +50,7 @@ class TripsController < ApplicationController
   end
 
   def create_or_update_trip
+  # byebug
     @trip = params[:id] ? Trip.find(params[:id]) : Trip.new
     authorize @trip
 

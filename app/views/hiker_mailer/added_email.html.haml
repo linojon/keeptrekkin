@@ -14,10 +14,10 @@
     - unless @hiker.user.present?
       %p
         No sign-up is needed. Just visit #{@url} and connect via your Facebook account. 
+      %p
+        %small Facebook access is for authentication only. We will never share your info or post without your direction.
       %p{ style: 'text-align: center; font-weight: bold'}
         = link_to 'CLICK TO VISIT', @url
-      %p
-        %small For authentication only, we will never share your info or post without your direction.
     -if @trip.title_image.present?
       %p.centered
         = image_tag @trip.title_image_url

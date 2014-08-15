@@ -17,11 +17,12 @@ class Trip < ActiveRecord::Base
 
   def set_defaults
     self.date ||= Date.today
-    self.title = nil if title.strip.blank?
+    title.strip!
+    self.title = title.titleize if title == title.downcase # titleize if all lower case
   end
 
   def title
-    @title || default_title
+    self[:title].blank? ? default_title : self[:title]
   end
 
   def default_title
@@ -43,7 +44,7 @@ class Trip < ActiveRecord::Base
   end
   
   def update_hikers( ids )
-  byebug
+  # byebug
     current_ids = self.hiker_ids.map(&:to_s)
     ids = ids.to_a
     ids -= ['']
