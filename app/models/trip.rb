@@ -48,7 +48,7 @@ class Trip < ActiveRecord::Base
     current_ids = self.hiker_ids.map(&:to_s)
     ids = ids.to_a
     ids -= ['']
-    self.hiker_ids = ids ##unless ids.empty? # No hikers aka deletes trip
+    self.hiker_ids = ids unless ids.empty? # No hikers aka deletes trip
     # return new ones
     ids - current_ids 
   end 

@@ -20,8 +20,8 @@ class TripPolicy < ApplicationPolicy
     user && (record.hikers.empty? || record.hikers.include?(user)) # BUT hikers shouldnt be empty
   end
 
-  def scope # not used?
-    user && user.trips.order('date DESC')
-  end
+  # def scope
+  #   user && user.trips.order('date DESC')
+  # end
 
 end

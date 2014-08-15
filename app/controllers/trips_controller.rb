@@ -54,6 +54,14 @@ class TripsController < ApplicationController
     @trip = params[:id] ? Trip.find(params[:id]) : Trip.new
     authorize @trip
 
+    if params[:delete]
+      # trip is deleted when all hikers removed, but also hiker_ids == [''] when not changed b/c the widget is disabled, so added a separate params[:delete] to indicate deletion. (todo: just use DELETE verb and action from form sumbit)
+      @trip.hiker_ids = nil
+      @trip.save
+      redirect_to newsfeed_path, notice: 'Trip removed'
+      return true
+    end
+        
     # dont let disabled select widget wipe out these
     mountain_ids = params[:trip].delete(:mountain_ids)
     hiker_ids    = params[:trip].delete(:hiker_ids)
@@ -68,11 +76,7 @@ class TripsController < ApplicationController
       @trip.associate_photos_with current_hiker
       send_added_hiker_emails added_hikers_ids
       flash_no_mountains
-      if @trip.hikers.empty?
-        redirect_to newsfeed_path, notice: 'Trip removed'
-      else
-        redirect_to @trip, success: 'Trip saved'
-      end
+      redirect_to @trip, success: 'Trip saved'
       true
     end
   end

@@ -88,7 +88,7 @@ $ ->
     $('#edit_trip_form').areYouSure()
 
 
-
+    # submit
     $('#edit_trip_form input[type=submit]').click ->
       hiker_ids = $('#trip_hikers_select').val()
       if hiker_ids == null || hiker_ids.length == 0
@@ -107,6 +107,7 @@ $ ->
       false
 
     $('#remove_self_dialog .confirm, #deleting_trip_dialog .confirm').click -> 
+      $('#edit_trip_form').append("<input type='hidden' name='delete' value='true' />")
       $('#edit_trip_form').submit()
 
         

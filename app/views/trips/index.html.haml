@@ -1,4 +1,13 @@
 .row
   #newsfeed.col-sm-8.col-sm-offset-2
     = title 'Trips Feed'
-    = render @trips
+    - if @trips.blank?
+      %p
+        %em No trips visible
+      %p
+        - if current_user
+          = link_to 'Add your first trip now!', new_trip_path
+        - else
+          You must Sign in to see your newsfeed and your friends!
+    - else
+      = render @trips
