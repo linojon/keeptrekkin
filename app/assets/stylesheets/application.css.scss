@@ -95,3 +95,15 @@ body { padding-top: 50px; }
     margin-left: 0;
 }
 
+// TRIPS FEED
+// trips index missing title image
+.panel .thumbnail .glyph-icon,
+.panel .thumbnail .glyph-icon::before {
+  font-size: 150px !important;
+  color: #bbb;
+}
+
+.media-body {
+  min-width: 300px;
+}
+

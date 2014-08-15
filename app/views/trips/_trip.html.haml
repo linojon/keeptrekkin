@@ -1,23 +1,22 @@
 .panel.panel-default[trip]
   .panel-body{ class: "#{trip.hikers.include?(current_hiker) && 'bg-success'}"}
     .media
-      /= link_to trip, class='pull-left' do
-      /%img.media-object{ data: { src: "holder.js/64x64" }}
-      .media.glyph
-        = link_to trip, class: 'pull-left' do
+      .thumbnail.pull-left{ style: 'width: 200px; height: 150px' }
+        = link_to trip do
           - if trip.title_image
-            = cl_image_tag trip.title_image.path, size: '64x64', crop: :fit
+            = cl_image_tag trip.title_image.path, size: '200x150', crop: :fit
           - else
-            %i.glyph-icon.flaticon-mountain13
-        .media-body
-          - if trip.title
-            %h4= link_to trip.title, trip
-          %p
-            = trip.date.strftime('%A, %b %-d, %Y')
-          %p
-            = trip.mountains.map {|mountain| link_to mountain.full_name, mountain }.join(', ').html_safe
-          %p
-            - trip.hikers.each do |hiker|
-              %div{style: 'display:inline-block; margin: 0 1em 0.5em 0;'}
-                = link_to hiker_ribbon(hiker), hiker
+            .glyph
+              %i.glyph-icon.flaticon-mountain13
+      .media-body
+        - if trip.title
+          %h4= link_to trip.title, trip
+        %p
+          = trip.date.strftime('%A, %b %-d, %Y')
+        %p
+          = trip.mountains.map {|mountain| link_to mountain.full_name, mountain }.join(', ').html_safe
+        %p
+          - trip.hikers.each do |hiker|
+            %div{style: 'display:inline-block; margin: 0 1em 0.5em 0;'}
+              = link_to hiker_ribbon(hiker), hiker
 
