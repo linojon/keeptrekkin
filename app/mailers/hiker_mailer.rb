@@ -1,6 +1,6 @@
 class HikerMailer < ActionMailer::Base
-  # default from: "KeepTrekkin <noreply@keeptrekkin.com>"
-  default from: "KeepTrekkin <app26373640@heroku.com>"
+  default from: "KeepTrekkin <noreply@keeptrekkin.com>"
+  # default from: "KeepTrekkin <app26373640@heroku.com>"
 
   def added_email(hiker, trip)
     @hiker = hiker

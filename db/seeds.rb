@@ -141,7 +141,7 @@ end
   ['Nikki (dog)', '', '2006-01-11']
 ].each do |name, email, birth, image|
   url = "/assets/#{image}"
-  attrs = {name: name, email: email, profile_image_url: url, profile_chip_url: url}
+  attrs = {name: name, email: email}
   if hiker = Hiker.where(name: name).first
     hiker.update_attributes attrs
   else
@@ -149,7 +149,7 @@ end
   end
 end
 
-# user
+# first user
 jon = Hiker.where( name: 'Jonathan Linowes').first
 unless jon.user
   User.create( provider: 'facebook', uid: "10203290081348033", hiker: jon)
