@@ -13,17 +13,19 @@ class SessionsController < ApplicationController
   end
 
   def create
+  # byebug
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    if user
+    if user.hiker
       flash_edit_profile user
       redirect_to newsfeed_url
     else
-      redirect_to :who
+      redirect_to who_sessions_path
     end
   end
 
   def who
+  # byebug
     if current_user.nil?
       redirect_to root_url
     else
@@ -32,8 +34,25 @@ class SessionsController < ApplicationController
   end
 
   def iam
-    # TODO
-    byebug
+    # byebug
+    if current_user.nil?
+      redirect_to root_url
+
+    elsif params[:id] == 'new'
+      current_user.create_hiker name: current_user.name, email: current_user.email
+      flash_edit_profile(current_user)
+      redirect_to newsfeed_url
+
+    elsif hiker = Hiker.find( params[:id])
+      current_user.hiker = hiker
+      current_user.save
+      flash_edit_profile(current_user)
+      redirect_to newsfeed_url
+
+    else
+      session[:user_id] = nil
+      redirect_to root_url, alert: "I'm sorry, unable to connect and sign in"
+    end
   end
 
   # def create

@@ -2,12 +2,13 @@
 
 def facebook_omniauth_hash( name:'Joe Example', email:'joe@example.com' )
   OmniAuth::AuthHash.new({
-    provider: 'facebook',
+    provider: 'Facebook',
     uid: '12345',
     info: {
       name: name,
       email: email,
-      image: '/assets/profile-small.jpg' #'http://graph.facebook.com/10203290081348033/picture?type=square'
+      image: '/assets/profile-small.jpg?type=square', #'http://graph.facebook.com/10203290081348033/picture?type=square'
+      urls:  { 'Facebook' => 'http://www.facebook.com/path/to/profile' }
     },
     credentials: {
       token: 'ABCtokenXYZ',

@@ -10,7 +10,7 @@ jQuery ->
 window.fbAsyncInit = ->
   FB.init(appId: "<%= ENV['facebook_app_id'] %>", cookie: true)
 
-  $('#sign_in').click (e) ->
+  $('.js-sign_in').click (e) ->
     e.preventDefault()
     FB.init(appId: "<%= ENV['facebook_app_id'] %>", cookie: true) # was getting FB.login() called before FB.init
     FB.login (response) ->

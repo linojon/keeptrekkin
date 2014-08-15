@@ -6,16 +6,23 @@
       %br
       %br
   .row
-    .col-sm-4.well
-      #profile_image
-        - if @hiker.profile_image_url
-          = image_tag @hiker.profile_image_url
-        - else
-          %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
-      = f.hidden_field :profile_image_input
-      - if @hiker.profile_image
-        %br
-        = link_to 'Use facebook image', '#', id: 'use_facebook_image', 'data-facebook-image-url' => @hiker.user.profile_image_url
+    .col-sm-4
+      .well
+        #profile_image
+          - if @hiker.profile_image_url
+            = image_tag @hiker.profile_image_url
+          - else
+            %img.img-thumbnail{ data: { src: "holder.js/300x200/text:Profile Image" }}
+        = f.hidden_field :profile_image_input
+        - if @hiker.profile_image
+          %br
+          = link_to 'Use facebook image', '#', id: 'use_facebook_image', 'data-facebook-image-url' => @hiker.user.profile_image_url
+
+
+      %p= link_to 'Sign out', signout_path, id: 'sign_out', class: 'btn btn-warning'
+
+
+
 
     .col-sm-8
       .well

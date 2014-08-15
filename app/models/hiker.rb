@@ -29,15 +29,23 @@ class Hiker < ActiveRecord::Base
   attr_accessor :fuzzy_score
   def self.fuzzy( name:nil, email:nil, threshold:0.7 )
     matches = []
+    name = name.downcase if name
+    email = email.downcase if email
     self.find_each do |hiker|
+      hiker_name = hiker.name.downcase if hiker.name
+      hiker_email = hiker.email.downcase if hiker.email
       score = [
-        (name && hiker.name ? name.jarowinkler_similar(hiker.name) : 0.0),
-        (email && hiker.email ? email.jarowinkler_similar(hiker.email) : 0.0)
+        (name  && hiker_name  ? name.levenshtein_similar( hiker_name) : 0.0),
+        (email && hiker_email ? email.levenshtein_similar(hiker_email) : 0.0),
+        (name  && hiker_name  ? name.jaro_similar(        hiker_name) : 0.0),
+        (email && hiker_email ? email.jaro_similar(       hiker_email) : 0.0),
+        (name  && hiker_name  ? name.jarowinkler_similar( hiker_name) : 0.0),
+        (email && hiker_email ? email.jarowinkler_similar(hiker_email) : 0.0)
       ].max
       hiker.fuzzy_score = score 
-      matches << hiker if score > threshold
+      matches << hiker #if score > threshold
     end
-    matches.sort! {|a,b| b.fuzzy_score <=> a.fuzzy_score } # sort by score highest first
+    matches.sort! {|a,b| b.fuzzy_score <=> a.fuzzy_score }[0..10] # sort by score highest first # top 10
   end
 
   def update_attributes_only_if_blank(attributes)

@@ -27,6 +27,5 @@
 
           - if current_hiker
             %li= link_to hiker_ribbon(current_hiker), edit_hiker_path(current_hiker)
-            %li= link_to 'Sign out', signout_path, id: 'sign_out'
           - else
-            %li= link_to 'Sign in via Facebook', signin_path #, id: 'sign_in'
+            %li= link_to 'Sign in via Facebook', signin_path, class: 'js-sign_in'

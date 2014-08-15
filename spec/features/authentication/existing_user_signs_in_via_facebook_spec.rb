@@ -10,8 +10,14 @@ feature 'Existing user signs in via Facebook' do
   end
 
   it "signed in and redirects to newsfeed" do
-    expect(page).to have_content('Sign out')
-    # TODO: user name and link to profile
+    within 'nav.navbar' do
+      expect(page).to have_content('Sign out')
+      expect(page).to have_content(hiker.name)
+      expect(page).to have_selector('img.chip') # src=/assets/profile-small.jpg
+    end
     expect(current_url).to include '/newsfeed'
   end
+
+  it "signs in with invalid credentials"
+   # OmniAuth.config.mock_auth[:facebook] = :invalid_credentials
 end

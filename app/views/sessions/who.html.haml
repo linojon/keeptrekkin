@@ -5,20 +5,27 @@
     .modal-content
       .modal-header
         %button.close{ type: :button, 'data-dismiss' => :modal, 'aria-hidden' => true} &times;
-        %h4.modal-title Welcome
+        %h4.modal-title Hello and welcome!
       .modal-body
-        %p Hello
-        - if @hikers.present?
-          %p Were you invited to join KeepTrekkin? Are you one of these unregistered hikers? (CHOOSE ONE)
-          .padded
-            - @hikers.each do |hiker|
-              = link_to hiker.name, iam_sessions_path(id: hiker.id)
-              %br
-          %p Not you? What's your name?
-        - else
-          %p Welcome. What's your name?
+        %p 
+          %strong Are you one of these unregistered hikers? (CHOOSE ONE)
         %p
-          = text_field_tag :name 
-        %button.btn.btn-default.confirm{ type: :button, 'data-dismiss' => :modal } I'm new
+          %em (If you received a Welcome email to an address different from your Facebook login, we need your help matching the accounts)
+        .list-group
+          - diff = (@hikers.first.fuzzy_score - @hikers.last.fuzzy_score)
+          - last = @hikers.last.fuzzy_score
+          - @hikers.each do |hiker|
+            - fade = "background-color: rgba(223, 240, 216, #{(hiker.fuzzy_score - last) / diff})"
+            = link_to "#{hiker.name} (#{hiker.email.split('@').first}@...)".html_safe, iam_sessions_path(id: hiker.id), class: 'list-group-item list-group-item-success', style: fade, title: hiker.fuzzy_score
+        .list-group
+          = link_to "Nope, none of these, I'm new", iam_sessions_path(id: 'new'), class: 'list-group-item list-group-item-info', id: 'im_new'
+
       .modal-footer
         %button.btn.btn-default.cancel{ type: :button, 'data-dismiss' => :modal } Never mind
+
+:coffee
+  $('#who_dialog').modal('show')
+
+  $('#who_dialog button.cancel').click ->
+    window.location = '/signout'
+

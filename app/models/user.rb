@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :hiker
 
   def self.from_omniauth(auth)
+  # byebug
     logger.info auth
 
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

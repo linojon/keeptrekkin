@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'New user signs up via Facebook' do
+feature 'New user signs up via Facebook', js: true do
   let(:name) { 'Jonathan Example' }
   let(:email) { 'jonathan@example.com' }
   let(:omniauth) { facebook_omniauth_hash name: name, email: email }
@@ -14,6 +14,7 @@ feature 'New user signs up via Facebook' do
   context 'First time sign up' do
 
     scenario "has Sign out link and redirects to newsfeed" do 
+      byebug
       expect(page).to have_content('Sign out')
       # TODO: user name and link to profile
       expect(current_url).to include '/newsfeed'
@@ -24,6 +25,7 @@ feature 'New user signs up via Facebook' do
       expect(user.uid).to eql omniauth.uid
     end
     scenario "creates hiker with name, email associated with user" do
+        pending
       hiker = Hiker.last
       expect(hiker.name).to eql omniauth.info.name
       expect(hiker.email).to eql omniauth.info.email

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   match 'auth/hack', to: 'sessions#hack', via: :get
-  get 'who', to: 'sessions#who'
-  get 'iam', to: 'sessions#iam'
+  get 'who', to: 'sessions#who', as: :who_sessions
+  get 'iam', to: 'sessions#iam', as: :iam_sessions
   
   resources :trips do
     resources :hikers, only: [:create]
