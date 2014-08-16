@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814045305) do
+ActiveRecord::Schema.define(version: 20140816033857) do
 
   create_table "attachinary_files", force: true do |t|
     t.integer  "attachinariable_id"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20140814045305) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
-    t.string   "profile_image"
     t.string   "location"
     t.boolean  "disable_notifications"
     t.integer  "profile_image_id"

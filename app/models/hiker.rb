@@ -49,6 +49,7 @@ class Hiker < ActiveRecord::Base
   end
 
   def update_attributes_only_if_blank(attributes)
+  # byebug
     attributes.each { |k,v| attributes.delete(k) unless read_attribute(k).blank? }
     update(attributes)
   end
@@ -79,12 +80,16 @@ class Hiker < ActiveRecord::Base
   end
 
   def set_profile_image
-    if @profile_image_input.is_a? Attachinary::File
+    if @profile_image_input.blank?
+      return #unchanged
+    elsif @profile_image_input == 'facebook'
+      image_id = nil
+    elsif @profile_image_input.is_a? Attachinary::File
       image_id = val.id
     elsif photo = photos.where(public_id: @profile_image_input).first
       image_id = photo.id
     else
-      image_id = nil
+      image_id = nil # photo was deleted
     end
     update_column :profile_image_id, image_id
   end

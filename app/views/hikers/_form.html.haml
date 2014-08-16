@@ -36,7 +36,7 @@
         %h4 Social Connections
         = link_to 'Facebook Profile', @hiker.user.profile_url, class: 'btn btn-sm btn-info'
 
-      %h3 Gallery
+      %h3 Photos
       - @hiker.photos.each do |photo|
         .profile_image_thumb.pull-left.padded
           - trip = photo.attachinariable

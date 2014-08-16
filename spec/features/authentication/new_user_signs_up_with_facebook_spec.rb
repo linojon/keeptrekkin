@@ -14,7 +14,7 @@ feature 'New user signs up via Facebook', js: true do
   context 'First time sign up' do
 
     scenario "has Sign out link and redirects to newsfeed" do 
-      byebug
+      # byebug
       expect(page).to have_content('Sign out')
       # TODO: user name and link to profile
       expect(current_url).to include '/newsfeed'
