@@ -11,6 +11,13 @@ class TripPolicy < ApplicationPolicy
     end
   end
 
+  def me?
+    true
+  end
+  def everyone?
+    true
+  end
+
   def create?
     user.present?
   end

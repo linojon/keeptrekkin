@@ -2,6 +2,7 @@ class HikersController < ApplicationController
 
   def show
     find_and_authorize_hiker
+    @mountains = params[:all] ? Mountain.all : @hiker.mountains.uniq
   end
 
   def edit

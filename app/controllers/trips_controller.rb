@@ -1,8 +1,23 @@
 class TripsController < ApplicationController
   before_action :save_back, only: [:new, :edit]
 
-  def index
-    @trips = policy_scope(Trip)
+  after_action :verify_authorized, :except => [:index, :me, :everyone]
+  after_action :verify_policy_scoped, :only => [] #[:index, :me, :everyone]
+
+  def index # default: friends 
+    redirect_to everyone_trips_path unless current_user
+    @trips = current_hiker.friends.map {|hiker| hiker.trips }.flatten.uniq.sort {|a,b| b.date <=> a.date }
+  end
+  def me
+    redirect_to everyone_trips_path unless current_user
+    @trips = current_hiker.trips.order("date DESC")
+    render :index
+  end
+  def everyone
+    @trips = Trip.order("date DESC")
+    # clean this up!
+    @trips.to_a.delete_if {|t| t.hiker_ids.blank? }
+    render :index
   end
 
   def show

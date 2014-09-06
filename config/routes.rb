@@ -12,9 +12,13 @@ Rails.application.routes.draw do
   
   resources :trips do
     resources :hikers, only: [:create]
+    collection do
+      get :everyone
+      get :me
+    end
   end
   
-  match 'newsfeed', to: 'trips#index', as: :newsfeed, via: :get
+  match 'trips', to: 'trips#index', as: :newsfeed, via: :get # generic name "newsfeed" gives us some flexilbity in nav menus, redirects etc
 
   resources :hikers
 

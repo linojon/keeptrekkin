@@ -24,6 +24,11 @@
         .chart{ style: 'display: inline-block', data: { percent: percent }}= "#{percent}%"
         %em= "#{count} out of #{Mountain.count} New Hampshire 4000-footers bagged!"
 
+    .btn-group.btn-group-justified
+      = link_to 'Hiked', current_hiker, class: 'btn btn-default' + (params[:all] ? '' : ' active')
+      = link_to 'All',   hiker_path(current_hiker, all: 1), class: 'btn btn-default' + (params[:all] ? ' active' : '')
+    %p &nbsp;
+
     = render 'mountains'
 
     - if @hiker.photos.present?
