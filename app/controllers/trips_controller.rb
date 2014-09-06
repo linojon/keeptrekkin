@@ -6,17 +6,20 @@ class TripsController < ApplicationController
 
   def index # default: friends 
     redirect_to everyone_trips_path unless current_user
+    # this sucks!
     @trips = current_hiker.friends.map {|hiker| hiker.trips }.flatten.uniq.sort {|a,b| b.date <=> a.date }
+    @trips = Kaminari.paginate_array(@trips).page(params[:page]).per(10)
   end
   def me
     redirect_to everyone_trips_path unless current_user
-    @trips = current_hiker.trips.order("date DESC")
+    @trips = current_hiker.trips.order("date DESC").page(params[:page]).per(10)
     render :index
   end
   def everyone
-    @trips = Trip.order("date DESC")
+    @trips = Trip.order("date DESC") #.page(params[:page]).per(10)
     # clean this up!
     @trips.to_a.delete_if {|t| t.hiker_ids.blank? }
+    @trips = Kaminari.paginate_array(@trips).page(params[:page]).per(10)
     render :index
   end
 

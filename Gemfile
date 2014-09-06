@@ -38,6 +38,8 @@ gem 'wysiwyg-rails' # froala
 gem 'assets_js' # assets helpers
 gem 'gon' # rails variables in js
 gem 'active_link_to'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 
 gem 'pundit'
 gem 'omniauth'
