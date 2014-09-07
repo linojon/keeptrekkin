@@ -8,15 +8,15 @@
       Hi #{@hiker.name}! 
     %p 
       You've been added to a hiking trip on KeepTrekkin. Check out the trip report, edit the journal, and add photos. 
-    %h3= @trip.title
+    %h3= link_to @trip.title, trip_url(@trip)
   
     - unless @hiker.user.present?
       %p
-        No sign-up is needed. Just visit #{@url} and connect via your Facebook account. 
+        No sign-up is needed. Just visit and connect via your Facebook account. 
       %p
         %small Facebook access is for authentication only. We will never share your info or post without your direction.
       %p{ style: 'text-align: center; font-weight: bold'}
-        = link_to 'CLICK TO VISIT', @url
+        = link_to 'CLICK TO VISIT', trip_url(@trip)
     -if @trip.title_image.present?
       %p.centered
         = image_tag @trip.title_image_url
