@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   match 'legalese', to: 'pages#legalese', as: :legalese, via: :get
   match 'test_email', to: 'pages#test_email', as: :test_email, via: :get
+  match 'broadcast_email', to: 'pages#broadcast_email', as: :broadcast_email, via: [:get, :post]
 
   match '/contacts', to: 'contacts#new', via: 'get'
   resources "contacts", only: [:new, :create]

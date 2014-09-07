@@ -1,5 +1,5 @@
 class HikerMailer < ActionMailer::Base
-  default from: "KeepTrekkin <noreply@keeptrekkin.com>"
+  default from: "KeepTrekkin <info@keeptrekkin.com>"
   # default from: "KeepTrekkin <app26373640@heroku.com>"
 
   def added_email(hiker, trip)
@@ -20,6 +20,14 @@ class HikerMailer < ActionMailer::Base
     @url   = root_url
     to     = "#{hiker.name} <#{hiker.email}>"
     mail to: to, subject: "Test from Keeptrekkin"
+  end
+
+  def broadcast_email(hiker, subject, body)
+    @hiker  = hiker
+    @url    = root_url
+    @body   = body
+    to      = "#{hiker.name} <#{hiker.email}>"
+    mail to: to, subject: subject
   end
 
 end

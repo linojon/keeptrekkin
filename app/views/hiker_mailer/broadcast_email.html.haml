@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+  %body
+    / %p (to email #{@hiker.email})
+    %h1 
+      Hi #{@hiker.name}! 
+    %p 
+      #{@body} 
+    %p
+      Cheers,
+      %br
+      Jonathan
+    %p
+      %small
+        You are receiving this message because you have registered with 
+        = link_to "KeepTrekkin", @url
+        These are infrequent notifications, but you can disable by editing your profile. Thanks, and keep on trekkin'!
+

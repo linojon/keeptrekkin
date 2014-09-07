@@ -1,0 +1,8 @@
+%h3 Broadcast Message to All Registered Users!
+
+= simple_form_for :contact, url: broadcast_email_path, html: {class: 'form-horizontal'} do |f|
+  = f.input :email, label: 'To Hiker', placeholder: 'type "all" for all, a hiker_id'
+  = f.input :name, label: 'Subject', value: 'A brief message from KeepTrekkin website'
+  = f.input :message, as: :text, required: true
+  %p
+    = f.button :submit, 'Send message', class: 'btn btn-primary'
