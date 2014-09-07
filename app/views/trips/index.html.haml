@@ -2,8 +2,9 @@
   #newsfeed.col-sm-8.col-sm-offset-2
     %p &nbsp;
     .btn-group.btn-group-justified
-      = active_link_to 'Mine',      me_trips_path, class: 'btn btn-default', active: :exclusive
-      = active_link_to 'Friends', trips_path, class: 'btn btn-default', active: :exclusive
+      - disabled = current_user ? '' : 'disabled'
+      = active_link_to 'Mine',      me_trips_path, class: "btn btn-default #{disabled}", active: :exclusive
+      = active_link_to 'Friends', trips_path, class: "btn btn-default #{disabled}", active: :exclusive
       = active_link_to 'All',     everyone_trips_path, class: 'btn btn-default', active: :exclusive
 
     = title 'Trips Feed'

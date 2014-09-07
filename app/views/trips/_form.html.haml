@@ -18,11 +18,11 @@
       %br
       %br
 
-      %span#enable_edit_mtns.pull-right.glyphicon.glyphicon-pencil.clickable_icon
+      %span#enable_edit_mtns.pull-right.glyph-icon.flaticon-lock27.clickable_icon
       = f.association :mountains, label: 'Mountains', collection: @mountains, label_method: -> (mtn) { mountain_ribbon(mtn) } , input_html: {id: 'trip_mtns_select'} #, placeholder: 'Select a mountain'
       %button#add_mtns.btn.add_select.btn-info.btn-xs.btn-block Select mountains
 
-      %span#enable_edit_hikers.pull-right.glyphicon.glyphicon-pencil.clickable_icon
+      %span#enable_edit_hikers.pull-right.glyph-icon.flaticon-lock27.clickable_icon
       /= f.association :hikers, label: 'Hiker(s)', collection: friends, input_html: {id: 'trip_hikers_select'}
 
       / http://stackoverflow.com/questions/4037537/simple-form-how-to-create-a-grouped-select-box
