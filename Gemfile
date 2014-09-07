@@ -41,6 +41,7 @@ gem 'active_link_to'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'mail_form'
+gem 'public_activity'
 
 gem 'pundit'
 gem 'omniauth'

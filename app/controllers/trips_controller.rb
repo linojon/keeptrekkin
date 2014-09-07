@@ -93,6 +93,7 @@ class TripsController < ApplicationController
     if @trip.save
       @trip.associate_photos_with current_hiker
       send_added_hiker_emails added_hikers_ids
+      @trip.create_activity action_name, owner: current_hiker
       flash_no_mountains
       redirect_to @trip, success: 'Trip saved'
       true
@@ -108,6 +109,7 @@ class TripsController < ApplicationController
     hikers = Hiker.find( ids).select {|h| !h.disable_notifications }
     hikers.each do |hiker|
       HikerMailer.added_email( hiker, @trip).deliver
+      hiker.create_activity :added_email, owner: current_hiker
     end
     flash[:notice] = "An email notification has been sent to #{hikers.map(&:first_name).to_sentence}" if hikers.present?
   end

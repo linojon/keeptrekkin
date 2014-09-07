@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :links
-
   get 'signin', to: redirect('/auth/facebook'), as: :signin
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
@@ -23,6 +21,8 @@ Rails.application.routes.draw do
   resources :hikers
 
   resources :mountains
+
+  resources :activities
 
   mount Attachinary::Engine => "/attachinary"
 

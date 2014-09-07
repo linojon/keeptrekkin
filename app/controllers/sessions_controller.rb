@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     if user.hiker
       flash_edit_profile user
+      user.hiker.create_activity :logged_in, owner: current_hiker
       redirect_to newsfeed_url
     else
       redirect_to who_sessions_path
@@ -40,12 +41,14 @@ class SessionsController < ApplicationController
 
     elsif params[:id] == 'new'
       current_user.create_hiker name: current_user.name, email: current_user.email
+      current_user.hiker.create_activity :signed_up_new, owner: current_hiker
       flash_edit_profile(current_user)
       redirect_to newsfeed_url
 
     elsif hiker = Hiker.find( params[:id])
       current_user.hiker = hiker
       current_user.save
+      hiker.create_activity :signed_up_iam, owner: current_hiker
       flash_edit_profile(current_user)
       redirect_to newsfeed_url
 
@@ -85,6 +88,7 @@ class SessionsController < ApplicationController
   #   end
 
   def destroy
+    current_hiker.create_activity :logged_out, owner: current_hiker
     session[:user_id] = nil
     redirect_to root_url
   end

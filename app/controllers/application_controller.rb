@@ -58,6 +58,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
+  include PublicActivity::StoreController
+
   protected
   def user_not_authorized(exception)
     flash[:error] = "You are not authorized to perform this action."
@@ -77,10 +79,11 @@ class ApplicationController < ActionController::Base
   # vvvvvvvvvvvvvvvvvvvvvvvvvvvvv
   # vvvvvv app specific vvvvvv
   public
-  protected
   def current_hiker
     current_user && current_user.hiker
   end
   helper_method :current_hiker
+  hide_action :current_hiker # so its not considered an action, should do this for all public ApplicationController methods (or make them private)
 
+  protected
 end

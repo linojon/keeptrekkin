@@ -1,4 +1,6 @@
 class Hiker < ActiveRecord::Base
+  include PublicActivity::Common
+
   has_one :user, dependent: :destroy
   has_many :hiker_trips, dependent: :destroy
   has_many :trips, through: :hiker_trips

@@ -1,4 +1,6 @@
 class Trip < ActiveRecord::Base
+  include PublicActivity::Common
+
   has_many :hiker_trips, dependent: :destroy
   has_many :mountain_trips, dependent: :destroy
   

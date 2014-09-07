@@ -12,6 +12,7 @@ class HikersController < ApplicationController
   def update
     find_and_authorize_hiker
     if @hiker.update_attributes(hiker_params)
+      current_hiker.create_activity :update, owner: current_hiker
       redirect_to @hiker, notice: 'Hiker profile updated'
     else
       flash.now[:error] = 'There was a problem saving the profile. Please try again.'
@@ -29,6 +30,7 @@ class HikersController < ApplicationController
       @hiker = Hiker.new hiker_params
       authorize @hiker
       if @hiker.save
+        @hiker.create_activity :create, owner: current_hiker
         render json: @hiker
       else
         render json: @hiker, status: :unprocessable_entity
