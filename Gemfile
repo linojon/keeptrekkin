@@ -40,6 +40,7 @@ gem 'gon' # rails variables in js
 gem 'active_link_to'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'mail_form'
 
 gem 'pundit'
 gem 'omniauth'

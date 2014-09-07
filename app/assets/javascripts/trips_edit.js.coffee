@@ -50,6 +50,8 @@ $ ->
     # todo: integrate this search icon into vertical multiselect custom input
     $('#s2id_trip_hikers_select') # only for hikers select
       .find(".select2-search-field label").after("&nbsp; <span class='glyphicon glyphicon-search'></span>")
+    $('#s2id_autogen2').attr('placeholder', 'enter hiker to find or add...').attr('style','width:200px')
+
 
     $('.input-group.date').datepicker(
       format: "yyyy-mm-dd" # date format must match the database date format
