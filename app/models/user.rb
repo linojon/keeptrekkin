@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def create_or_update_hiker(attributes)
     if self.hiker
       self.hiker.update_attributes_only_if_blank attributes
-    elsif hiker = Hiker.where(email: attributes[:email]).first
+    elsif attributes[:email].present? && (hiker = Hiker.where(email: attributes[:email]).first)
       self.hiker = hiker
       self.save!
     # else

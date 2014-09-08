@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-  # byebug
+# byebug
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     if user.hiker
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
   end
 
   def who
-  # byebug
+# byebug
     if current_user.nil?
       redirect_to root_url
     else
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
   end
 
   def iam
-    # byebug
+# byebug
     if current_user.nil?
       redirect_to root_url
 

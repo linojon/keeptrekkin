@@ -30,6 +30,7 @@ class Hiker < ActiveRecord::Base
   # fuzzy search (like where) but returns collection
   attr_accessor :fuzzy_score
   def self.fuzzy( name:nil, email:nil, threshold:0.7 )
+# byebug
     matches = []
     name = name.downcase if name
     email = email.downcase if email
