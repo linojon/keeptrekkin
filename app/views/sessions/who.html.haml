@@ -16,7 +16,9 @@
           - last = @hikers.last.fuzzy_score
           - @hikers.each do |hiker|
             - fade = "background-color: rgba(223, 240, 216, #{(hiker.fuzzy_score - last) / diff})"
-            = link_to "#{hiker.name} (#{hiker.email.split('@').first}@...)".html_safe, iam_sessions_path(id: hiker.id), class: 'list-group-item list-group-item-success', style: fade, title: hiker.fuzzy_score
+            - display = hiker.name
+            - display += "(#{hiker.email.split('@').first}@...)" if hiker.email.present?
+            = link_to display.html_safe, iam_sessions_path(id: hiker.id), class: 'list-group-item list-group-item-success', style: fade, title: hiker.fuzzy_score
         .list-group
           = link_to "Nope, none of these, I'm new", iam_sessions_path(id: 'new'), class: 'list-group-item list-group-item-info', id: 'im_new'
 
