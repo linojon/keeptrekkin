@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
         name:  auth.info.name, 
         email: auth.info.email
       )
+      user
     end
   end
 
@@ -39,6 +40,7 @@ class User < ActiveRecord::Base
     # else
     #   self.create_hiker attributes
     end
+    self
   end
 
   def profile_image_url
