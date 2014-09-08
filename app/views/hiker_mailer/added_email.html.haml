@@ -20,3 +20,8 @@
     -if @trip.title_image.present?
       %p.centered
         = image_tag @trip.title_image_url
+    %p
+      %small
+        You are receiving this message because you have registered with 
+        = link_to "KeepTrekkin", @url
+        These are infrequent notifications, but you can disable by editing your profile. Thanks, and keep on trekkin'!

@@ -32,6 +32,7 @@ class PagesController < ApplicationController
         return redirect_to( back_path, notice: 'Broadcast email not sent. Invalid Hiker ID')
       end
       hikers.each do |hiker|
+        next if hiker.email.blank? # eg Matt id 9 
         HikerMailer.broadcast_email( hiker, params[:contact][:name], params[:contact][:message] ).deliver
       end
       redirect_to( back_path, notice: "Broadcast emails sent to #{hikers.size} recipients")
