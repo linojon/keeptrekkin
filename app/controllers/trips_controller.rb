@@ -108,7 +108,7 @@ class TripsController < ApplicationController
     ids -= [current_hiker.id.to_s]
     hikers = Hiker.find( ids).select {|h| !h.disable_notifications }
     hikers.each do |hiker|
-      HikerMailer.added_email( hiker, @trip).deliver
+      HikerMailer.added_email( hiker, @trip).deliver unless hiker.email.blank?
       hiker.create_activity :added_email, owner: current_hiker
     end
     flash[:notice] = "An email notification has been sent to #{hikers.map(&:first_name).to_sentence}" if hikers.present?
